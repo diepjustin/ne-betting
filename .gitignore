@@ -7,3 +7,7 @@ data/raw/
 data/husker.db
 data/sample/recon/*.log
 data/state/*.log
+
+# R writes these into whatever directory it is started in
+.Rhistory
+.RData
