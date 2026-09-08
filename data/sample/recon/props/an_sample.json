@@ -1,0 +1,1304 @@
+{
+ "league": {
+  "id": 2,
+  "sport": "football",
+  "name": "ncaaf",
+  "description": "Men's College Football",
+  "logo": "https://static.sprtactn.co/leagues/500/ncaa.png",
+  "current_season": "2026",
+  "current_season_type": "reg",
+  "pre_season_start": null,
+  "pre_season_end": null,
+  "reg_season_start": "2026-04-01T07:00:00.000Z",
+  "reg_season_end": "2026-12-19T07:59:59.000Z",
+  "post_season_start": "2026-12-07T08:00:00.000Z",
+  "post_season_end": "2027-04-16T06:59:59.000Z",
+  "blacklist_dates": [
+   "2026-04-01T07:00:00.000Z",
+   "2026-04-02T07:00:00.000Z",
+   "2026-04-03T07:00:00.000Z",
+   "2026-04-04T07:00:00.000Z",
+   "2026-04-05T07:00:00.000Z",
+   "2026-04-06T07:00:00.000Z",
+   "2026-04-07T07:00:00.000Z",
+   "2026-04-08T07:00:00.000Z",
+   "2026-04-09T07:00:00.000Z",
+   "2026-04-10T07:00:00.000Z",
+   "2026-04-11T07:00:00.000Z",
+   "2026-04-12T07:00:00.000Z",
+   "2026-04-13T07:00:00.000Z",
+   "2026-04-14T07:00:00.000Z",
+   "2026-04-15T07:00:00.000Z",
+   "2026-04-16T07:00:00.000Z",
+   "2026-04-17T07:00:00.000Z",
+   "2026-04-18T07:00:00.000Z",
+   "2026-04-19T07:00:00.000Z",
+   "2026-04-20T07:00:00.000Z",
+   "2026-04-21T07:00:00.000Z",
+   "2026-04-22T07:00:00.000Z",
+   "2026-04-23T07:00:00.000Z",
+   "2026-04-24T07:00:00.000Z",
+   "2026-04-25T07:00:00.000Z",
+   "2026-04-26T07:00:00.000Z",
+   "2026-04-27T07:00:00.000Z",
+   "2026-04-28T07:00:00.000Z",
+   "2026-04-29T07:00:00.000Z",
+   "2026-04-30T07:00:00.000Z",
+   "2026-05-01T07:00:00.000Z",
+   "2026-05-02T07:00:00.000Z",
+   "2026-05-03T07:00:00.000Z",
+   "2026-05-04T07:00:00.000Z",
+   "2026-05-05T07:00:00.000Z",
+   "2026-05-06T07:00:00.000Z",
+   "2026-05-07T07:00:00.000Z",
+   "2026-05-08T07:00:00.000Z",
+   "2026-05-09T07:00:00.000Z",
+   "2026-05-10T07:00:00.000Z",
+   "2026-05-11T07:00:00.000Z",
+   "2026-05-12T07:00:00.000Z",
+   "2026-05-13T07:00:00.000Z",
+   "2026-05-14T07:00:00.000Z",
+   "2026-05-15T07:00:00.000Z",
+   "2026-05-16T07:00:00.000Z",
+   "2026-05-17T07:00:00.000Z",
+   "2026-05-18T07:00:00.000Z",
+   "2026-05-19T07:00:00.000Z",
+   "2026-05-20T07:00:00.000Z",
+   "2026-05-21T07:00:00.000Z",
+   "2026-05-22T07:00:00.000Z",
+   "2026-05-23T07:00:00.000Z",
+   "2026-05-24T07:00:00.000Z",
+   "2026-05-25T07:00:00.000Z",
+   "2026-05-26T07:00:00.000Z",
+   "2026-05-27T07:00:00.000Z",
+   "2026-05-28T07:00:00.000Z",
+   "2026-05-29T07:00:00.000Z",
+   "2026-05-30T07:00:00.000Z",
+   "2026-05-31T07:00:00.000Z",
+   "2026-06-01T07:00:00.000Z",
+   "2026-06-02T07:00:00.000Z",
+   "2026-06-03T07:00:00.000Z",
+   "2026-06-04T07:00:00.000Z",
+   "2026-06-05T07:00:00.000Z",
+   "2026-06-06T07:00:00.000Z",
+   "2026-06-07T07:00:00.000Z",
+   "2026-06-08T07:00:00.000Z",
+   "2026-06-09T07:00:00.000Z",
+   "2026-06-10T07:00:00.000Z",
+   "2026-06-11T07:00:00.000Z",
+   "2026-06-12T07:00:00.000Z",
+   "2026-06-13T07:00:00.000Z",
+   "2026-06-14T07:00:00.000Z",
+   "2026-06-15T07:00:00.000Z",
+   "2026-06-16T07:00:00.000Z",
+   "2026-06-17T07:00:00.000Z",
+   "2026-06-18T07:00:00.000Z",
+   "2026-06-19T07:00:00.000Z",
+   "2026-06-20T07:00:00.000Z",
+   "2026-06-21T07:00:00.000Z",
+   "2026-06-22T07:00:00.000Z",
+   "2026-06-23T07:00:00.000Z",
+   "2026-06-24T07:00:00.000Z",
+   "2026-06-25T07:00:00.000Z",
+   "2026-06-26T07:00:00.000Z",
+   "2026-06-27T07:00:00.000Z",
+   "2026-06-28T07:00:00.000Z",
+   "2026-06-29T07:00:00.000Z",
+   "2026-06-30T07:00:00.000Z",
+   "2026-07-01T07:00:00.000Z",
+   "2026-07-02T07:00:00.000Z",
+   "2026-07-03T07:00:00.000Z",
+   "2026-07-04T07:00:00.000Z",
+   "2026-07-05T07:00:00.000Z",
+   "2026-07-06T07:00:00.000Z",
+   "2026-07-07T07:00:00.000Z",
+   "2026-07-08T07:00:00.000Z",
+   "2026-07-09T07:00:00.000Z",
+   "2026-07-10T07:00:00.000Z",
+   "2026-07-11T07:00:00.000Z",
+   "2026-07-12T07:00:00.000Z",
+   "2026-07-13T07:00:00.000Z",
+   "2026-07-14T07:00:00.000Z",
+   "2026-07-15T07:00:00.000Z",
+   "2026-07-16T07:00:00.000Z",
+   "2026-07-17T07:00:00.000Z",
+   "2026-07-18T07:00:00.000Z",
+   "2026-07-19T07:00:00.000Z",
+   "2026-07-20T07:00:00.000Z",
+   "2026-07-21T07:00:00.000Z",
+   "2026-07-22T07:00:00.000Z",
+   "2026-07-23T07:00:00.000Z",
+   "2026-07-24T07:00:00.000Z",
+   "2026-07-25T07:00:00.000Z",
+   "2026-07-26T07:00:00.000Z",
+   "2026-07-27T07:00:00.000Z",
+   "2026-07-28T07:00:00.000Z",
+   "2026-07-29T07:00:00.000Z",
+   "2026-07-30T07:00:00.000Z",
+   "2026-07-31T07:00:00.000Z",
+   "2026-08-01T07:00:00.000Z",
+   "2026-08-02T07:00:00.000Z",
+   "2026-08-03T07:00:00.000Z",
+   "2026-08-04T07:00:00.000Z",
+   "2026-08-05T07:00:00.000Z",
+   "2026-08-06T07:00:00.000Z",
+   "2026-08-07T07:00:00.000Z",
+   "2026-08-08T07:00:00.000Z",
+   "2026-08-09T07:00:00.000Z",
+   "2026-08-10T07:00:00.000Z",
+   "2026-08-11T07:00:00.000Z",
+   "2026-08-12T07:00:00.000Z",
+   "2026-08-13T07:00:00.000Z",
+   "2026-08-14T07:00:00.000Z",
+   "2026-08-15T07:00:00.000Z",
+   "2026-08-16T07:00:00.000Z",
+   "2026-08-17T07:00:00.000Z",
+   "2026-08-18T07:00:00.000Z",
+   "2026-08-19T07:00:00.000Z",
+   "2026-08-20T07:00:00.000Z",
+   "2026-08-21T07:00:00.000Z",
+   "2026-08-22T07:00:00.000Z",
+   "2026-08-23T07:00:00.000Z",
+   "2026-08-24T07:00:00.000Z",
+   "2026-08-25T07:00:00.000Z",
+   "2026-08-26T07:00:00.000Z",
+   "2026-08-27T07:00:00.000Z",
+   "2026-08-28T07:00:00.000Z",
+   "2026-08-30T07:00:00.000Z",
+   "2026-08-31T07:00:00.000Z",
+   "2026-09-01T07:00:00.000Z",
+   "2026-09-02T07:00:00.000Z",
+   "2026-09-03T07:00:00.000Z",
+   "2026-09-04T07:00:00.000Z",
+   "2026-09-07T07:00:00.000Z",
+   "2026-09-08T07:00:00.000Z",
+   "2026-09-09T07:00:00.000Z",
+   "2026-09-10T07:00:00.000Z",
+   "2026-09-11T07:00:00.000Z",
+   "2026-09-13T07:00:00.000Z",
+   "2026-09-14T07:00:00.000Z",
+   "2026-09-15T07:00:00.000Z",
+   "2026-09-16T07:00:00.000Z",
+   "2026-09-17T07:00:00.000Z",
+   "2026-09-18T07:00:00.000Z",
+   "2026-09-19T07:00:00.000Z",
+   "2026-09-20T07:00:00.000Z",
+   "2026-09-21T07:00:00.000Z",
+   "2026-09-22T07:00:00.000Z",
+   "2026-09-23T07:00:00.000Z",
+   "2026-09-24T07:00:00.000Z",
+   "2026-09-25T07:00:00.000Z",
+   "2026-09-26T07:00:00.000Z",
+   "2026-09-27T07:00:00.000Z",
+   "2026-09-28T07:00:00.000Z",
+   "2026-09-29T07:00:00.000Z",
+   "2026-09-30T07:00:00.000Z",
+   "2026-10-01T07:00:00.000Z",
+   "2026-10-02T07:00:00.000Z",
+   "2026-10-03T07:00:00.000Z",
+   "2026-10-04T07:00:00.000Z",
+   "2026-10-05T07:00:00.000Z",
+   "2026-10-06T07:00:00.000Z",
+   "2026-10-07T07:00:00.000Z",
+   "2026-10-08T07:00:00.000Z",
+   "2026-10-09T07:00:00.000Z",
+   "2026-10-10T07:00:00.000Z",
+   "2026-10-11T07:00:00.000Z",
+   "2026-10-12T07:00:00.000Z",
+   "2026-10-13T07:00:00.000Z",
+   "2026-10-14T07:00:00.000Z",
+   "2026-10-15T07:00:00.000Z",
+   "2026-10-16T07:00:00.000Z",
+   "2026-10-17T07:00:00.000Z",
+   "2026-10-18T07:00:00.000Z",
+   "2026-10-19T07:00:00.000Z",
+   "2026-10-20T07:00:00.000Z",
+   "2026-10-21T07:00:00.000Z",
+   "2026-10-22T07:00:00.000Z",
+   "2026-10-23T07:00:00.000Z",
+   "2026-10-24T07:00:00.000Z",
+   "2026-10-25T07:00:00.000Z",
+   "2026-10-26T07:00:00.000Z",
+   "2026-10-27T07:00:00.000Z",
+   "2026-10-28T07:00:00.000Z",
+   "2026-10-29T07:00:00.000Z",
+   "2026-10-30T07:00:00.000Z",
+   "2026-10-31T07:00:00.000Z",
+   "2026-11-01T07:00:00.000Z",
+   "2026-11-02T08:00:00.000Z",
+   "2026-11-03T08:00:00.000Z",
+   "2026-11-04T08:00:00.000Z",
+   "2026-11-05T08:00:00.000Z",
+   "2026-11-06T08:00:00.000Z",
+   "2026-11-07T08:00:00.000Z",
+   "2026-11-08T08:00:00.000Z",
+   "2026-11-09T08:00:00.000Z",
+   "2026-11-10T08:00:00.000Z",
+   "2026-11-11T08:00:00.000Z",
+   "2026-11-12T08:00:00.000Z",
+   "2026-11-13T08:00:00.000Z",
+   "2026-11-14T08:00:00.000Z",
+   "2026-11-15T08:00:00.000Z",
+   "2026-11-16T08:00:00.000Z",
+   "2026-11-17T08:00:00.000Z",
+   "2026-11-18T08:00:00.000Z",
+   "2026-11-19T08:00:00.000Z",
+   "2026-11-20T08:00:00.000Z",
+   "2026-11-21T08:00:00.000Z",
+   "2026-11-22T08:00:00.000Z",
+   "2026-11-23T08:00:00.000Z",
+   "2026-11-24T08:00:00.000Z",
+   "2026-11-25T08:00:00.000Z",
+   "2026-11-26T08:00:00.000Z",
+   "2026-11-27T08:00:00.000Z",
+   "2026-11-28T08:00:00.000Z",
+   "2026-11-29T08:00:00.000Z",
+   "2026-11-30T08:00:00.000Z",
+   "2026-12-01T08:00:00.000Z",
+   "2026-12-02T08:00:00.000Z",
+   "2026-12-03T08:00:00.000Z",
+   "2026-12-04T08:00:00.000Z",
+   "2026-12-05T08:00:00.000Z",
+   "2026-12-06T08:00:00.000Z",
+   "2026-12-07T08:00:00.000Z",
+   "2026-12-08T08:00:00.000Z",
+   "2026-12-09T08:00:00.000Z",
+   "2026-12-10T08:00:00.000Z",
+   "2026-12-11T08:00:00.000Z",
+   "2026-12-12T08:00:00.000Z",
+   "2026-12-13T08:00:00.000Z",
+   "2026-12-14T08:00:00.000Z",
+   "2026-12-15T08:00:00.000Z",
+   "2026-12-16T08:00:00.000Z",
+   "2026-12-17T08:00:00.000Z",
+   "2026-12-18T08:00:00.000Z",
+   "2026-12-19T08:00:00.000Z"
+  ],
+  "calendar_info": {
+   "reg": [
+    {
+     "abbr": "Week 1",
+     "week": 1,
+     "label": "Week 0 / 1",
+     "endDate": "2026-09-08T06:59Z",
+     "startDate": "2026-04-01T07:00Z"
+    },
+    {
+     "abbr": "Week 2",
+     "week": 2,
+     "label": "Week 2",
+     "endDate": "2026-09-13T06:59Z",
+     "startDate": "2026-09-08T07:00Z"
+    },
+    {
+     "abbr": "Week 3",
+     "week": 3,
+     "label": "Week 3",
+     "endDate": "2026-09-20T06:59Z",
+     "startDate": "2026-09-13T07:00Z"
+    },
+    {
+     "abbr": "Week 4",
+     "week": 4,
+     "label": "Week 4",
+     "endDate": "2026-09-27T06:59Z",
+     "startDate": "2026-09-20T07:00Z"
+    },
+    {
+     "abbr": "Week 5",
+     "week": 5,
+     "label": "Week 5",
+     "endDate": "2026-10-04T06:59Z",
+     "startDate": "2026-09-27T07:00Z"
+    },
+    {
+     "abbr": "Week 6",
+     "week": 6,
+     "label": "Week 6",
+     "endDate": "2026-10-11T06:59Z",
+     "startDate": "2026-10-04T07:00Z"
+    },
+    {
+     "abbr": "Week 7",
+     "week": 7,
+     "label": "Week 7",
+     "endDate": "2026-10-18T06:59Z",
+     "startDate": "2026-10-11T07:00Z"
+    },
+    {
+     "abbr": "Week 8",
+     "week": 8,
+     "label": "Week 8",
+     "endDate": "2026-10-25T06:59Z",
+     "startDate": "2026-10-18T07:00Z"
+    },
+    {
+     "abbr": "Week 9",
+     "week": 9,
+     "label": "Week 9",
+     "endDate": "2026-11-01T06:59Z",
+     "startDate": "2026-10-25T07:00Z"
+    },
+    {
+     "abbr": "Week 10",
+     "week": 10,
+     "label": "Week 10",
+     "endDate": "2026-11-08T06:59Z",
+     "startDate": "2026-11-01T07:00Z"
+    },
+    {
+     "abbr": "Week 11",
+     "week": 11,
+     "label": "Week 11",
+     "endDate": "2026-11-15T06:59Z",
+     "startDate": "2026-11-08T07:00Z"
+    },
+    {
+     "abbr": "Week 12",
+     "week": 12,
+     "label": "Week 12",
+     "endDate": "2026-11-22T06:59Z",
+     "startDate": "2026-11-15T07:00Z"
+    },
+    {
+     "abbr": "Week 13",
+     "week": 13,
+     "label": "Week 13",
+     "endDate": "2026-11-29T06:59Z",
+     "startDate": "2026-11-22T07:00Z"
+    },
+    {
+     "abbr": "Week 14",
+     "week": 14,
+     "label": "Week 14",
+     "endDate": "2026-12-06T03:59Z",
+     "startDate": "2026-11-29T07:00Z"
+    }
+   ],
+   "post": [
+    {
+     "abbr": "Conf. Champ",
+     "week": 15,
+     "label": "Conf. Champ",
+     "endDate": "2026-12-06T06:59Z",
+     "startDate": "2026-11-29T04:00Z"
+    },
+    {
+     "abbr": "Bowls",
+     "week": 16,
+     "label": "Bowls",
+     "endDate": "2027-01-31T06:59Z",
+     "startDate": "2026-12-06T07:00Z"
+    }
+   ]
+  },
+  "current_week": 2,
+  "updated_at": "2026-09-08T08:35:20.149Z",
+  "is_active": true,
+  "conferences": [
+   {
+    "id": "ACC",
+    "display": "ACC"
+   },
+   {
+    "id": "AMERICAN",
+    "display": "American"
+   },
+   {
+    "id": "BIG12",
+    "display": "Big 12"
+   },
+   {
+    "id": "BIGSKY",
+    "display": "Big Sky"
+   },
+   {
+    "id": "BIGSOUTHOVC",
+    "display": "Big South - OVC"
+   },
+   {
+    "id": "BIGTEN",
+    "display": "Big Ten"
+   },
+   {
+    "id": "CONFERENCEUSA",
+    "display": "CUSA"
+   },
+   {
+    "id": "CAA",
+    "display": "CAA"
+   },
+   {
+    "id": "IAINDEPENDENTS",
+    "display": "FBS (Ind)"
+   },
+   {
+    "id": "IAAINDEPENDENTS",
+    "display": "FCS (Ind)"
+   },
+   {
+    "id": "IVY",
+    "display": "Ivy"
+   },
+   {
+    "id": "MEAC",
+    "display": "MEAC"
+   },
+   {
+    "id": "MIDAMERICAN",
+    "display": "MAC"
+   },
+   {
+    "id": "MISSOURIVALLEY",
+    "display": "MVFC"
+   },
+   {
+    "id": "MOUNTAINWEST",
+    "display": "MWC"
+   },
+   {
+    "id": "NORTHEAST",
+    "display": "NEC"
+   },
+   {
+    "id": "PAC12",
+    "display": "PAC-12"
+   },
+   {
+    "id": "PATRIOTLEAGUE",
+    "display": "Patriot"
+   },
+   {
+    "id": "PIONEER",
+    "display": "Pioneer"
+   },
+   {
+    "id": "SEC",
+    "display": "SEC"
+   },
+   {
+    "id": "SOUTHERN",
+    "display": "SoCon"
+   },
+   {
+    "id": "SOUTHLAND",
+    "display": "SLC"
+   },
+   {
+    "id": "SUNBELT",
+    "display": "SBC"
+   },
+   {
+    "id": "SWAC",
+    "display": "SWAC"
+   },
+   {
+    "id": "UAC",
+    "display": "UAC"
+   }
+  ],
+  "divisions": [
+   {
+    "id": "FBS",
+    "display": "ALL FBS"
+   },
+   {
+    "id": "TOP25",
+    "display": "Top 25"
+   },
+   {
+    "id": "FCS",
+    "display": "ALL FCS"
+   }
+  ]
+ },
+ "note": "trimmed to one game; the odds array was empty on this endpoint",
+ "games_returned": 86,
+ "sample_game": {
+  "id": 288898,
+  "league_id": 2,
+  "status": "scheduled",
+  "real_status": "scheduled",
+  "status_display": null,
+  "start_time": "2026-09-11T00:00:00.000Z",
+  "away_team_id": 431,
+  "home_team_id": 263,
+  "winning_team_id": null,
+  "league_name": "ncaaf",
+  "type": "reg",
+  "season": 2026,
+  "week": 2,
+  "attendance": 0,
+  "coverage": "full",
+  "is_free": false,
+  "trending": false,
+  "away_rotation_number": 308901,
+  "home_rotation_number": 308902,
+  "teams": [
+   {
+    "id": 263,
+    "full_name": "Miami (FL) Hurricanes",
+    "display_name": "Miami (FL)",
+    "short_name": "Hurricanes",
+    "location": "Miami (FL)",
+    "abbr": "MIA",
+    "logo": "https://static.sprtactn.co/teamlogos/ncaaf/100/mfl.png",
+    "primary_color": "005030",
+    "secondary_color": "f47321",
+    "conference_type": "ACC",
+    "division_type": "FBS",
+    "url_slug": "miami-fl-hurricanes",
+    "standings": {
+     "win": 1,
+     "loss": 0,
+     "ties": 0,
+     "overtime_losses": null,
+     "draw": null
+    },
+    "core_id": 2048
+   },
+   {
+    "id": 431,
+    "full_name": "Florida A&M Rattlers",
+    "display_name": "Florida A&M",
+    "short_name": "Rattlers",
+    "location": "Florida A&M",
+    "abbr": "FAMU",
+    "logo": "https://static.sprtactn.co/teamlogos/ncaaf/100/famu.png",
+    "primary_color": "F89728",
+    "secondary_color": "00B552",
+    "conference_type": "SWAC",
+    "division_type": "FCS",
+    "url_slug": "florida-am-rattlers",
+    "standings": {
+     "win": 1,
+     "loss": 1,
+     "ties": 0,
+     "overtime_losses": null,
+     "draw": null
+    },
+    "core_id": 39296
+   }
+  ],
+  "meta": {},
+  "num_bets": 1999,
+  "core_id": 12261160,
+  "broadcast": {
+   "network": "ACC Network",
+   "satellite": "612",
+   "network_short": "ACCN"
+  },
+  "ranks": [
+   {
+    "team_id": 263,
+    "rank": 7,
+    "poll": "AP25"
+   }
+  ],
+  "markets": {
+   "15": {
+    "event": {
+     "spread": [
+      {
+       "outcome_id": "2916814664",
+       "market_id": "25105163",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 15,
+       "book_parent_id": 18,
+       "type": "spread",
+       "side": "home",
+       "period": "event",
+       "team_id": 263,
+       "odds": -108,
+       "value": -55.5,
+       "is_live": false,
+       "deeplink_id": "",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 54
+        },
+        "money": {
+         "value": 0,
+         "percent": 90
+        }
+       },
+       "odds_coefficient_score": null,
+       "is_alt_market": false
+      },
+      {
+       "outcome_id": "2916814665",
+       "market_id": "25105163",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 15,
+       "book_parent_id": 18,
+       "type": "spread",
+       "side": "away",
+       "period": "event",
+       "team_id": 431,
+       "odds": -112,
+       "value": 55.5,
+       "is_live": false,
+       "deeplink_id": "",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 46
+        },
+        "money": {
+         "value": 0,
+         "percent": 10
+        }
+       },
+       "odds_coefficient_score": null,
+       "is_alt_market": false
+      }
+     ],
+     "total": [
+      {
+       "outcome_id": "2916814662",
+       "market_id": "25105162",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 15,
+       "book_parent_id": 18,
+       "type": "total",
+       "side": "under",
+       "period": "event",
+       "odds": -105,
+       "value": 61.5,
+       "is_live": false,
+       "deeplink_id": "",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 43
+        },
+        "money": {
+         "value": 0,
+         "percent": 8
+        }
+       },
+       "odds_coefficient_score": -10000,
+       "is_alt_market": false
+      },
+      {
+       "outcome_id": "2916814663",
+       "market_id": "25105162",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 15,
+       "book_parent_id": 18,
+       "type": "total",
+       "side": "over",
+       "period": "event",
+       "odds": -115,
+       "value": 61.5,
+       "is_live": false,
+       "deeplink_id": "",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 57
+        },
+        "money": {
+         "value": 0,
+         "percent": 92
+        }
+       },
+       "odds_coefficient_score": -10000,
+       "is_alt_market": false
+      }
+     ]
+    }
+   },
+   "30": {
+    "event": {
+     "total": [
+      {
+       "event_id": 288898,
+       "value": 56.5,
+       "side": "under",
+       "odds": -110,
+       "type": "total",
+       "book_id": 30,
+       "period": "event",
+       "player_id": 0,
+       "competitor_id": 0,
+       "team_id": 0,
+       "event_type": "game",
+       "market_id": "25105162",
+       "outcome_id": "2916814662",
+       "option_type_id": 0
+      },
+      {
+       "event_id": 288898,
+       "value": 56.5,
+       "side": "over",
+       "odds": -110,
+       "type": "total",
+       "book_id": 30,
+       "period": "event",
+       "player_id": 0,
+       "competitor_id": 0,
+       "team_id": 0,
+       "event_type": "game",
+       "market_id": "25105162",
+       "outcome_id": "2916814663",
+       "option_type_id": 0
+      }
+     ],
+     "spread": [
+      {
+       "event_id": 288898,
+       "value": -49.5,
+       "side": "home",
+       "odds": -110,
+       "type": "spread",
+       "book_id": 30,
+       "period": "event",
+       "player_id": 0,
+       "competitor_id": 0,
+       "team_id": 263,
+       "event_type": "game",
+       "market_id": "25105163",
+       "outcome_id": "2916814664",
+       "option_type_id": 0
+      },
+      {
+       "event_id": 288898,
+       "value": 49.5,
+       "side": "away",
+       "odds": -110,
+       "type": "spread",
+       "book_id": 30,
+       "period": "event",
+       "player_id": 0,
+       "competitor_id": 0,
+       "team_id": 431,
+       "event_type": "game",
+       "market_id": "25105163",
+       "outcome_id": "2916814665",
+       "option_type_id": 0
+      }
+     ]
+    }
+   },
+   "49": {
+    "event": {
+     "spread": [
+      {
+       "outcome_id": "2939536657",
+       "market_id": "25105163",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 49,
+       "book_parent_id": 2,
+       "type": "spread",
+       "side": "away",
+       "period": "event",
+       "team_id": 431,
+       "odds": -112,
+       "value": 55.5,
+       "is_live": false,
+       "deeplink_id": "ML2939536657",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 46
+        },
+        "money": {
+         "value": 0,
+         "percent": 10
+        }
+       },
+       "odds_coefficient_score": null,
+       "is_alt_market": false
+      },
+      {
+       "outcome_id": "2939536659",
+       "market_id": "25105163",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 49,
+       "book_parent_id": 2,
+       "type": "spread",
+       "side": "home",
+       "period": "event",
+       "team_id": 263,
+       "odds": -109,
+       "value": -55.5,
+       "is_live": false,
+       "deeplink_id": "ML2939536659",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 54
+        },
+        "money": {
+         "value": 0,
+         "percent": 90
+        }
+       },
+       "odds_coefficient_score": null,
+       "is_alt_market": false
+      }
+     ],
+     "total": [
+      {
+       "outcome_id": "2936602413",
+       "market_id": "25105162",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 49,
+       "book_parent_id": 2,
+       "type": "total",
+       "side": "over",
+       "period": "event",
+       "odds": -113,
+       "value": 61.5,
+       "is_live": false,
+       "deeplink_id": "ML2936602413",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 57
+        },
+        "money": {
+         "value": 0,
+         "percent": 92
+        }
+       },
+       "odds_coefficient_score": -0.15626,
+       "is_alt_market": false
+      },
+      {
+       "outcome_id": "2936602416",
+       "market_id": "25105162",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 49,
+       "book_parent_id": 2,
+       "type": "total",
+       "side": "under",
+       "period": "event",
+       "odds": -107,
+       "value": 61.5,
+       "is_live": false,
+       "deeplink_id": "ML2936602416",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 43
+        },
+        "money": {
+         "value": 0,
+         "percent": 8
+        }
+       },
+       "odds_coefficient_score": 0.108837,
+       "is_alt_market": false
+      }
+     ]
+    }
+   },
+   "68": {
+    "event": {
+     "spread": [
+      {
+       "outcome_id": "2936585577",
+       "market_id": "25105163",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 68,
+       "book_parent_id": 10,
+       "type": "spread",
+       "side": "home",
+       "period": "event",
+       "team_id": 263,
+       "odds": -108,
+       "value": -55.5,
+       "is_live": false,
+       "deeplink_id": "ML2936585577",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 54
+        },
+        "money": {
+         "value": 0,
+         "percent": 90
+        }
+       },
+       "odds_coefficient_score": null,
+       "is_alt_market": false
+      },
+      {
+       "outcome_id": "2936585578",
+       "market_id": "25105163",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 68,
+       "book_parent_id": 10,
+       "type": "spread",
+       "side": "away",
+       "period": "event",
+       "team_id": 431,
+       "odds": -112,
+       "value": 55.5,
+       "is_live": false,
+       "deeplink_id": "ML2936585578",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 46
+        },
+        "money": {
+         "value": 0,
+         "percent": 10
+        }
+       },
+       "odds_coefficient_score": null,
+       "is_alt_market": false
+      }
+     ],
+     "total": [
+      {
+       "outcome_id": "2936585581",
+       "market_id": "25105162",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 68,
+       "book_parent_id": 10,
+       "type": "total",
+       "side": "over",
+       "period": "event",
+       "odds": -108,
+       "value": 61.5,
+       "is_live": false,
+       "deeplink_id": "ML2936585581",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 57
+        },
+        "money": {
+         "value": 0,
+         "percent": 92
+        }
+       },
+       "odds_coefficient_score": -0.14498,
+       "is_alt_market": false
+      },
+      {
+       "outcome_id": "2936585583",
+       "market_id": "25105162",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 68,
+       "book_parent_id": 10,
+       "type": "total",
+       "side": "under",
+       "period": "event",
+       "odds": -112,
+       "value": 61.5,
+       "is_live": false,
+       "deeplink_id": "ML2936585583",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 43
+        },
+        "money": {
+         "value": 0,
+         "percent": 8
+        }
+       },
+       "odds_coefficient_score": 0.097443,
+       "is_alt_market": false
+      }
+     ]
+    }
+   },
+   "69": {
+    "event": {
+     "spread": [
+      {
+       "outcome_id": "2916814261",
+       "market_id": "25105163",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 69,
+       "book_parent_id": 3,
+       "type": "spread",
+       "side": "home",
+       "period": "event",
+       "team_id": 263,
+       "odds": -108,
+       "value": -55.5,
+       "is_live": false,
+       "deeplink_id": "ML2916814261",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 54
+        },
+        "money": {
+         "value": 0,
+         "percent": 90
+        }
+       },
+       "odds_coefficient_score": null,
+       "is_alt_market": false
+      },
+      {
+       "outcome_id": "2916814258",
+       "market_id": "25105163",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 69,
+       "book_parent_id": 3,
+       "type": "spread",
+       "side": "away",
+       "period": "event",
+       "team_id": 431,
+       "odds": -112,
+       "value": 55.5,
+       "is_live": false,
+       "deeplink_id": "ML2916814258",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 46
+        },
+        "money": {
+         "value": 0,
+         "percent": 10
+        }
+       },
+       "odds_coefficient_score": null,
+       "is_alt_market": false
+      }
+     ],
+     "total": [
+      {
+       "outcome_id": "2916814252",
+       "market_id": "25105162",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 69,
+       "book_parent_id": 3,
+       "type": "total",
+       "side": "over",
+       "period": "event",
+       "odds": -118,
+       "value": 61.5,
+       "is_live": false,
+       "deeplink_id": "ML2916814252",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 57
+        },
+        "money": {
+         "value": 0,
+         "percent": 92
+        }
+       },
+       "odds_coefficient_score": -0.16703,
+       "is_alt_market": false
+      },
+      {
+       "outcome_id": "2916814254",
+       "market_id": "25105162",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 69,
+       "book_parent_id": 3,
+       "type": "total",
+       "side": "under",
+       "period": "event",
+       "odds": -104,
+       "value": 61.5,
+       "is_live": false,
+       "deeplink_id": "ML2916814254",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 43
+        },
+        "money": {
+         "value": 0,
+         "percent": 8
+        }
+       },
+       "odds_coefficient_score": 0.115941,
+       "is_alt_market": false
+      }
+     ]
+    }
+   },
+   "71": {
+    "event": {
+     "spread": [
+      {
+       "outcome_id": "2936201941",
+       "market_id": "25105163",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 71,
+       "book_parent_id": 5,
+       "type": "spread",
+       "side": "away",
+       "period": "event",
+       "team_id": 431,
+       "odds": -114,
+       "value": 55.5,
+       "is_live": false,
+       "deeplink_id": "ML2936201941",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 46
+        },
+        "money": {
+         "value": 0,
+         "percent": 10
+        }
+       },
+       "odds_coefficient_score": null,
+       "is_alt_market": false
+      },
+      {
+       "outcome_id": "2936201938",
+       "market_id": "25105163",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 71,
+       "book_parent_id": 5,
+       "type": "spread",
+       "side": "home",
+       "period": "event",
+       "team_id": 263,
+       "odds": -109,
+       "value": -55.5,
+       "is_live": false,
+       "deeplink_id": "ML2936201938",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 54
+        },
+        "money": {
+         "value": 0,
+         "percent": 90
+        }
+       },
+       "odds_coefficient_score": null,
+       "is_alt_market": false
+      }
+     ],
+     "total": [
+      {
+       "outcome_id": "2936201958",
+       "market_id": "25105162",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 71,
+       "book_parent_id": 5,
+       "type": "total",
+       "side": "under",
+       "period": "event",
+       "odds": -108,
+       "value": 62,
+       "is_live": false,
+       "deeplink_id": "ML2936201958",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 43
+        },
+        "money": {
+         "value": 0,
+         "percent": 8
+        }
+       },
+       "odds_coefficient_score": 0.117284,
+       "is_alt_market": false
+      },
+      {
+       "outcome_id": "2936201952",
+       "market_id": "25105162",
+       "event_type": "game",
+       "event_id": 288898,
+       "league_id": 2,
+       "book_id": 71,
+       "book_parent_id": 5,
+       "type": "total",
+       "side": "over",
+       "period": "event",
+       "odds": -115,
+       "value": 62,
+       "is_live": false,
+       "deeplink_id": "ML2936201952",
+       "line_status": "normal",
+       "bet_info": {
+        "tickets": {
+         "value": 0,
+         "percent": 57
+        },
+        "money": {
+         "value": 0,
+         "percent": 92
+        }
+       },
+       "odds_coefficient_score": -0.1714,
+       "is_alt_market": false
+      }
+     ]
+    }
+   }
+  }
+ },
+ "market_rules_keys": []
+}
