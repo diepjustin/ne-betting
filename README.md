@@ -14,6 +14,10 @@ football (Kalshi, Polymarket). Owner: Justin Diep, The Daily Nebraskan.
   `<source>/<YYYY-MM-DD>/<endpoint>_<key>_<fetch_ts>.json.gz`.
 - `data/state/kalshi.json`, `data/state/polymarket.json` — per-market
   watermarks and match reasons.
+- `normalize/` — `schema.sql`, `resolve.py` (title to game, market type, team,
+  player) and `load.py` (raw to SQLite, rebuilt from scratch each run).
+- `analysis/breakdown.py` — tidy CSVs by market type, game, market, player and
+  day. Output is gitignored; the per-player view names athletes.
 
 ## Run
 
@@ -26,6 +30,9 @@ uv run python -m collectors.kalshi --historical  # also pre-cutoff history
 uv run python -m collectors.polymarket          # ~4 min
 uv run python -m collectors.polymarket --dry-run
 uv run python -m collectors.polymarket --backfill-since 2024-01-01  # by hand
+
+uv run python -m normalize.load        # raw -> data/husker.db
+uv run python -m analysis.breakdown    # CSVs into data/analysis/
 
 uv run pytest
 ```

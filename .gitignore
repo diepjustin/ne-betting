@@ -5,6 +5,11 @@ __pycache__/
 .pytest_cache/
 data/raw/
 data/husker.db
+
+# Derived analysis output. Rebuilt by `python -m analysis.breakdown` in
+# seconds, and player_props.csv names individual athletes, which plan section
+# 9 keeps out of anything published.
+data/analysis/
 data/sample/recon/*.log
 data/state/*.log
 

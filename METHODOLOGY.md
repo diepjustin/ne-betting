@@ -153,6 +153,41 @@ retrieved yet (RECON §1). The API is the primary source until then.
   pages already contain it, so every normalized row can point at one small
   raw file rather than a multi-megabyte discovery page.
 
+## Normalization decisions
+
+- **2026-09-08.** The store is derived. `data/husker.db` is deleted and
+  rebuilt from the raw archive on every load, so a mapping bug is fixed by
+  changing the code and re-running, never by editing data. Every row records
+  the raw file it came from.
+- **2026-09-08.** A game is identified as `<date>-NEB-<opponent>`. Kalshi
+  encodes it in the ticker (`26SEP05OHIONEB`), Polymarket in the event slug
+  (`cfb-ohio-nebr-2026-09-05`). Polymarket's 2024 slugs carry no date, so the
+  date comes from the market's own `gameStartTime`. Five 2024-era markets
+  still resolve to no game because their slugs use hyphenated team names that
+  cannot be split unambiguously; they are left unmapped rather than guessed.
+- **2026-09-08.** A gamma market response carries no `events` key, and a
+  spread market's own slug is not its game's, so the event a market belongs to
+  is recovered from the event listings already in the archive.
+- **2026-09-08.** Polymarket markets created before the platform tagged a
+  `sportsMarketType` phrase the same wagers as plain questions ("Will Nebraska
+  beat Colorado?", "Will there be 49 or more combined points scored?"). Those
+  phrasings are matched explicitly. Anything unmatched lands in `unresolved`
+  with its text; the loader prints the count and the current count is zero.
+- **2026-09-08.** **Kalshi files coach awards in the same series as player
+  awards.** The Eddie Robinson Award market names Matt Rhule and would
+  otherwise have been counted as a market on a player. The award named in the
+  market's rules is the only thing separating a head coach from a
+  20-year-old, so coach awards are listed explicitly and the list grows only
+  when such a market is actually seen.
+- **2026-09-08.** Polymarket trade ids are synthesised as a hash of the row,
+  with an ordinal for exact repeats, because the platform serves no id and
+  transaction hashes are not unique. Rows carry `id_is_synthetic` so a
+  synthesised key is never mistaken for a real one.
+- **2026-09-08.** The per-player breakdown names athletes and is written to
+  `data/analysis/`, which is gitignored. Plan §9 keeps published figures
+  aggregate; naming players is for reporting, and publication is the editor's
+  call.
+
 ## Limitations
 
 - Kalshi publishes no taker identity. Nothing here can say who traded.
@@ -173,6 +208,7 @@ retrieved yet (RECON §1). The API is the primary source until then.
 - polymarket.com tells US visitors to trade on polymarket.us instead. Whether
   polymarket.us fills appear in these public feeds is unconfirmed, and it
   matters for any claim about Nebraskans trading on Polymarket.
+- Five 2024-era Polymarket markets are not tied to a game; see above.
 - No sportsbook or DFS prop lines are collected, by decision on 8 Sep 2026
   (RECON "Phase 0b"). Any claim about how many chances there were to bet on a
   Nebraska athlete at a sportsbook is therefore out of this project's reach;
@@ -196,3 +232,8 @@ retrieved yet (RECON §1). The API is the primary source until then.
   in 597 raw files (20 MB gzipped). 246 of the 265 markets were already
   closed. A run before the football tag gate matched 100 events and 549
   markets; the 67 basketball events it wrongly included are the difference.
+- **2026-09-08, first normalization run.** 493 markets and 94,568 trades
+  loaded from the raw archive, 72 duplicate trade rows collapsed on their
+  keys, zero markets unresolved. Of 24 named players with markets listed
+  across both platforms, three have any trade at all, totalling 12 trades and
+  668 contracts.
