@@ -1,0 +1,1831 @@
+{
+ "markets": {
+  "KXNCAAFAPANY-27T10-NEB": {
+   "event_ticker": "KXNCAAFAPANY-27T10",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFAPANY",
+   "status": "active"
+  },
+  "KXNCAAFAPANY-27T25-NEB": {
+   "event_ticker": "KXNCAAFAPANY-27T25",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFAPANY",
+   "status": "active"
+  },
+  "KXNCAAFAPANY-27T5-NEB": {
+   "event_ticker": "KXNCAAFAPANY-27T5",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFAPANY",
+   "status": "active"
+  },
+  "KXNCAAFAWARD-26BUTK-OCHA": {
+   "event_ticker": "KXNCAAFAWARD-26BUTK",
+   "matched_by": "text:nebraska",
+   "partition": "live",
+   "series": "KXNCAAFAWARD",
+   "status": "active"
+  },
+  "KXNCAAFAWARD-26DAVE-ACOL": {
+   "event_ticker": "KXNCAAFAWARD-26DAVE",
+   "matched_by": "text:nebraska",
+   "partition": "live",
+   "series": "KXNCAAFAWARD",
+   "status": "active"
+  },
+  "KXNCAAFAWARD-26EDDI-MRHU": {
+   "event_ticker": "KXNCAAFAWARD-26EDDI",
+   "matched_by": "text:nebraska",
+   "partition": "live",
+   "series": "KXNCAAFAWARD",
+   "status": "active"
+  },
+  "KXNCAAFAWARD-26PAUL-JBAR": {
+   "event_ticker": "KXNCAAFAWARD-26PAUL",
+   "matched_by": "text:nebraska",
+   "partition": "live",
+   "series": "KXNCAAFAWARD",
+   "status": "active"
+  },
+  "KXNCAAFAWARD-26RIMI-JEVA": {
+   "event_ticker": "KXNCAAFAWARD-26RIMI",
+   "matched_by": "text:nebraska",
+   "partition": "live",
+   "series": "KXNCAAFAWARD",
+   "status": "active",
+   "watermark_ts": 1788535940
+  },
+  "KXNCAAFB10-26-NEB": {
+   "event_ticker": "KXNCAAFB10-26",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFB10",
+   "status": "active",
+   "watermark_ts": 1788843355
+  },
+  "KXNCAAFB10QUAL-26-NEB": {
+   "event_ticker": "KXNCAAFB10QUAL-26",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFB10QUAL",
+   "status": "active",
+   "watermark_ts": 1788761716
+  },
+  "KXNCAAFBIGTENLEADER-26PASSTD-NEBACOL": {
+   "event_ticker": "KXNCAAFBIGTENLEADER-26PASSTD",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBIGTENLEADER",
+   "status": "active",
+   "watermark_ts": 1788174514
+  },
+  "KXNCAAFBIGTENLEADER-26PASSYDS-NEBACOL": {
+   "event_ticker": "KXNCAAFBIGTENLEADER-26PASSYDS",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBIGTENLEADER",
+   "status": "active",
+   "watermark_ts": 1788174559
+  },
+  "KXNCAAFBIGTENLEADER-26RECYDS-NEBJBAR": {
+   "event_ticker": "KXNCAAFBIGTENLEADER-26RECYDS",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBIGTENLEADER",
+   "status": "active",
+   "watermark_ts": 1787531804
+  },
+  "KXNCAAFBIGTENLEADER-26RECYDS-NEBKGIL": {
+   "event_ticker": "KXNCAAFBIGTENLEADER-26RECYDS",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBIGTENLEADER",
+   "status": "active"
+  },
+  "KXNCAAFBIGTENLEADER-26RECYDS-NEBNHUN": {
+   "event_ticker": "KXNCAAFBIGTENLEADER-26RECYDS",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBIGTENLEADER",
+   "status": "active"
+  },
+  "KXNCAAFBIGTENLEADER-26RSHYDS-NEBACOL": {
+   "event_ticker": "KXNCAAFBIGTENLEADER-26RSHYDS",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBIGTENLEADER",
+   "status": "active"
+  },
+  "KXNCAAFBIGTENLEADER-26RSHYDS-NEBMNEL": {
+   "event_ticker": "KXNCAAFBIGTENLEADER-26RSHYDS",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBIGTENLEADER",
+   "status": "active"
+  },
+  "KXNCAAFBIGTENLEADER-26SACK-NEBOCHA": {
+   "event_ticker": "KXNCAAFBIGTENLEADER-26SACK",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBIGTENLEADER",
+   "status": "active"
+  },
+  "KXNCAAFBIGTENLEADER-26SACK-NEBWNWA": {
+   "event_ticker": "KXNCAAFBIGTENLEADER-26SACK",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBIGTENLEADER",
+   "status": "active"
+  },
+  "KXNCAAFBIGTENREGTOP-27T3-NEB": {
+   "event_ticker": "KXNCAAFBIGTENREGTOP-27T3",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBIGTENREGTOP",
+   "status": "active"
+  },
+  "KXNCAAFBIGTENREGTOP-27T4-NEB": {
+   "event_ticker": "KXNCAAFBIGTENREGTOP-27T4",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBIGTENREGTOP",
+   "status": "active",
+   "watermark_ts": 1788429563
+  },
+  "KXNCAAFBIGTENREGTOP-27T5-NEB": {
+   "event_ticker": "KXNCAAFBIGTENREGTOP-27T5",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBIGTENREGTOP",
+   "status": "active",
+   "watermark_ts": 1788569164
+  },
+  "KXNCAAFBOWLGAME-26-NEB": {
+   "event_ticker": "KXNCAAFBOWLGAME-26",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFBOWLGAME",
+   "status": "active"
+  },
+  "KXNCAAFCOACHOUT-27FEB01-MRHU": {
+   "event_ticker": "KXNCAAFCOACHOUT-27FEB01",
+   "matched_by": "text:nebraska",
+   "partition": "live",
+   "series": "KXNCAAFCOACHOUT",
+   "status": "active",
+   "watermark_ts": 1788825843
+  },
+  "KXNCAAFCOTY-27-MRHU": {
+   "event_ticker": "KXNCAAFCOTY-27",
+   "matched_by": "text:nebraska",
+   "partition": "live",
+   "series": "KXNCAAFCOTY",
+   "status": "active",
+   "watermark_ts": 1788714282
+  },
+  "KXNCAAFGAME-26SEP05OHIONEB-NEB": {
+   "event_ticker": "KXNCAAFGAME-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFGAME",
+   "status": "finalized",
+   "watermark_ts": 1788636646
+  },
+  "KXNCAAFGAME-26SEP05OHIONEB-OHIO": {
+   "event_ticker": "KXNCAAFGAME-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFGAME",
+   "status": "finalized",
+   "watermark_ts": 1788636619
+  },
+  "KXNCAAFGAME-26SEP12BGSUNEB-BGSU": {
+   "event_ticker": "KXNCAAFGAME-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFGAME",
+   "status": "active",
+   "watermark_ts": 1788844871
+  },
+  "KXNCAAFGAME-26SEP12BGSUNEB-NEB": {
+   "event_ticker": "KXNCAAFGAME-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFGAME",
+   "status": "active",
+   "watermark_ts": 1788871472
+  },
+  "KXNCAAFGAME-26SEP19UNDNEB-NEB": {
+   "event_ticker": "KXNCAAFGAME-26SEP19UNDNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFGAME",
+   "status": "active",
+   "watermark_ts": 1788749621
+  },
+  "KXNCAAFGAME-26SEP19UNDNEB-UND": {
+   "event_ticker": "KXNCAAFGAME-26SEP19UNDNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFGAME",
+   "status": "active"
+  },
+  "KXNCAAFLEADER-26PASSTD-NEBACOL": {
+   "event_ticker": "KXNCAAFLEADER-26PASSTD",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFLEADER",
+   "status": "active"
+  },
+  "KXNCAAFLEADER-26PASSYDS-NEBACOL": {
+   "event_ticker": "KXNCAAFLEADER-26PASSYDS",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFLEADER",
+   "status": "active"
+  },
+  "KXNCAAFLEADER-26RECYDS-NEBNHUN": {
+   "event_ticker": "KXNCAAFLEADER-26RECYDS",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFLEADER",
+   "status": "active"
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB10": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636600
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB11": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636667
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB12": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636513
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB14": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636596
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB15": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636606
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB17": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636621
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB18": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636465
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB21": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636658
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB22": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636655
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB24": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636665
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB25": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636665
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB28": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636662
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB3": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788635609
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB31": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636648
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB34": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636373
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB36": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788632283
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB39": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788627818
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB4": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636643
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB42": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788627813
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB5": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788635897
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB6": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636182
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB7": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636045
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-NEB8": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788636497
+  },
+  "KXNCAAFSPREAD-26SEP05OHIONEB-OHIO4": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "finalized",
+   "watermark_ts": 1788634915
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB10": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active",
+   "watermark_ts": 1788868022
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB11": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active"
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB12": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active"
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB14": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active"
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB15": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active"
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB17": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active",
+   "watermark_ts": 1788796334
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB18": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active"
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB21": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active",
+   "watermark_ts": 1788865702
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB22": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active",
+   "watermark_ts": 1788862440
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB24": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active"
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB25": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active"
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB28": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active",
+   "watermark_ts": 1788872677
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB29": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active",
+   "watermark_ts": 1788871209
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB31": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active",
+   "watermark_ts": 1788868772
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB34": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active",
+   "watermark_ts": 1788844845
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB36": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active"
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB39": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active"
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB42": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active",
+   "watermark_ts": 1788831757
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB46": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active"
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB49": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active",
+   "watermark_ts": 1788802649
+  },
+  "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB8": {
+   "event_ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFSPREAD",
+   "status": "active",
+   "watermark_ts": 1788863303
+  },
+  "KXNCAAFTEAMTD-26SEP05OHIONEB-NEB4": {
+   "event_ticker": "KXNCAAFTEAMTD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTD",
+   "status": "finalized",
+   "watermark_ts": 1788633506
+  },
+  "KXNCAAFTEAMTD-26SEP05OHIONEB-NEB5": {
+   "event_ticker": "KXNCAAFTEAMTD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTD",
+   "status": "finalized",
+   "watermark_ts": 1788634864
+  },
+  "KXNCAAFTEAMTD-26SEP05OHIONEB-NEB6": {
+   "event_ticker": "KXNCAAFTEAMTD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTD",
+   "status": "finalized",
+   "watermark_ts": 1788635683
+  },
+  "KXNCAAFTEAMTD-26SEP05OHIONEB-OHIO1": {
+   "event_ticker": "KXNCAAFTEAMTD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTD",
+   "status": "finalized",
+   "watermark_ts": 1788624415
+  },
+  "KXNCAAFTEAMTD-26SEP05OHIONEB-OHIO2": {
+   "event_ticker": "KXNCAAFTEAMTD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTD",
+   "status": "finalized",
+   "watermark_ts": 1788635572
+  },
+  "KXNCAAFTEAMTD-26SEP05OHIONEB-OHIO3": {
+   "event_ticker": "KXNCAAFTEAMTD-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTD",
+   "status": "finalized",
+   "watermark_ts": 1788637044
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB14": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788628039
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB17": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788629291
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB20": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788632210
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB21": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788632655
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB24": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788633092
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB28": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788633496
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB31": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634749
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB35": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634870
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB38": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788635668
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB42": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788635721
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB46": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788636344
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB49": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788636379
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB52": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788636643
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB55": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788633942
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO10": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788625663
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO11": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788627471
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO14": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634271
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO17": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634271
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO20": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634322
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO21": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634329
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO24": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788636643
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO3": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788624381
+  },
+  "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO7": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788624413
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU10": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU12": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU14": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU17": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU20": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU21": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU24": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU3": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU7": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB17": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB20": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB21": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB24": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB28": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB31": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB35": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB38": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active",
+   "watermark_ts": 1788796465
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB41": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active",
+   "watermark_ts": 1788832393
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB42": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active",
+   "watermark_ts": 1788822219
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB46": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB49": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active",
+   "watermark_ts": 1788799727
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB52": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB55": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB58": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB61": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB64": {
+   "event_ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB275": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized",
+   "watermark_ts": 1788632836
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB300": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized",
+   "watermark_ts": 1788632974
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB325": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized",
+   "watermark_ts": 1788633327
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB350": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized",
+   "watermark_ts": 1788633558
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB375": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized",
+   "watermark_ts": 1788636968
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB400": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized",
+   "watermark_ts": 1788636960
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB425": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized",
+   "watermark_ts": 1788636951
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB450": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized",
+   "watermark_ts": 1788636986
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO275": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized",
+   "watermark_ts": 1788635051
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO300": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized",
+   "watermark_ts": 1788636636
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO325": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized",
+   "watermark_ts": 1788633131
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO350": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized",
+   "watermark_ts": 1788629289
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO375": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized"
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO400": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized"
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO425": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized"
+  },
+  "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO450": {
+   "event_ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTEAMYDS",
+   "status": "finalized"
+  },
+  "KXNCAAFTFUT-30NEB-Y": {
+   "event_ticker": "KXNCAAFTFUT-30NEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTFUT",
+   "status": "active",
+   "watermark_ts": 1788648628
+  },
+  "KXNCAAFTOPAPRANK-26W10T10-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W10T10",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W10T25-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W10T25",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active",
+   "watermark_ts": 1788187190
+  },
+  "KXNCAAFTOPAPRANK-26W10T5-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W10T5",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W11T10-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W11T10",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W11T25-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W11T25",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active",
+   "watermark_ts": 1788186534
+  },
+  "KXNCAAFTOPAPRANK-26W11T5-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W11T5",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W12T10-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W12T10",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W12T25-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W12T25",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active",
+   "watermark_ts": 1788186280
+  },
+  "KXNCAAFTOPAPRANK-26W12T5-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W12T5",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W3T10-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W3T10",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W3T25-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W3T25",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W3T5-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W3T5",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W4T10-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W4T10",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W4T25-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W4T25",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W4T5-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W4T5",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W5T10-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W5T10",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W5T25-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W5T25",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active",
+   "watermark_ts": 1788433554
+  },
+  "KXNCAAFTOPAPRANK-26W5T5-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W5T5",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W6T10-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W6T10",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W6T25-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W6T25",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W6T5-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W6T5",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W7T10-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W7T10",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W7T25-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W7T25",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W7T5-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W7T5",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W8T10-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W8T10",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W8T25-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W8T25",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active",
+   "watermark_ts": 1788187514
+  },
+  "KXNCAAFTOPAPRANK-26W8T5-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W8T5",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W9T10-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W9T10",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOPAPRANK-26W9T25-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W9T25",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active",
+   "watermark_ts": 1788187352
+  },
+  "KXNCAAFTOPAPRANK-26W9T5-NEB": {
+   "event_ticker": "KXNCAAFTOPAPRANK-26W9T5",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOPAPRANK",
+   "status": "active"
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-28": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788632075
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-31": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788632182
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-34": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788632638
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-37": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634047
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-40": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788633447
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-43": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634322
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-46": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634773
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-47": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634781
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-48": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634819
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-49": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634428
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-50": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634807
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-51": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788634891
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-52": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788635596
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-55": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788635771
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-58": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788635750
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-61": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788636600
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-64": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788636612
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-67": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788636614
+  },
+  "KXNCAAFTOTAL-26SEP05OHIONEB-70": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP05OHIONEB",
+   "finalized_complete": true,
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "finalized",
+   "watermark_ts": 1788636444
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-33": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active",
+   "watermark_ts": 1788750609
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-36": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active",
+   "watermark_ts": 1788864205
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-39": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-42": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active",
+   "watermark_ts": 1788864661
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-45": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-48": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-51": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active",
+   "watermark_ts": 1788778438
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-52": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active",
+   "watermark_ts": 1788868132
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-53": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active",
+   "watermark_ts": 1788787930
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-54": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active",
+   "watermark_ts": 1788863745
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-55": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-56": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active",
+   "watermark_ts": 1788864879
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-57": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-60": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-63": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-66": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active",
+   "watermark_ts": 1788703441
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-69": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active"
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-72": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active",
+   "watermark_ts": 1788873062
+  },
+  "KXNCAAFTOTAL-26SEP12BGSUNEB-75": {
+   "event_ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFTOTAL",
+   "status": "active",
+   "watermark_ts": 1788830833
+  },
+  "KXNCAAFWINS-26NEB-10": {
+   "event_ticker": "KXNCAAFWINS-26NEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFWINS",
+   "status": "active",
+   "watermark_ts": 1788658961
+  },
+  "KXNCAAFWINS-26NEB-11": {
+   "event_ticker": "KXNCAAFWINS-26NEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFWINS",
+   "status": "active",
+   "watermark_ts": 1788658956
+  },
+  "KXNCAAFWINS-26NEB-12": {
+   "event_ticker": "KXNCAAFWINS-26NEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFWINS",
+   "status": "active",
+   "watermark_ts": 1783890903
+  },
+  "KXNCAAFWINS-26NEB-4": {
+   "event_ticker": "KXNCAAFWINS-26NEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFWINS",
+   "status": "active",
+   "watermark_ts": 1788624077
+  },
+  "KXNCAAFWINS-26NEB-5": {
+   "event_ticker": "KXNCAAFWINS-26NEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFWINS",
+   "status": "active",
+   "watermark_ts": 1788799232
+  },
+  "KXNCAAFWINS-26NEB-6": {
+   "event_ticker": "KXNCAAFWINS-26NEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFWINS",
+   "status": "active",
+   "watermark_ts": 1788839709
+  },
+  "KXNCAAFWINS-26NEB-7": {
+   "event_ticker": "KXNCAAFWINS-26NEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFWINS",
+   "status": "active",
+   "watermark_ts": 1788839725
+  },
+  "KXNCAAFWINS-26NEB-8": {
+   "event_ticker": "KXNCAAFWINS-26NEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFWINS",
+   "status": "active",
+   "watermark_ts": 1788803445
+  },
+  "KXNCAAFWINS-26NEB-9": {
+   "event_ticker": "KXNCAAFWINS-26NEB",
+   "matched_by": "ticker",
+   "partition": "live",
+   "series": "KXNCAAFWINS",
+   "status": "active",
+   "watermark_ts": 1788802735
+  }
+ }
+}
