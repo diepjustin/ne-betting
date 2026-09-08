@@ -1,0 +1,80 @@
+# Names the automatic matcher cannot place, resolved by hand and recorded with
+# the evidence. Keys are the team name exactly as a platform writes it.
+#
+# Nothing here is guessed. Where two ESPN teams share a name, the right one was
+# identified from the opponents the code actually plays, noted per entry.
+
+overrides:
+  # ESPN files this school as "App State", the platforms as "Appalachian".
+  "Appalachian St.": "2026"
+  "Appalachian State": "2026"
+
+  # ESPN writes Hawai'i with an okina, which normalisation strips to a space.
+  "Hawaii": "62"
+
+  # Polymarket truncates the title of some Bowling Green games to one word.
+  "Bowling": "189"
+
+  # ESPN lists a Charlotte 49ers and a Charlotte Saints. The betting code
+  # `char` plays App State, North Carolina, Rice and UAB, so it is the 49ers.
+  "Charlotte": "2429"
+
+  # ESPN lists Troy Trojans and Troy Vikings (Hudson Valley CC). The betting
+  # code `troy` plays Alabama State, Arkansas State, Georgia State and
+  # Louisiana, so it is the Trojans.
+  "Troy": "2653"
+
+  # ESPN calls this UAlbany.
+  "University at Albany": "399"
+
+  # --- names the matcher cannot place, each checked against the ESPN list ---
+  # ESPN drops "State" from several school names.
+  "Central Connecticut St.": "2115"
+  "Central Connecticut State": "2115"
+  "Grambling St.": "2755"
+  "Grambling State": "2755"
+  "Nicholls St.": "2447"
+  "Nicholls State": "2447"
+  "Central State (OH)": "2119"
+  "Central State (OH) Marauders": "2119"
+  # ESPN writes this one as Lane College. Kalshi reuses the code LC for both
+  # Lane and Louisiana Christian, which is why they are checked apart.
+  "Lane Dragons": "2323"
+  "Fairmont State Fighting Falcons": "2986"
+  "Glenville State College": "2249"
+  "Glenville State College Pioneers": "2249"
+  "Oklahoma Panhandle State": "2824"
+  "Oklahoma Panhandle State Aggies": "2824"
+
+  # ESPN abbreviates where the platforms spell out. Each of these was
+  # previously mis-merged into a bigger school by prefix matching, which is
+  # why the prefix rule was removed: NC State is not North Carolina, UL Monroe
+  # is not Louisiana, Southern Miss is not Southern.
+  "North Carolina St.": "152"
+  "Louisiana-Monroe": "2433"
+  "Southern Mississippi": "2572"
+  "Tennessee-Martin": "2630"
+  "Southeastern Louisiana": "2545"
+  "Texas Permian Basin": "110243"
+  "Texas Permian Basin Falcons": "110243"
+
+  # Parenthetical qualifiers. Georgetown College is the Kentucky school, not
+  # the Hoyas; Miami (FL) is the Hurricanes, not Miami (OH).
+  "Miami (FL)": "2390"
+  "Georgetown College": "2245"
+  "Georgetown College Tigers": "2245"
+
+# Names deliberately left unresolved. Recording them stops the same lookup
+# being repeated, and an unresolved row is honest where a guess is a
+# correction waiting to happen.
+unresolvable:
+  "UT Rio Grande Valley": "no matching team in the ESPN list; the programme is new"
+  "Roosevelt": "NAIA school, listed twice in ESPN under one name; not separable"
+  "Chicago St.": "Chicago State is not in the ESPN list; Chicago Maroons is a different school"
+  "Chicago State": "Chicago State is not in the ESPN list; Chicago Maroons is a different school"
+  "Lawrence Tech": "Lawrence Technological University is absent; Lawrence Vikings is a different school"
+  "Lawrence Tech Blue Devils": "Lawrence Technological University is absent; Lawrence Vikings is a different school"
+  "Texas Wesleyan": "absent from the ESPN list"
+  "Texas Wesleyan Rams": "absent from the ESPN list"
+  "Northwestern (IA)": "Northwestern College Iowa is absent; the ESPN Northwesterns are MN, OK, State and the Wildcats"
+  "Northwestern (IA) Red Raiders": "Northwestern College Iowa is absent"
