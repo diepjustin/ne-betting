@@ -1,0 +1,121 @@
+# Which Kalshi series to walk each run, and how to decide a market is about
+# Nebraska. Series tickers here were read from the live /series dump on
+# 8 Sep 2026 (docs/RECON.md, data/sample/recon/kalshi/kalshi_cfb_series_list.txt).
+# Do not add a ticker you have not seen in a response.
+
+kalshi:
+  base_url: https://api.elections.kalshi.com/trade-api/v2
+  # Kalshi publishes no rate limit for unauthenticated calls (RECON §1), so
+  # stay polite: one request a second, sequential, back off on 429.
+  min_seconds_between_requests: 1.0
+  page_size: 200          # /events max is 200; trades/markets use 1000
+  trades_page_size: 1000
+  # Re-fetch trades from this many seconds before the stored watermark so a
+  # trade timestamped in the same second as the last one seen is not missed.
+  # Duplicates are removed downstream on trade_id, never here.
+  watermark_overlap_seconds: 60
+
+  series:
+    # game-level
+    - KXNCAAFGAME
+    - KXNCAAFSPREAD
+    - KXNCAAFTOTAL
+    - KXNCAAFTEAMTOTAL
+    - KXNCAAFTEAMYDS
+    - KXNCAAFTEAMTD
+    # season / futures
+    - KXNCAAFWINS
+    - KXNCAAFB10
+    - KXNCAAFB10QUAL
+    - KXNCAAFBIGTENWINS
+    - KXNCAAFBIGTENREGTOP
+    - KXNCAAFPLAYOFF
+    - KXNCAAPLAYOFF
+    - KXNCAAF
+    - KXNCAAFSEED
+    - KXNCAAFQF
+    - KXNCAAFSF
+    - KXNCAAFBOWLGAME
+    - KXNCAAFUNDEFEATED
+    - KXNCAAFAPRANK
+    - KXNCAAFAPANY
+    - KXNCAAFTOPAPRANK
+    - KXNCAAFTFUT
+    # coach
+    - KXNCAAFCOACHOUT
+    - KXNCAAFCOACHLEAVE
+    - KXCOACHOUTNCAAFB
+    - KXNCAAFCOTY
+    - KXNCAAFCOTW
+    # player-level: collected for aggregate volume only (plan §9)
+    - KXNCAAFLEADER
+    - KXNCAAFBIGTENLEADER
+    - KXNCAAFAWARD
+    - KXHEISMAN
+    - KXHEISMANFINALIST
+
+  match:
+    # Case-insensitive; tested against title, subtitle, yes/no sub-titles,
+    # rules_primary and the parent event title.
+    text_patterns:
+      - "nebraska"
+      - "husker"
+      - "matt rhule"
+    # Tested against the market ticker after its series prefix. Kalshi embeds
+    # the team code NEB in the game code (26SEP05OHIONEB), the season code
+    # (26NEB), strike segments (NEB275) and player codes (NEBOCHA).
+    ticker_pattern: "-[0-9A-Z]*NEB[0-9A-Z]*(-|$)"
+
+polymarket:
+  gamma_url: https://gamma-api.polymarket.com
+  data_url: https://data-api.polymarket.com
+  # Published Cloudflare limits are per 10 s: gamma /events 500, /markets 300,
+  # /public-search 350; data-api /trades 200. Three requests a second is about
+  # 15% of the tightest of those (RECON §2).
+  min_seconds_between_requests: 0.35
+  # gamma /events caps at 100 per page whatever `limit` says (verified
+  # 8 Sep 2026); public-search ignores `limit` and always returns 5.
+  events_page_size: 100
+  trades_page_size: 1000
+  # data-api rejects offsets above 10000, so once a market's history runs
+  # deeper than that the collector re-anchors with `end=<oldest seen>`.
+  max_offset: 10000
+  watermark_overlap_seconds: 60
+  # How far back the daily run sweeps closed game events. The College
+  # Football series carries every FBS game, so each page back is ~1-3 MB of
+  # events we do not want; one season is a handful of pages, three seasons is
+  # tens of megabytes on every run. The daily job therefore covers the current
+  # season and earlier seasons are reached two ways: public-search candidates
+  # (which found the 2024 and 2025 Nebraska games) and a deliberate
+  # `--backfill-since 2024-01-01`, run by hand.
+  earliest_start_date: "2026-01-01"
+
+  # College Football, from GET /sports: id 9, series 12756, primaryTagId 100351.
+  cfb_series_id: 12756
+  cfb_tag_id: 100351
+  # public-search is only a candidate generator; its own matching is loose
+  # ("Huskers" returns cricket teams named Tuskers), so every candidate is
+  # re-tested against the patterns below.
+  search_terms:
+    - Cornhuskers
+    - Nebraska football
+
+  match:
+    text_patterns:
+      - "nebraska"
+      - "cornhusker"
+      - "matt rhule"
+    # Game slugs are cfb-<away>-<home>-<YYYY-MM-DD>. Polymarket abbreviated
+    # Nebraska as `neb` in 2024-25 (cfb-mich-neb-2025-09-20) and `nebr` in
+    # 2026 (cfb-ohio-nebr-2026-09-05); 2024 used a longer style
+    # (cfb-indiana-vs-nebraska). All three are matched.
+    slug_pattern: "(^|-)(neb|nebr|nebraska)(-|$)"
+
+  # Nebraska's basketball teams share those slug abbreviations
+  # (cbb-ill-nebr-2026-02-01 traded $503k), and this project is about
+  # football. Every one of the 1,624 college-football events seen on
+  # 8 Sep 2026 carried tag 100351 and none of the 67 basketball events did,
+  # so an event must carry a football tag to be collected at all.
+  football:
+    tag_ids: ["100351"]
+    tag_slugs: ["cfb", "ncaaf", "football"]
