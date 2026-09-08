@@ -21,6 +21,11 @@ def matcher():
     return polymarket.Matcher.from_config(CFG["match"], CFG["football"])
 
 
+@pytest.fixture
+def wide():
+    return polymarket.Matcher.from_config(CFG["match"], CFG["football"], "all")
+
+
 def test_matches_nebraska_game_events_on_slug(matcher):
     for e in fixture("pm_nebraska_events.json"):
         assert matcher.why(e) == "slug", e["slug"]
@@ -111,10 +116,13 @@ def test_end_to_end_archives_and_watermarks(tmp_path, cfg, matcher, monkeypatch)
     matched, state, archive, stats = run_once(tmp_path, router, cfg, matcher)
     assert stats.events_matched == 3
     assert stats.markets_matched == 156  # 148 + 7 + 1
-    assert stats.metadata_captured == 156
-    # every matched market got a metadata fetch and at least one trades page
+    # Only the 38 that have ever traded cost a request; the other 118 are
+    # recorded as untraded and skipped, which is where the saving comes from
+    # at full college-football scale.
+    assert stats.metadata_captured == 38
+    assert stats.skipped_no_volume == 118
     files = list((tmp_path / "raw" / SOURCE_DIR).rglob("*.json.gz"))
-    assert len([f for f in files if f.name.startswith("gamma_market_")]) == 156
+    assert len([f for f in files if f.name.startswith("gamma_market_")]) == 38
     env = read_raw([f for f in files if f.name.startswith("trades_")][0])
     assert env["source"] == "polymarket" and env["status"] == 200
     assert json.loads(env["body"]) == json.loads(env["body"])  # body is valid JSON text
@@ -133,8 +141,8 @@ def test_second_run_uses_start_and_skips_closed(tmp_path, cfg, matcher):
     router.calls.clear()
     _, state, _, stats = run_once(tmp_path, router, cfg, matcher)
     trade_calls = [q for p, q in router.calls if p.endswith("/trades")]
-    # every Ohio-game market is closed in the fixture, so nothing is re-fetched
-    assert stats.skipped_closed == 148
+    # closed and previously collected, so nothing is re-fetched
+    assert stats.skipped_closed == 37
     assert stats.metadata_captured == 0
     open_calls = [q for q in trade_calls if "start" in q]
     assert open_calls, "open markets should be re-polled from their watermark"
@@ -147,7 +155,7 @@ def test_metadata_captured_once_then_not_refetched(tmp_path, cfg, matcher):
     router.calls.clear()
     run_once(tmp_path, router, cfg, matcher)
     second = len([q for p, q in router.calls if "/markets/" in p])
-    assert first == 156 and second == 0
+    assert first == 38 and second == 0
 
 
 def test_offset_paging_walks_whole_history(tmp_path, cfg, matcher):
@@ -186,3 +194,21 @@ def test_older_nebraska_abbreviations_still_match(matcher):
     assert {e["slug"] for e in old} >= {"cfb-mich-neb-2025-09-20", "cfb-indiana-vs-nebraska"}
     for e in old:
         assert matcher.why(e) == "slug", e["slug"]
+
+
+def test_wide_scope_keeps_every_football_market_but_no_basketball(wide):
+    """Widening to all of college football is not licence to collect
+    basketball: the sport gate runs first in every scope."""
+    games = fixture("pm_negative_events.json")          # other teams' football
+    assert all(wide.why(e) == "scope:all" for e in games)
+    bb = fixture("pm_basketball_events.json")           # Nebraska basketball
+    assert [e["slug"] for e in bb if wide.why(e)] == []
+
+
+def test_wide_scope_keeps_every_rung_of_a_futures_event(wide, matcher):
+    b10 = [e for e in fixture("pm_futures_events.json")
+           if "big-ten-conference-winner" in e["slug"]][0]
+    wide_keep = [m for m in b10["markets"] if wide.market_is_nebraska(m, "scope:all")]
+    narrow_keep = [m for m in b10["markets"]
+                   if matcher.market_is_nebraska(m, matcher.why(b10))]
+    assert len(wide_keep) == 22 and len(narrow_keep) == 1

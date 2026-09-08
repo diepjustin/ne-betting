@@ -9,7 +9,13 @@ wrong mapping is a correction.
 from __future__ import annotations
 
 import re
+import gzip
+import json
 from dataclasses import dataclass
+from functools import lru_cache
+
+from collectors.common import PROJECT_ROOT
+from .teams import resolve_team
 
 # The enum the plan asks for, plus the coach markets both platforms list.
 GAME_WINNER = "game_winner"
@@ -103,49 +109,107 @@ class Resolved:
     reason: str | None = None      # why it is unresolved, when it is
 
 
+CODES_FILE = PROJECT_ROOT / "data" / "reference" / "kalshi_team_codes.json.gz"
+PM_CODES_FILE = PROJECT_ROOT / "data" / "reference" / "polymarket_team_codes.json.gz"
+
+
+@lru_cache(maxsize=1)
+def _kalshi_codes() -> dict:
+    """Kalshi team code -> ESPN team id, learned from the archive.
+
+    Only codes that map to exactly one school are here. Codes Kalshi reuses
+    across divisions (WSU, KSU, CSU, WEB, LC) are deliberately absent, so a
+    game using one of them resolves to no game rather than the wrong one.
+    """
+    try:
+        with gzip.open(CODES_FILE, "rt") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+
+def _abbr(team_id: str) -> str | None:
+    from .teams import _load
+    by_id, _, _, _ = _load()
+    t = by_id.get(team_id)
+    return (t.abbr or t.name).upper().replace(" ", "") if t else None
+
+
+def _split_kalshi_teams(blob: str) -> tuple[str, str] | None:
+    """`OHIONEB` -> the two team codes that make it up.
+
+    Kalshi runs the away and home codes together with no separator, so the
+    split is only knowable from the vocabulary of codes actually observed.
+    A blob that splits more than one way is refused rather than guessed.
+    """
+    codes = _kalshi_codes()
+    splits = [(blob[:i], blob[i:]) for i in range(2, len(blob) - 1)
+              if blob[:i] in codes and blob[i:] in codes]
+    return splits[0] if len(splits) == 1 else None
+
+
 def _kalshi_game_id(ticker: str) -> str | None:
-    """26SEP05OHIONEB -> 2026-09-05-NEB-OHIO, opponent second."""
+    """`...-26SEP05OHIONEB-...` -> `2026-09-05-OHIO-NEB`, away then home."""
     m = _KALSHI_GAME.search(ticker)
     if not m:
         return None
-    yy, mon, dd, teams = m.groups()
+    yy, mon, dd, blob = m.groups()
     if mon not in _MONTHS:
         return None
-    if NEBRASKA not in teams:
+    split = _split_kalshi_teams(blob)
+    if not split:
         return None
-    opp = teams.replace(NEBRASKA, "", 1)
-    if not opp:
+    away, home = split
+    codes = _kalshi_codes()
+    a, h = _abbr(codes[away]), _abbr(codes[home])
+    if not a or not h:
         return None
-    return f"20{yy}-{_MONTHS[mon]:02d}-{dd}-{NEBRASKA}-{opp}"
+    return f"20{yy}-{_MONTHS[mon]:02d}-{dd}-{a}-{h}"
+
+
+@lru_cache(maxsize=1)
+def _pm_codes() -> dict:
+    try:
+        with gzip.open(PM_CODES_FILE, "rt") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+
+@lru_cache(maxsize=4096)
+def _pm_abbr(slug_code: str) -> str | None:
+    """Polymarket slug abbreviation -> canonical abbreviation.
+
+    `nebr` is not a school name, so the slug alone cannot be resolved. The
+    event title carries the real names and is what the alias table was built
+    from; here the code is matched against that table by way of the team
+    resolver, and anything unknown returns nothing rather than a guess.
+    """
+    codes = _pm_codes()
+    if slug_code in codes:
+        return _abbr(codes[slug_code])
+    from .teams import _load
+    by_id, index, _, _ = _load()
+    hit = index.get(slug_code)
+    if hit and len(hit) == 1:
+        return _abbr(next(iter(hit)))
+    return None
 
 
 def _pm_game_id(slug: str, game_start: str | None = None) -> str | None:
     m = _PM_GAME.match(slug or "")
-    if not m:
+    if m:
+        away, home, y, mo, d = m.groups()
+    else:
         u = _PM_GAME_UNDATED.match(slug or "")
         if not u or not game_start or len(str(game_start)) < 10:
             return None
         away, home = u.groups()
         y, mo, d = str(game_start)[:10].split("-")
-        if _PM_NEB.match(away):
-            opp = home
-        elif _PM_NEB.match(home):
-            opp = away
-        elif away == "nebraska":
-            opp = home
-        elif home == "nebraska":
-            opp = away
-        else:
-            return None
-        return f"{y}-{mo}-{d}-{NEBRASKA}-{opp.upper()}"
-    away, home, y, mo, d = m.groups()
-    if _PM_NEB.match(away):
-        opp = home
-    elif _PM_NEB.match(home):
-        opp = away
-    else:
+    a, h = _pm_abbr(away), _pm_abbr(home)
+    if not a or not h:
         return None
-    return f"{y}-{mo}-{d}-{NEBRASKA}-{opp.upper()}"
+    return f"{y}-{mo}-{d}-{a}-{h}"
 
 
 def _line_from_title(title: str) -> float | None:

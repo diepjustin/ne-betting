@@ -41,14 +41,16 @@ class Matcher:
     slug_pattern: re.Pattern
     football_tag_ids: set[str]
     football_tag_slugs: set[str]
+    match_all: bool = False
 
     @classmethod
-    def from_config(cls, cfg: dict, football: dict) -> "Matcher":
+    def from_config(cls, cfg: dict, football: dict, scope: str = "nebraska") -> "Matcher":
         return cls(
             [re.compile(p, re.I) for p in cfg["text_patterns"]],
             re.compile(cfg["slug_pattern"], re.I),
             {str(t) for t in football["tag_ids"]},
             {str(s).lower() for s in football["tag_slugs"]},
+            match_all=(scope == "all"),
         )
 
     def is_football(self, event: dict) -> bool:
@@ -71,8 +73,12 @@ class Matcher:
         because the event itself is league-wide ("2026 Big Ten Champion").
         Non-football events never match.
         """
+        # The football gate applies in every scope. Widening to all of college
+        # football is not licence to collect college basketball.
         if not self.is_football(event):
             return None
+        if self.match_all:
+            return "scope:all"
         slug = str(event.get("slug") or "")
         if self.slug_pattern.search(slug):
             return "slug"
@@ -93,7 +99,7 @@ class Matcher:
         For a futures event only the Nebraska rung counts; the other 21 Big Ten
         teams' markets are not Nebraska markets.
         """
-        if event_matched_by == "slug":
+        if self.match_all or event_matched_by == "slug":
             return True
         for p in self.text_patterns:
             for f in MARKET_TEXT_FIELDS:
@@ -110,6 +116,7 @@ class MatchedMarket:
     event_slug: str
     reason: str
     closed: bool
+    volume: float = 0.0
 
 
 @dataclass
@@ -122,6 +129,7 @@ class RunStats:
     trades_pages: int = 0
     trades_rows: int = 0
     skipped_closed: int = 0
+    skipped_no_volume: int = 0
     no_condition_id: int = 0
     requests: int = 0
     retries: int = 0
@@ -205,9 +213,13 @@ def discover(gamma: Client, archive: RawArchive, cfg: dict, matcher: Matcher,
             cid = str(m.get("conditionId") or "")
             if not cid:
                 stats.no_condition_id += 1
+            try:
+                vol = float(m.get("volume") or 0)
+            except (TypeError, ValueError):
+                vol = 0.0
             matched[mid] = MatchedMarket(
                 mid, cid, str(e.get("id")), str(e.get("slug") or ""), why,
-                bool(m.get("closed")))
+                bool(m.get("closed")), vol)
     stats.markets_matched = len(matched)
     return list(matched.values())
 
@@ -215,6 +227,15 @@ def discover(gamma: Client, archive: RawArchive, cfg: dict, matcher: Matcher,
 def collect_market(gamma: Client, data: Client, archive: RawArchive, cfg: dict,
                    state: State, m: MatchedMarket, stats: RunStats) -> None:
     st = state.market(f"polymarket:{m.market_id}")
+    # Never traded: nothing to pull, and the event listing that carries its
+    # metadata is already archived.
+    if m.volume <= cfg["min_volume_for_trades"] and not st.get("watermark_ts"):
+        st["event_slug"], st["closed"], st["volume"] = m.event_slug, m.closed, m.volume
+        st["untraded"] = True
+        stats.skipped_no_volume += 1
+        state.save()
+        return
+    st.pop("untraded", None)
     if st.get("closed_complete"):
         stats.skipped_closed += 1
         return
@@ -288,6 +309,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--data-dir", type=Path, default=PROJECT_ROOT / "data")
     ap.add_argument("--config", type=Path, default=PROJECT_ROOT / "config" / "targets.yml")
     ap.add_argument("--dry-run", action="store_true", help="discover and match only")
+    ap.add_argument("--scope", choices=("nebraska", "all"),
+                    help="override the configured scope; `all` is every college football market")
     ap.add_argument("--backfill-since", metavar="YYYY-MM-DD",
                     help="sweep closed game events back to this date instead of the "
                          "current season; expensive, run by hand, not on a schedule")
@@ -298,7 +321,9 @@ def main(argv: list[str] | None = None) -> int:
     cfg = load_yaml(args.config)["polymarket"]
     if args.backfill_since:
         cfg = dict(cfg, earliest_start_date=args.backfill_since)
-    matcher = Matcher.from_config(cfg["match"], cfg["football"])
+    if args.scope:
+        cfg = dict(cfg, scope=args.scope)
+    matcher = Matcher.from_config(cfg["match"], cfg["football"], cfg.get("scope", "nebraska"))
     interval = cfg["min_seconds_between_requests"]
     gamma = Client(cfg["gamma_url"], min_interval=interval)
     data = Client(cfg["data_url"], min_interval=interval)
@@ -333,6 +358,8 @@ def main(argv: list[str] | None = None) -> int:
         "trades_pages": stats.trades_pages,
         "trades_rows_fetched": stats.trades_rows,
         "closed_skipped": stats.skipped_closed,
+        "untraded_skipped": stats.skipped_no_volume,
+        "scope": cfg.get("scope", "nebraska"),
         "http_requests": stats.requests,
         "http_retries": stats.retries,
         "raw_files_written": stats.files,

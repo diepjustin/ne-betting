@@ -38,6 +38,54 @@ def _ts(iso: str) -> int:
     return int(parse_rfc3339(iso).timestamp())
 
 
+def load_markets_from_discovery(db, root: Path, stats: Counter) -> None:
+    """Markets as they appear in the archived discovery pages.
+
+    A market that has never traded gets no per-market fetch, so the listing
+    page is the only record that it existed. Since the whole point of the
+    player-prop finding is markets that are listed and not traded, they have to
+    come from here. Per-market files load afterwards and win on the fields
+    they refresh.
+    """
+    for p, env, body in envelopes(root, "kalshi", "events"):
+        fetched = _ts(env["fetched_at"])
+        rel = str(p.relative_to(PROJECT_ROOT))
+        for e in (body.get("events") or []):
+            for m in (e.get("markets") or []):
+                r = resolve_kalshi(m)
+                db.execute("""INSERT OR IGNORE INTO market VALUES
+                              (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                           ("kalshi", m["ticker"], m.get("title"), m.get("yes_sub_title"),
+                            m["ticker"].split("-")[0], e.get("event_ticker"),
+                            _ts(m["open_time"]) if m.get("open_time") else None,
+                            _ts(m["close_time"]) if m.get("close_time") else None,
+                            m.get("status"), m.get("result"),
+                            r.game_id, r.market_type, r.team, r.player, r.line,
+                            fetched, rel))
+                stats["markets_from_discovery"] += 1
+
+    for p, env, body in envelopes(root, "polymarket", "gamma_events"):
+        fetched = _ts(env["fetched_at"])
+        rel = str(p.relative_to(PROJECT_ROOT))
+        events = body if isinstance(body, list) else (body.get("events") or [])
+        for e in events:
+            slug = e.get("slug") or ""
+            for m in (e.get("markets") or []):
+                cid = m.get("conditionId")
+                if not cid:
+                    continue
+                r = resolve_polymarket(m, slug)
+                db.execute("""INSERT OR IGNORE INTO market VALUES
+                              (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                           ("polymarket", cid, m.get("question"), m.get("groupItemTitle"),
+                            m.get("sportsMarketType"), str(e.get("id") or ""),
+                            None, None,
+                            "closed" if m.get("closed") else "open", None,
+                            r.game_id, r.market_type, r.team, r.player, r.line,
+                            fetched, rel))
+                stats["markets_from_discovery"] += 1
+
+
 def load_kalshi(db, root: Path, stats: Counter) -> None:
     for prefix, hist in (("market", 0), ("historical_market", 1)):
         for p, env, body in envelopes(root, "kalshi", prefix):
@@ -169,6 +217,7 @@ def main(argv=None) -> int:
     db = sqlite3.connect(db_path)
     db.executescript(SCHEMA.read_text())
     stats: Counter = Counter()
+    load_markets_from_discovery(db, raw, stats)
     load_kalshi(db, raw, stats)
     load_polymarket(db, raw, stats)
     db.commit()
@@ -183,6 +232,7 @@ def main(argv=None) -> int:
         "markets": mkts,
         "trades": rows,
         "market_rows_read": stats["markets"],
+        "market_rows_from_discovery_pages": stats["markets_from_discovery"],
         "trade_rows_read": stats["trades"],
         "duplicate_trade_rows_collapsed": stats["trades"] - rows,
         "unresolved_markets": unres,

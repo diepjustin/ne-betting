@@ -87,7 +87,33 @@ Code is in `normalize/teams.py`, overrides in `config/team_overrides.yml`, the
 canonical list in `data/reference/espn_teams.json.gz`, tests in
 `tests/test_teams.py`.
 
-## 4. Steps that follow
+## 4. Step two, done: the collectors take a scope
+
+Both collectors now accept `--scope all`, and the normalizer identifies games
+on both platforms with one joinable key. Measured against the live exchange
+rather than estimated:
+
+| | |
+|---|---|
+| Kalshi college-football markets discovered | 22,564 |
+| Of those that have ever traded | 13,791 (61%) |
+| Contracts traded across them | 824,128,445 |
+| Discovery cost | 49 requests, the same as the Nebraska scope |
+| Full first pass, at one request a second | roughly 7.7 hours |
+| Games identified on both platforms | 419 |
+
+The volume gate is what makes it affordable: a market that has never traded
+has nothing to fetch, and skipping those saves about five hours a pass. Their
+metadata is not lost, because the normalizer now reads markets out of the
+archived discovery pages.
+
+**The scheduled job has not been switched.** Two things have to happen first.
+Raw needs somewhere to live, and the state file needs to move out of git: at
+this scale it lists 22,564 markets and would be committed daily, which is the
+same multi-megabyte-file-per-day pattern this repo has already had to purge
+from its history once.
+
+## 5. Steps that follow
 
 1. **Player identity.** The same problem, harder. Names arrive as
    `yes_sub_title` on Kalshi and inside the question on Polymarket, with
@@ -102,7 +128,7 @@ canonical list in `data/reference/espn_teams.json.gz`, tests in
    solves this shape: build a payload, ship it as a workflow artifact rather
    than committing it, serve a static page that filters client-side.
 
-## 5. The fork that is not a technical decision
+## 6. The fork that is not a technical decision
 
 A public page where anyone picks a school, then a player, and sees the betting
 markets carrying that athlete's name is close to the artifact plan §9 says not
@@ -120,7 +146,7 @@ That still supports the finding the current data cannot reach: Nebraska has 24
 named players with markets and three with any trade, and whether that is
 typical nationally.
 
-## 6. Sportsbook props, revisited
+## 7. Sportsbook props, revisited
 
 Justin asked on 8 Sep whether the free RotoWire props could be scraped after
 all, reversing the earlier decision to keep the project to Kalshi and

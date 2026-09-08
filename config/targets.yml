@@ -5,6 +5,16 @@
 
 kalshi:
   base_url: https://api.elections.kalshi.com/trade-api/v2
+  # `nebraska` keeps only markets naming Nebraska. `all` keeps every market in
+  # the series below, which is all of college football. Discovery costs the
+  # same either way -- those pages are walked regardless -- so the difference
+  # is what gets a metadata fetch and a trade pull.
+  scope: nebraska
+  # A market that has never traded has no trades to fetch, and at full scale
+  # most strike-level markets never trade. Discovery pages carry each market's
+  # volume, so anything at or below this is recorded as seen and skipped.
+  # Its metadata is still in the archived discovery page.
+  min_volume_for_trades: 0
   # Kalshi publishes no rate limit for unauthenticated calls (RECON §1), so
   # stay polite: one request a second, sequential, back off on 429.
   min_seconds_between_requests: 1.0
@@ -68,6 +78,8 @@ kalshi:
 
 polymarket:
   gamma_url: https://gamma-api.polymarket.com
+  scope: nebraska
+  min_volume_for_trades: 0
   data_url: https://data-api.polymarket.com
   # Published Cloudflare limits are per 10 s: gamma /events 500, /markets 300,
   # /public-search 350; data-api /trades 200. Three requests a second is about

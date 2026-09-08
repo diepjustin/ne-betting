@@ -188,6 +188,34 @@ retrieved yet (RECON §1). The API is the primary source until then.
   aggregate; naming players is for reporting, and publication is the editor's
   call.
 
+## Widening past Nebraska
+
+- **2026-09-08.** Both collectors take a `scope`: `nebraska` keeps only markets
+  naming Nebraska, `all` keeps every market in the college-football series
+  walked. The football gate applies in both, so widening the scope never
+  admits college basketball. The configured default stays `nebraska`, and the
+  scheduled job is deliberately not switched.
+- **2026-09-08.** A market that has never traded has no trades to fetch, so
+  anything with zero volume is recorded as seen and skipped. Its metadata is
+  not lost: the discovery page carrying it is archived, and the normalizer now
+  reads markets from those pages. Measured on the live exchange, this is the
+  difference between roughly 7.7 and 12.5 hours for one full Kalshi pass.
+- **2026-09-08.** Games are identified as `<date>-<away>-<home>` using
+  canonical abbreviations, so a Kalshi ticker and a Polymarket slug for the
+  same game produce the same identifier and can be joined. This replaced a
+  Nebraska-only scheme. On the archive as it stands, 419 games are present on
+  both platforms.
+- **2026-09-08.** Kalshi runs the two team codes together with no separator
+  (`OHIONEB`), so the split is only knowable from the vocabulary of codes
+  actually observed. That vocabulary is learned from the archive and stored in
+  `data/reference/kalshi_team_codes.json.gz`, and it deliberately excludes the
+  codes Kalshi reuses across divisions. A blob that splits more than one way
+  resolves to no game rather than the wrong one.
+- **2026-09-08.** Polymarket slug abbreviations (`nebr`) are not school names,
+  so they get their own learned vocabulary in
+  `data/reference/polymarket_team_codes.json.gz`. Six of 406 codes were
+  refused because no single reading dominated.
+
 ## Limitations
 
 - Kalshi publishes no taker identity. Nothing here can say who traded.
@@ -208,7 +236,14 @@ retrieved yet (RECON §1). The API is the primary source until then.
 - polymarket.com tells US visitors to trade on polymarket.us instead. Whether
   polymarket.us fills appear in these public feeds is unconfirmed, and it
   matters for any claim about Nebraskans trading on Polymarket.
-- Five 2024-era Polymarket markets are not tied to a game; see above.
+- About 1,050 game markets carry no game identifier, mostly older events whose
+  slugs or tickers use a code that names more than one school. They are left
+  unidentified rather than guessed.
+- The scheduled job runs the Nebraska scope. Running the wide scope daily
+  would commit a state file listing 22,564 markets, which is the kind of
+  multi-megabyte file changing every day that this repo has already had to
+  clean out of its history once. That has to move to the Actions cache before
+  the wide scope goes on a schedule.
 - No sportsbook or DFS prop lines are collected, by decision on 8 Sep 2026
   (RECON "Phase 0b"). Any claim about how many chances there were to bet on a
   Nebraska athlete at a sportsbook is therefore out of this project's reach;
@@ -237,3 +272,9 @@ retrieved yet (RECON §1). The API is the primary source until then.
   keys, zero markets unresolved. Of 24 named players with markets listed
   across both platforms, three have any trade at all, totalling 12 trades and
   668 contracts.
+- **2026-09-08, measured for all of college football.** Discovery costs the
+  same 49 requests as the Nebraska scope, because those pages were always
+  being walked. It finds 22,564 Kalshi markets, of which 13,791 have ever
+  traded, carrying 824,128,445 contracts. A full first pass is roughly 7.7
+  hours at one request a second. Nothing at that scale has been collected yet;
+  where three gigabytes of raw archive lives is still undecided.

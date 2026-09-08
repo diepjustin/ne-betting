@@ -31,6 +31,9 @@ uv run python -m collectors.polymarket          # ~4 min
 uv run python -m collectors.polymarket --dry-run
 uv run python -m collectors.polymarket --backfill-since 2024-01-01  # by hand
 
+uv run python -m collectors.kalshi --scope all --dry-run   # all of college football
+uv run python -m collectors.polymarket --scope all --dry-run
+
 uv run python -m normalize.load        # raw -> data/husker.db
 uv run python -m analysis.breakdown    # CSVs into data/analysis/
 

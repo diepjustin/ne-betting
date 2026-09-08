@@ -168,3 +168,28 @@ def test_raw_archive_refuses_overwrite(tmp_path):
     a.write("kalshi", "market", "T", r)
     with pytest.raises(FileExistsError):
         a.write("kalshi", "market", "T", r)
+
+
+def test_wide_scope_keeps_every_market_in_the_walked_series():
+    wide = kalshi.Matcher.from_config(CFG["match"], "all")
+    rows = fixture("kalshi_negative_markets.json")      # other teams, Heisman field
+    assert rows and all(wide.why(r, r["event_title"]) == "scope:all" for r in rows)
+
+
+def test_untraded_markets_cost_no_requests(tmp_path, small_cfg, matcher):
+    """At full scale most strike-level markets never trade. One that has not
+    is recorded and skipped, and its metadata is already in the archived
+    discovery page."""
+    router = Router()
+    client = Client(small_cfg["base_url"], min_interval=0,
+                    transport=httpx.MockTransport(router.handler))
+    archive = RawArchive(tmp_path / "raw")
+    state = State(tmp_path / "state" / "kalshi.json")
+    stats = kalshi.RunStats()
+    m = kalshi.Matched("KXNCAAFB10-26-NEB", "KXNCAAFB10", "KXNCAAFB10-26",
+                       "ticker", "live", "active", "", volume=0.0)
+    kalshi.collect_market(client, archive, small_cfg, state, m, False, stats)
+    client.close()
+    assert stats.skipped_no_volume == 1
+    assert router.calls == []
+    assert state.market("KXNCAAFB10-26-NEB")["untraded"] is True

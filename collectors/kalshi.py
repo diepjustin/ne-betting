@@ -38,20 +38,31 @@ SOURCE = "kalshi"
 TEXT_FIELDS = ("title", "subtitle", "yes_sub_title", "no_sub_title", "rules_primary")
 
 
+def _volume(market: dict) -> float:
+    try:
+        return float(market.get("volume_fp") or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
 @dataclass
 class Matcher:
     text_patterns: list[re.Pattern]
     ticker_pattern: re.Pattern
+    match_all: bool = False
 
     @classmethod
-    def from_config(cls, cfg: dict) -> "Matcher":
+    def from_config(cls, cfg: dict, scope: str = "nebraska") -> "Matcher":
         return cls(
             [re.compile(p, re.I) for p in cfg["text_patterns"]],
             re.compile(cfg["ticker_pattern"]),
+            match_all=(scope == "all"),
         )
 
     def why(self, market: dict, event_title: str = "") -> str | None:
         """Return the reason a market matches, or None."""
+        if self.match_all:
+            return "scope:all"
         ticker = market.get("ticker", "")
         if self.ticker_pattern.search(ticker):
             return "ticker"
@@ -72,6 +83,7 @@ class Matched:
     partition: str  # live | historical
     status: str
     close_time: str
+    volume: float = 0.0
 
 
 @dataclass
@@ -83,6 +95,7 @@ class RunStats:
     trades_pages: int = 0
     trades_rows: int = 0
     skipped_finalized: int = 0
+    skipped_no_volume: int = 0
     requests: int = 0
     retries: int = 0
     files: int = 0
@@ -114,7 +127,8 @@ def discover(client: Client, archive: RawArchive, cfg: dict, matcher: Matcher,
                     if why and m["ticker"] not in found:
                         found[m["ticker"]] = Matched(
                             m["ticker"], series, ev.get("event_ticker", ""), why,
-                            "live", m.get("status", ""), m.get("close_time", ""))
+                            "live", m.get("status", ""), m.get("close_time", ""),
+                            _volume(m))
             cursor = body.get("cursor")
             if not cursor:
                 break
@@ -137,7 +151,8 @@ def discover(client: Client, archive: RawArchive, cfg: dict, matcher: Matcher,
                 if why and m["ticker"] not in found:
                     found[m["ticker"]] = Matched(
                         m["ticker"], series, m.get("event_ticker", ""), why,
-                        "historical", m.get("status", ""), m.get("close_time", ""))
+                        "historical", m.get("status", ""), m.get("close_time", ""),
+                        _volume(m))
             cursor = body.get("cursor")
             if not cursor:
                 break
@@ -148,6 +163,14 @@ def discover(client: Client, archive: RawArchive, cfg: dict, matcher: Matcher,
 def collect_market(client: Client, archive: RawArchive, cfg: dict, state: State,
                    m: Matched, historical: bool, stats: RunStats) -> None:
     st = state.market(m.ticker)
+    # Never traded, so there is nothing to pull. Its metadata is already in the
+    # archived discovery page, and the normalizer reads markets from there too.
+    if m.volume <= cfg["min_volume_for_trades"] and not st.get("watermark_ts"):
+        st["series"], st["status"], st["volume"] = m.series, m.status, m.volume
+        st["untraded"] = True
+        stats.skipped_no_volume += 1
+        return
+    st.pop("untraded", None)
     if st.get("finalized_complete"):
         # trades cannot occur after settlement and metadata is frozen; the
         # last full fetch is already in the archive.
@@ -214,12 +237,16 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--historical", action="store_true",
                     help="also walk /historical/markets and /historical/trades (pre-cutoff data)")
     ap.add_argument("--dry-run", action="store_true", help="discover and match only; fetch no trades")
+    ap.add_argument("--scope", choices=("nebraska", "all"),
+                    help="override the configured scope; `all` is every college football market")
     ap.add_argument("--log-level", default="INFO")
     args = ap.parse_args(argv)
     setup_logging(args.log_level)
 
     cfg = load_yaml(args.config)["kalshi"]
-    matcher = Matcher.from_config(cfg["match"])
+    if args.scope:
+        cfg = dict(cfg, scope=args.scope)
+    matcher = Matcher.from_config(cfg["match"], cfg.get("scope", "nebraska"))
     client = Client(cfg["base_url"], min_interval=cfg["min_seconds_between_requests"])
     archive = RawArchive(args.data_dir / "raw")
     state = State(args.data_dir / "state" / "kalshi.json")
@@ -251,6 +278,8 @@ def main(argv: list[str] | None = None) -> int:
         "trades_pages": stats.trades_pages,
         "trades_rows_fetched": stats.trades_rows,
         "finalized_skipped": stats.skipped_finalized,
+        "untraded_skipped": stats.skipped_no_volume,
+        "scope": cfg.get("scope", "nebraska"),
         "http_requests": stats.requests,
         "http_retries": stats.retries,
         "raw_files_written": stats.files,

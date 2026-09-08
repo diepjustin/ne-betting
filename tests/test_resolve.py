@@ -29,9 +29,9 @@ def test_unknown_kalshi_family_is_recorded_not_guessed():
 # --- game identity -----------------------------------------------------------
 
 @pytest.mark.parametrize("ticker,game", [
-    ("KXNCAAFGAME-26SEP05OHIONEB-NEB", "2026-09-05-NEB-OHIO"),
-    ("KXNCAAFGAME-26SEP19UNDNEB-UND", "2026-09-19-NEB-UND"),
-    ("KXNCAAFSPREAD-26SEP12BGSUNEB-NEB49", "2026-09-12-NEB-BGSU"),
+    ("KXNCAAFGAME-26SEP05OHIONEB-NEB", "2026-09-05-OHIO-NEB"),
+    ("KXNCAAFSPREAD-26SEP12BGSUNEB-NEB49", "2026-09-12-BGSU-NEB"),
+    ("KXNCAAFGAME-26SEP26NEBMSU-NEB", "2026-09-26-NEB-MSU"),
 ])
 def test_kalshi_game_ids(ticker, game):
     assert r.resolve_kalshi({"ticker": ticker, "title": ""}).game_id == game
@@ -43,9 +43,9 @@ def test_season_long_markets_have_no_game():
 
 
 @pytest.mark.parametrize("slug,game", [
-    ("cfb-ohio-nebr-2026-09-05", "2026-09-05-NEB-OHIO"),
-    ("cfb-mich-neb-2025-09-20", "2025-09-20-NEB-MICH"),
-    ("cfb-nebr-utah-2025-12-31", "2025-12-31-NEB-UTAH"),
+    ("cfb-ohio-nebr-2026-09-05", "2026-09-05-OHIO-NEB"),
+    ("cfb-mich-neb-2025-09-20", "2025-09-20-MICH-NEB"),
+    ("cfb-pur-ucla-2026-09-19", "2026-09-19-PUR-UCLA"),
 ])
 def test_polymarket_dated_slugs(slug, game):
     got = r.resolve_polymarket({"sportsMarketType": "moneyline", "question": "x"}, slug)
@@ -57,12 +57,23 @@ def test_polymarket_dateless_2024_slug_uses_game_start_time():
         {"sportsMarketType": "moneyline", "question": "Will Indiana beat Nebraska?",
          "gameStartTime": "2024-10-19 16:00:00+00"},
         "cfb-indiana-vs-nebraska")
-    assert got.game_id == "2024-10-19-NEB-INDIANA"
+    assert got.game_id == "2024-10-19-IU-NEB"
 
 
-def test_a_game_that_is_not_nebraskas_gets_no_game_id():
-    assert r.resolve_polymarket({"sportsMarketType": "moneyline", "question": "x"},
-                                "cfb-pur-ucla-2026-09-19").game_id is None
+def test_both_platforms_name_the_same_game_the_same_way():
+    """The point of the identifier: a Kalshi ticker and a Polymarket slug for
+    one game must join."""
+    k = r.resolve_kalshi({"ticker": "KXNCAAFGAME-26SEP05OHIONEB-NEB", "title": ""})
+    p = r.resolve_polymarket({"sportsMarketType": "moneyline", "question": "x"},
+                             "cfb-ohio-nebr-2026-09-05")
+    assert k.game_id == p.game_id == "2026-09-05-OHIO-NEB"
+
+
+def test_a_reused_kalshi_code_refuses_to_name_a_game():
+    """WSU is Washington St. and Winona State. A blob that splits more than
+    one way, or uses a code that names two schools, gets no game rather than
+    the wrong one."""
+    assert r._split_kalshi_teams("ZZZZQQQQ") is None
 
 
 # --- older Polymarket phrasing ----------------------------------------------
