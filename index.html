@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nebraska Football Prediction Markets</title>
+<meta name="description" content="A collection pipeline recording every trade on Nebraska football markets at Kalshi and Polymarket, with the methodology and caveats behind the numbers.">
+<meta property="og:title" content="Nebraska Football Prediction Markets">
+<meta property="og:description" content="A collection pipeline recording every trade on Nebraska football markets at Kalshi and Polymarket.">
+<meta property="og:url" content="https://diepjustin.github.io/ne-betting/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📈</text></svg>">
+<style>
+  :root {
+    --bg: #ffffff; --panel: #f6f7f9; --border: #d9dde3; --text: #14181d;
+    --muted: #626b76; --accent: #d00000; --accent-soft: #fdecec;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171a; --panel: #1c2025; --border: #2c323a; --text: #e6e9ed;
+      --muted: #98a2ae; --accent: #ff5a5a; --accent-soft: #2a1618;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6; color: var(--text); background: var(--bg);
+    max-width: 820px; margin: 0 auto; padding: 2rem 1.25rem 4rem;
+  }
+  h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 .4rem; }
+  h2 { font-size: 1.25rem; margin: 2.6rem 0 .8rem; padding-bottom: .35rem;
+       border-bottom: 1px solid var(--border); }
+  h3 { font-size: 1rem; margin: 1.6rem 0 .4rem; }
+  p, li { margin-bottom: .9rem; }
+  a { color: var(--accent); }
+  .lede { font-size: 1.08rem; color: var(--muted); margin-bottom: 1.6rem; }
+  .status { display: inline-block; font-size: .78rem; letter-spacing: .04em;
+            text-transform: uppercase; background: var(--accent-soft);
+            color: var(--accent); border-radius: 3px; padding: .18rem .5rem;
+            margin-bottom: 1rem; }
+  .tablewrap { overflow-x: auto; margin: 1rem 0 .6rem; }
+  table { border-collapse: collapse; width: 100%; font-size: .95rem; }
+  th, td { text-align: left; padding: .55rem .7rem; border-bottom: 1px solid var(--border); }
+  th { font-weight: 600; color: var(--muted); font-size: .85rem;
+       text-transform: uppercase; letter-spacing: .03em; }
+  td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .note { background: var(--panel); border-left: 3px solid var(--accent);
+          padding: .9rem 1.1rem; margin: 1.2rem 0; border-radius: 0 4px 4px 0; }
+  .note p:last-child, .note ul:last-child { margin-bottom: 0; }
+  .caption { color: var(--muted); font-size: .87rem; margin-top: -.2rem; }
+  ul { padding-left: 1.2rem; }
+  footer { margin-top: 3.5rem; padding-top: 1.2rem; border-top: 1px solid var(--border);
+           color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+
+<span class="status">Collecting &middot; analysis not started</span>
+
+<h1>Nebraska football prediction markets</h1>
+
+<p class="lede">A pipeline that records every trade on Nebraska football
+markets at Kalshi and Polymarket, so the question of how much money moves on
+them can be answered from evidence rather than estimated.</p>
+
+<p>Two prediction markets list contracts on Nebraska football: who wins each
+game, the spread, the total, season win totals, conference and playoff
+outcomes, and markets on individual players. Both publish every completed
+trade. This project collects those trades daily and keeps each response
+exactly as the platform returned it, so any figure can be traced back to the
+response that produced it.</p>
+
+<p>Nothing here is a finished analysis. This page reports what has been
+collected, not what it means.</p>
+
+<h2>What has been collected</h2>
+
+<div class="tablewrap">
+<table>
+  <thead>
+    <tr><th>&nbsp;</th><th>Kalshi</th><th>Polymarket</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Nebraska markets tracked</td><td class="num">228</td><td class="num">265</td></tr>
+    <tr><td>Trades recorded</td><td class="num">66,386</td><td class="num">28,181</td></tr>
+    <tr><td>Volume</td><td class="num">9,611,301 contracts</td><td class="num">$5,464,511</td></tr>
+    <tr><td>Earliest trade</td><td class="num">3 Jul 2026</td><td class="num">21 Aug 2024</td></tr>
+    <tr><td>Latest trade</td><td class="num">8 Sep 2026</td><td class="num">7 Sep 2026</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="caption">First collection run, 8 September 2026.</p>
+
+<div class="note">
+  <p><strong>These two columns are not comparable, and the totals should not
+  be added.</strong> Three reasons, all of which matter:</p>
+  <ul>
+    <li><strong>The units differ.</strong> A Kalshi contract settles at $1, so
+    contracts are a count, not dollars. The Polymarket figure is dollars
+    actually paid by the trader who took each fill.</li>
+    <li><strong>The windows differ.</strong> Kalshi serves recent trades from
+    one endpoint and older ones from another, so the figure above starts in
+    July 2026. Polymarket returned history back to 2024. A larger number here
+    can mean a longer window rather than more trading.</li>
+    <li><strong>Volume counts both sides.</strong> Every trade has a buyer and
+    a seller. Neither figure is "money at risk on Nebraska," and neither is a
+    count of people.</li>
+  </ul>
+</div>
+
+<h2>Where the numbers come from</h2>
+
+<p>Both platforms publish market data through public interfaces that need no
+account. The collectors discover Nebraska markets on each run rather than
+working from a fixed list, because both platforms add markets weekly. Every
+response is archived unmodified, with the time it was fetched, before anything
+is read from it.</p>
+
+<h3>Kalshi</h3>
+<p>Thirty-three college football market families are walked each run. A market
+counts as a Nebraska market if its identifier or its text names Nebraska,
+which includes the opponent's side of a Nebraska game. Ninety of the 228
+markets have already settled.</p>
+
+<h3>Polymarket</h3>
+<p>Game markets are found through the college football listing and futures
+through keyword search, then filtered. Nebraska's basketball teams use the
+same abbreviation as its football teams, so an early version of this filter
+pulled in 67 basketball events, including a single basketball game that had
+traded $503,345. Events must now carry a football tag before anything else is
+considered.</p>
+
+<h2>What this does not cover</h2>
+
+<ul>
+  <li><strong>Sportsbooks.</strong> No sportsbook or daily fantasy prop lines
+  are collected. Their interfaces refuse automated access, and the one open
+  source is a weekly selection that did not list Nebraska at all. A sportsbook
+  publishes a line and never publishes how much was bet on it.</li>
+  <li><strong>Who is trading.</strong> Kalshi publishes no identity for the
+  parties to a trade. Polymarket publishes a wallet address for each fill;
+  those are recorded for analysis but are redacted from everything published
+  here, because a wallet address is a person's trading history.</li>
+  <li><strong>Player markets.</strong> Both platforms list markets on named
+  Nebraska players. They are collected because they are markets, and they are
+  reported only as totals. No figure is attached to any named athlete.</li>
+</ul>
+
+<h2>Method and source data</h2>
+
+<ul>
+  <li><a href="METHODOLOGY.md">METHODOLOGY.md</a> &mdash; what each figure
+  means, every collection decision with the date it was made, and the
+  limitations that follow from them.</li>
+  <li><a href="docs/RECON.md">RECON.md</a> &mdash; what each platform
+  publishes, established endpoint by endpoint, with a saved response behind
+  every claim.</li>
+  <li><a href="data/sample/recon/README.md">Sample responses</a> &mdash; the
+  archived responses those findings rest on.</li>
+  <li><a href="https://github.com/diepjustin/diepjustin.github.io/tree/main/ne-betting">Source code</a>
+  &mdash; collectors, tests and the scheduled job.</li>
+</ul>
+
+<footer>
+  <p>Collection began 8 September 2026 and runs daily. Figures on this page
+  are from the first run and are not updated automatically.</p>
+  <p>By <a href="https://diepjustin.github.io/">Justin Diep</a>, The Daily
+  Nebraskan.</p>
+</footer>
+
+</body>
+</html>
