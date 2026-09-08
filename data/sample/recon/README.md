@@ -93,3 +93,20 @@ These were deleted on 8 Sep 2026; nothing in `collectors/`, `tests/` or
 Remaining files over 100 KB are gzipped. The Nebraska-specific artifacts, the
 full Kalshi series dump behind the 130-series list, and every response cited by
 a number in `docs/RECON.md` are still here.
+
+## Trader identity is redacted
+
+Polymarket publishes the wallet behind every fill. Committing that to a public
+repository publishes real people's trading histories, so in the files here
+`proxyWallet` and `transactionHash` are replaced with stable placeholders and
+`name`, `pseudonym`, `bio` and avatar fields are nulled. Affected files:
+`polymarket_data_trades_*.json*` and `tests/fixtures/pm_trades_ohio.json`.
+
+Trade sizes, prices, timestamps, outcomes and the number of distinct traders
+are unchanged, so these files still support every figure in `docs/RECON.md`.
+
+Addresses that remain are smart contracts and platform accounts, not people:
+`assetAddress` (USDC on Polygon), `resolvedBy` (oracle adapters),
+`marketMakerAddress` (one per market) and `submitted_by` (the accounts that
+create markets). Polymarket's own API documentation under `docs/` also quotes
+an example wallet, which is their publication and is left as they wrote it.

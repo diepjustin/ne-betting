@@ -124,6 +124,30 @@ retrieved yet (RECON §1). The API is the primary source until then.
   come from `/public-search` candidates and from a deliberate
   `--backfill-since`, run by hand. Coverage of 2024 and 2025 therefore depends
   on Polymarket's search index and is not guaranteed complete.
+- **2026-09-08, Polymarket.** **Trader identity is redacted from everything
+  committed to this repo.** A Polymarket trade row names the person who made
+  it: `proxyWallet` is their on-chain address, and `transactionHash` resolves
+  to that same address on any block explorer, so removing one without the
+  other removes nothing. Both are replaced with stable placeholders
+  (`redacted-trader-001`, `redacted-tx-001`), numbered by first appearance, and
+  `name`, `pseudonym`, `bio` and the avatar fields are nulled. No mapping back
+  to the real values exists anywhere in the repo. Plan §9 is the reason: a
+  wallet address is a person's trading history, and committing a sample day to
+  a public repository publishes it.
+
+  What is deliberately *not* redacted is the protocol infrastructure that
+  appears in market metadata, because none of it identifies a person:
+  `assetAddress` is a single address across 921 occurrences (USDC on Polygon),
+  `resolvedBy` is nine oracle and adapter contracts, `submitted_by` is six
+  Polymarket accounts that create markets, and `marketMakerAddress` is one
+  automated market maker contract per market. Redacting those would make it
+  impossible to check which oracle resolved a market and would protect nobody.
+
+  Analysis still works on the redacted files. Sizes, prices, timestamps,
+  outcomes and the count of distinct traders all survive, so the sample still
+  shows 93 traders and $12,734.96 of notional on the Ohio game. The
+  unredacted responses remain in the local raw archive, which is gitignored,
+  so any figure can still be traced to the exact response that produced it.
 - **2026-09-08.** Metadata for each matched market is fetched from
   `/markets/{ticker}` on every run it is active, even though the discovery
   pages already contain it, so every normalized row can point at one small
@@ -142,6 +166,9 @@ retrieved yet (RECON §1). The API is the primary source until then.
 - Volume counts both sides of a transaction; notional volume is not dollars
   at risk.
 - Polymarket trades have no unique identifier; see the 8 Sep 2026 note above.
+- Committed Polymarket samples carry redacted trader identifiers, so they
+  cannot be used to study individual trading behaviour. That analysis needs
+  the local raw archive.
 - Polymarket coverage before 2026 relies on the platform's search index.
 - polymarket.com tells US visitors to trade on polymarket.us instead. Whether
   polymarket.us fills appear in these public feeds is unconfirmed, and it
