@@ -58,16 +58,17 @@
 
 <h1>Nebraska football prediction markets</h1>
 
-<p class="lede">A pipeline that records every trade on Nebraska football
-markets at Kalshi and Polymarket, so the question of how much money moves on
-them can be answered from evidence rather than estimated.</p>
+<p class="lede">A pipeline that records the publicly reported trades on the
+Nebraska football markets it tracks at Kalshi and Polymarket, so the question
+of how much money moves on them can be answered from evidence rather than
+estimated.</p>
 
 <p>Two prediction markets list contracts on Nebraska football: who wins each
 game, the spread, the total, season win totals, conference and playoff
-outcomes, and markets on individual players. Both publish every completed
-trade. This project collects those trades daily and keeps each response
-exactly as the platform returned it, so any figure can be traced back to the
-response that produced it.</p>
+outcomes, and markets on individual players. Both report completed trades
+publicly. This project collects them daily and keeps each response exactly as
+the platform returned it, so any figure can be traced back to the response
+that produced it.</p>
 
 <p>Nothing here is a finished analysis. This page reports what has been
 collected, not what it means.</p>
@@ -128,6 +129,36 @@ same abbreviation as its football teams, so an early version of this filter
 pulled in 67 basketball events, including a single basketball game that had
 traded $503,345. Events must now carry a football tag before anything else is
 considered.</p>
+
+<h2>This is not a record of every bet</h2>
+
+<p>Within the markets it tracks and the window it covers, the archive holds
+what the platforms reported publicly. That is a narrower thing than every
+wager on Nebraska football, in five specific ways.</p>
+
+<ul>
+  <li><strong>These are trades, not bets placed.</strong> Only matched trades
+  are reported. An order placed and never filled, or cancelled before it
+  matched, leaves no trace. Each trade also has two sides, so a single "bet"
+  has no clean definition here.</li>
+  <li><strong>Polymarket figures are the taker side only.</strong> The trades
+  feed returns one row per taker fill by default. On the 5 September game that
+  was 326 rows where the fuller view returned 739. Counting both sides would
+  double the total, so the taker side is used deliberately, but it is half of
+  the fill records.</li>
+  <li><strong>Kalshi history here begins in July 2026.</strong> Kalshi moves
+  older trades to a separate interface at a shifting cutoff, currently
+  10 July 2026, and the daily job does not reach past it. The earliest trade
+  held is 3 July 2026. Nebraska's Big Ten championship market opened on
+  24 January 2026, so months of its trading are absent.</li>
+  <li><strong>Only markets the collectors find.</strong> Thirty-three market
+  families are searched on each run. Anything Nebraska-related outside that
+  list is invisible. Of the 228 markets tracked, 141 have produced any trade
+  at all.</li>
+  <li><strong>One venue is unverified.</strong> Polymarket directs visitors in
+  the United States to a separate site. Whether trades made there appear in
+  the public feed used here has not been confirmed.</li>
+</ul>
 
 <h2>What this does not cover</h2>
 
