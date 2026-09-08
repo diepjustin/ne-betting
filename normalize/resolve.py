@@ -136,6 +136,21 @@ def _abbr(team_id: str) -> str | None:
     return (t.abbr or t.name).upper().replace(" ", "") if t else None
 
 
+def _kalshi_team(ticker: str) -> str | None:
+    """The school a Kalshi market is about, from its own ticker suffix.
+
+    Suffixes look like NEB, NEB275 or NEBOCHA, so digits and any player code
+    are trimmed back to the longest segment that is a known team code.
+    """
+    seg = ticker.rsplit("-", 1)[-1]
+    codes = _kalshi_codes()
+    seg = re.sub(r"\d+$", "", seg)
+    for cut in range(len(seg), 1, -1):
+        if seg[:cut] in codes:
+            return _abbr(codes[seg[:cut]])
+    return None
+
+
 def _split_kalshi_teams(blob: str) -> tuple[str, str] | None:
     """`OHIONEB` -> the two team codes that make it up.
 
@@ -213,6 +228,28 @@ def _pm_game_id(slug: str, game_start: str | None = None) -> str | None:
     return f"{y}-{mo}-{d}-{a}-{h}"
 
 
+def team_in_text(text: str) -> str | None:
+    """The one school a market is about, or nothing.
+
+    Only for markets about a single team. A game market involves two, and its
+    `game_id` already carries both, so this deliberately returns nothing rather
+    than picking one. Written after an earlier version assigned every market
+    with a resolved game to Nebraska, which made Nebraska look like 87% of all
+    college football money.
+    """
+    text = (text or "").strip()
+    for pat in (r"^(?:Spread|Team Total|Total):\s*([A-Za-z][A-Za-z .'&()-]+?)\s*[(:]",
+                r"(?i:^will (?:the )?)([A-Z][A-Za-z .'&()-]+?) (?i:win|beat|have|qualify|be|make|go|finish)\b",
+                r"^([A-Z][A-Za-z .'&()-]+?) Team Total\b"):
+        m = re.search(pat, text)
+        if not m:
+            continue
+        r = resolve_team(m.group(1).strip())
+        if r.team:
+            return (r.team.abbr or r.team.name).upper().replace(" ", "")
+    return None
+
+
 def _line_from_title(title: str) -> float | None:
     m = re.search(r"(-?\d+(?:\.\d+)?)\s*(?:\+|or more|points|\))", title or "")
     if m:
@@ -245,7 +282,7 @@ def resolve_kalshi(market: dict) -> Resolved:
     return Resolved(
         market_type=mtype,
         game_id=_kalshi_game_id(ticker),
-        team=NEBRASKA if "NEB" in ticker.upper() or "nebraska" in title.lower() else None,
+        team=_kalshi_team(ticker) or team_in_text(title),
         player=player,
         line=_line_from_title(title) if mtype in (SPREAD, TOTAL, TEAM_STAT) else None,
     )
@@ -272,16 +309,26 @@ def resolve_polymarket(market: dict, event_slug: str = "") -> Resolved:
         if "draft" in q and ("pro football" in q or "nfl" in q):
             m = re.match(r"^[Ww]ill ([A-Z][\w'.\- ]+?) (?:go|be|get|land)\b", question)
             return Resolved(DRAFT, player=(m.group(1).strip() if m else None))
-        if "big ten championship" in q or "big ten conference" in q:
+        # Order matters: a national championship is not a conference one, and
+        # an award question names a person where a conference question names a
+        # school.
+        if "national champion" in q or "national championship" in q:
+            mtype = NATTY
+        elif re.search(r"\bheisman\b", q):
+            mtype = PLAYER_PROP
+        elif re.search(r"\b(award|trophy)\b", q):
+            # Coach awards are filed with player awards on both platforms.
+            mtype = COACH if re.search(r"coach of the year|\bcoach\b", q) else PLAYER_PROP
+        elif re.search(r"coach of the year|out as|be fired|next head coach", q):
+            mtype = COACH
+        elif re.search(r"conference championship|win the \d{4} .+ championship|"
+                       r"\b(big ten|sec|acc|big 12|pac-12|sun belt|mountain west|"
+                       r"american|conference usa|mac) (conference|championship)", q):
             mtype = CONFERENCE_CHAMP
         elif "wins during the" in q or "win total" in q:
             mtype = SEASON_WINS
-        elif "national champion" in q or "win the 2026 cfb" in q:
-            mtype = NATTY
-        elif "playoff" in q or "qualify" in q:
+        elif "playoff" in q or "qualify" in q or "cfp" in q:
             mtype = PLAYOFF_BERTH
-        elif "coach of the year" in q or "out as" in q:
-            mtype = COACH
         # Markets created before Polymarket tagged a sportsMarketType phrase
         # the same wagers as plain questions.
         elif re.search(r"\bbeat\b.*\bby \d+(\.\d+)? or more points", q):
@@ -296,20 +343,24 @@ def resolve_polymarket(market: dict, event_slug: str = "") -> Resolved:
             mtype = GAME_WINNER
         else:
             return Resolved(OTHER, game_id=_pm_game_id(slug, market.get("gameStartTime")),
+                            team=team_in_text(question),
                             reason="Polymarket question not recognised")
     player = None
     if mtype == PLAYER_PROP:
-        player = question.split(":")[0].strip() or None
+        if ":" in question:
+            player = question.split(":")[0].strip() or None
+        else:
+            m = re.match(r"^[Ww]ill ([A-Z][\w'.\- ]+?) win\b", question)
+            player = m.group(1).strip() if m else None
     line = market.get("line")
     try:
         line = float(line) if line is not None else None
     except (TypeError, ValueError):
         line = None
     game_id = _pm_game_id(slug, market.get("gameStartTime"))
-    # A market inside a Nebraska game is a Nebraska market even when its own
-    # question never says so ("Jacory Barney Jr.: Anytime Touchdown").
-    team = NEBRASKA if (game_id or re.search(r"nebraska|cornhusker|(^|-)nebr(-|$)",
-                                             question + " " + slug, re.I)) else None
+    # Only set when the market is about one school. Game markets involve two,
+    # and game_id already names both.
+    team = team_in_text(question)
     return Resolved(
         market_type=mtype,
         game_id=game_id,

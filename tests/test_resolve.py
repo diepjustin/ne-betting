@@ -105,11 +105,16 @@ def test_player_is_taken_from_the_market_not_the_prose():
     assert got.market_type == r.PLAYER_PROP and got.player == "Nyziah Hunter"
 
 
-def test_polymarket_touchdown_prop_names_the_player_and_inherits_the_team():
+def test_polymarket_touchdown_prop_names_the_player_but_not_a_team():
+    """The question names the player and the game names two schools, and
+    nothing in either says which of the two the player plays for. Guessing
+    would attribute an athlete to the wrong team, so the field stays empty."""
     got = r.resolve_polymarket(
         {"sportsMarketType": "anytime_touchdowns", "question": "Jacory Barney Jr.: Anytime Touchdown"},
         "cfb-ohio-nebr-2026-09-05")
-    assert got.player == "Jacory Barney Jr." and got.team == "NEB"
+    assert got.player == "Jacory Barney Jr."
+    assert got.game_id == "2026-09-05-OHIO-NEB"
+    assert got.team is None
 
 
 def test_a_coach_award_is_not_filed_as_a_player_prop():
@@ -142,3 +147,27 @@ def test_nfl_draft_markets_about_college_players_are_typed_apart():
     assert got.market_type == r.DRAFT
     assert got.player == "Jeremiyah Love"
     assert got.market_type not in (r.SEASON_WINS, r.GAME_WINNER, r.PLAYER_PROP)
+
+
+def test_a_game_market_is_not_attributed_to_one_team():
+    """A game involves two schools and game_id already names both. An earlier
+    version set the team whenever a game resolved, which made Nebraska look
+    like 87% of all college football money once every game started resolving."""
+    got = r.resolve_polymarket({"sportsMarketType": "moneyline", "question": "Ohio vs. Nebraska"},
+                               "cfb-ohio-nebr-2026-09-05")
+    assert got.game_id == "2026-09-05-OHIO-NEB"
+    assert got.team is None
+
+
+@pytest.mark.parametrize("question,team", [
+    ("Spread: Nebraska (-24.5)", "NEB"),
+    ("Will Oregon win the 2026 Big Ten Championship?", "ORE"),
+    ("Will Georgia State Panthers Win the 2026 Sun Belt Championship?", "GAST"),
+])
+def test_single_team_markets_name_their_team(question, team):
+    assert r.resolve_polymarket({"question": question}, "x").team == team
+
+
+def test_kalshi_reads_the_team_from_its_own_ticker():
+    assert r.resolve_kalshi({"ticker": "KXNCAAFGAME-26SEP05OHIONEB-OHIO", "title": ""}).team == "OHIO"
+    assert r.resolve_kalshi({"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB275", "title": ""}).team == "NEB"

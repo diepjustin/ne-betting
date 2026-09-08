@@ -23,13 +23,24 @@ from .resolve import resolve_kalshi, resolve_polymarket
 SCHEMA = Path(__file__).with_name("schema.sql")
 
 
+SKIPPED: Counter = Counter()
+
+
 def envelopes(root: Path, source: str, prefix: str):
+    """Yield archived responses, skipping any file that cannot be read.
+
+    A collector writing into the same archive right now has one file
+    half-written at any moment. Skipping it is correct: the run that wrote it
+    is still going and the next load picks it up. Skips are counted and
+    reported rather than swallowed.
+    """
     for p in sorted((root / source).rglob(f"{prefix}_*.json.gz")):
-        with gzip.open(p, "rt", encoding="utf-8") as f:
-            env = json.load(f)
         try:
+            with gzip.open(p, "rt", encoding="utf-8") as f:
+                env = json.load(f)
             body = json.loads(env["body"])
-        except json.JSONDecodeError:
+        except (OSError, EOFError, json.JSONDecodeError, KeyError):
+            SKIPPED[source] += 1
             continue
         yield p, env, body
 
@@ -38,7 +49,8 @@ def _ts(iso: str) -> int:
     return int(parse_rfc3339(iso).timestamp())
 
 
-def load_markets_from_discovery(db, root: Path, stats: Counter) -> None:
+def load_markets_from_discovery(db, root: Path, stats: Counter,
+                                sources=("kalshi", "polymarket")) -> None:
     """Markets as they appear in the archived discovery pages.
 
     A market that has never traded gets no per-market fetch, so the listing
@@ -47,7 +59,7 @@ def load_markets_from_discovery(db, root: Path, stats: Counter) -> None:
     come from here. Per-market files load afterwards and win on the fields
     they refresh.
     """
-    for p, env, body in envelopes(root, "kalshi", "events"):
+    for p, env, body in (envelopes(root, "kalshi", "events") if "kalshi" in sources else ()):
         fetched = _ts(env["fetched_at"])
         rel = str(p.relative_to(PROJECT_ROOT))
         for e in (body.get("events") or []):
@@ -64,7 +76,8 @@ def load_markets_from_discovery(db, root: Path, stats: Counter) -> None:
                             fetched, rel))
                 stats["markets_from_discovery"] += 1
 
-    for p, env, body in envelopes(root, "polymarket", "gamma_events"):
+    for p, env, body in (envelopes(root, "polymarket", "gamma_events")
+                         if "polymarket" in sources else ()):
         fetched = _ts(env["fetched_at"])
         rel = str(p.relative_to(PROJECT_ROOT))
         events = body if isinstance(body, list) else (body.get("events") or [])
@@ -209,21 +222,38 @@ def main(argv=None) -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--data-dir", type=Path, default=PROJECT_ROOT / "data")
     ap.add_argument("--db", type=Path, default=None)
+    ap.add_argument("--source", choices=("kalshi", "polymarket", "all"), default="all",
+                    help="load one platform only, replacing just its rows. Use this "
+                         "when the other platform's collector is still running.")
     args = ap.parse_args(argv)
     db_path = args.db or (args.data_dir / "husker.db")
     raw = args.data_dir / "raw"
-    if db_path.exists():
+    sources = ("kalshi", "polymarket") if args.source == "all" else (args.source,)
+    if args.source == "all" and db_path.exists():
         db_path.unlink()          # derived; rebuilt from raw every time
     db = sqlite3.connect(db_path)
     db.executescript(SCHEMA.read_text())
+    if args.source != "all":
+        # Replace only this platform's rows, so a load can run while the other
+        # platform's collector is still going.
+        for table in ("market", "trade", "unresolved"):
+            db.execute(f"DELETE FROM {table} WHERE source = ?", (args.source,))
     stats: Counter = Counter()
-    load_markets_from_discovery(db, raw, stats)
-    load_kalshi(db, raw, stats)
-    load_polymarket(db, raw, stats)
+    load_markets_from_discovery(db, raw, stats, sources)
+    if "kalshi" in sources:
+        load_kalshi(db, raw, stats)
+    if "polymarket" in sources:
+        load_polymarket(db, raw, stats)
     db.commit()
 
-    rows = db.execute("SELECT COUNT(*) FROM trade").fetchone()[0]
-    mkts = db.execute("SELECT COUNT(*) FROM market").fetchone()[0]
+    # Scoped to the sources just loaded. Counting every row in the table and
+    # subtracting one platform's reads produced a negative "duplicates
+    # collapsed" figure, which is worse than no figure at all.
+    marks = ",".join("?" * len(sources))
+    rows = db.execute(f"SELECT COUNT(*) FROM trade WHERE source IN ({marks})",
+                      sources).fetchone()[0]
+    mkts = db.execute(f"SELECT COUNT(*) FROM market WHERE source IN ({marks})",
+                      sources).fetchone()[0]
     unres = db.execute("SELECT COUNT(*) FROM unresolved").fetchone()[0]
     nogame = db.execute(
         "SELECT COUNT(*) FROM market WHERE game_id IS NULL AND market_type IN "
@@ -237,6 +267,8 @@ def main(argv=None) -> int:
         "duplicate_trade_rows_collapsed": stats["trades"] - rows,
         "unresolved_markets": unres,
         "game_markets_without_a_game_id": nogame,
+        "sources_loaded": list(sources),
+        "unreadable_files_skipped": dict(SKIPPED),
         "database": str(db_path),
     }, indent=1))
     if unres:
