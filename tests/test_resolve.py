@@ -130,3 +130,15 @@ def test_a_real_player_award_stays_a_player_prop():
         "rules_primary": "If Justin Evans wins the Rimington Trophy in the 2026 "
                          "college football season, then the market resolves to Yes."})
     assert got.market_type == r.PLAYER_PROP and got.player == "Justin Evans"
+
+
+def test_nfl_draft_markets_about_college_players_are_typed_apart():
+    """Polymarket tags these with its college-football tag, so they arrive
+    legitimately. They name college athletes but are not college football
+    outcomes, so they must not land in the season figures."""
+    got = r.resolve_polymarket(
+        {"question": "Will Jeremiyah Love go top 10 in the 2026 Pro Football Draft?"},
+        "will-jeremiyah-love-go-top-10-in-the-2026-pro-football-draft")
+    assert got.market_type == r.DRAFT
+    assert got.player == "Jeremiyah Love"
+    assert got.market_type not in (r.SEASON_WINS, r.GAME_WINNER, r.PLAYER_PROP)

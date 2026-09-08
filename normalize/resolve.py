@@ -29,6 +29,7 @@ NATTY = "natty"
 RANKING = "ranking"
 PLAYER_PROP = "player_prop"
 COACH = "coach"
+DRAFT = "draft"
 OTHER = "other"
 
 NEBRASKA = "NEB"
@@ -263,6 +264,14 @@ def resolve_polymarket(market: dict, event_slug: str = "") -> Resolved:
     else:
         # Futures events carry no sportsMarketType; read the question.
         q = question.lower()
+        # Polymarket tags NFL-draft markets about college players with its
+        # college-football tag, so they arrive through the sport gate legitimately
+        # and are not stray. They are markets on named college athletes but not
+        # on college football outcomes, so they get their own type rather than
+        # being dropped or folded into the season figures.
+        if "draft" in q and ("pro football" in q or "nfl" in q):
+            m = re.match(r"^[Ww]ill ([A-Z][\w'.\- ]+?) (?:go|be|get|land)\b", question)
+            return Resolved(DRAFT, player=(m.group(1).strip() if m else None))
         if "big ten championship" in q or "big ten conference" in q:
             mtype = CONFERENCE_CHAMP
         elif "wins during the" in q or "win total" in q:
