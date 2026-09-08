@@ -1,0 +1,2027 @@
+[
+{
+"ticker": "KXNCAAFAPANY-27T10-NEB",
+"title": "Will the Nebraska college football team be ranked top 10 during any week of the 2026-27 season?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If the Nebraska college football team is ranked top 10 on the AP Top 25 College Football Poll during any week of the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football AP Poll: Teams to be Ranked Top 10 this Season"
+},
+{
+"ticker": "KXNCAAFAPANY-27T25-NEB",
+"title": "Will the Nebraska college football team be ranked top 25 during any week of the 2026-27 season?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If the Nebraska college football team is ranked top 25 on the AP Top 25 College Football Poll during any week of the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football AP Poll: Teams to be Ranked Top 25 this Season"
+},
+{
+"ticker": "KXNCAAFAPANY-27T5-NEB",
+"title": "Will the Nebraska college football team be ranked top 5 during any week of the 2026-27 season?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If the Nebraska college football team is ranked top 5 on the AP Top 25 College Football Poll during any week of the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football AP Poll: Teams to be Ranked Top 5 this Season"
+},
+{
+"ticker": "KXNCAAFAWARD-26BUTK-OCHA",
+"title": "Owen Chambliss wins the award",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Owen Chambliss",
+"no_sub_title": "Owen Chambliss",
+"rules_primary": "If Owen Chambliss wins the Butkus Award in the 2026 college football season, then the market resolves to Yes.",
+"event_title": "Butkus Award Winner"
+},
+{
+"ticker": "KXNCAAFAWARD-26DAVE-ACOL",
+"title": "Anthony Colandrea wins the award",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Anthony Colandrea",
+"no_sub_title": "Anthony Colandrea",
+"rules_primary": "If Anthony Colandrea wins the Davey O'Brien Award in the 2026 college football season, then the market resolves to Yes.",
+"event_title": "Davey O'Brien Award Winner"
+},
+{
+"ticker": "KXNCAAFAWARD-26EDDI-MRHU",
+"title": "Matt Rhule wins the award",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Matt Rhule",
+"no_sub_title": "Matt Rhule",
+"rules_primary": "If Matt Rhule wins the Eddie Robinson Award in the 2026 college football season, then the market resolves to Yes.",
+"event_title": "Eddie Robinson Award Winner"
+},
+{
+"ticker": "KXNCAAFAWARD-26PAUL-JBAR",
+"title": "Jacory Barney Jr. wins the award",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Jacory Barney Jr.",
+"no_sub_title": "Jacory Barney Jr.",
+"rules_primary": "If Jacory Barney Jr. wins the Paul Hornung Award in the 2026 college football season, then the market resolves to Yes.",
+"event_title": "Paul Hornung Award Winner"
+},
+{
+"ticker": "KXNCAAFAWARD-26RIMI-JEVA",
+"title": "Justin Evans wins the award",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Justin Evans",
+"no_sub_title": "Justin Evans",
+"rules_primary": "If Justin Evans wins the Rimington Trophy in the 2026 college football season, then the market resolves to Yes.",
+"event_title": "Rimington Trophy Winner"
+},
+{
+"ticker": "KXNCAAFBIGTENLEADER-26PASSTD-NEBACOL",
+"title": "Anthony Colandrea records the most passing touchdowns in the Big Ten",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Anthony Colandrea",
+"no_sub_title": "Anthony Colandrea",
+"rules_primary": "If Anthony Colandrea records the most passing touchdowns in the Big Ten Conference in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Big Ten: Passing Touchdowns Leader"
+},
+{
+"ticker": "KXNCAAFBIGTENLEADER-26PASSYDS-NEBACOL",
+"title": "Anthony Colandrea records the most passing yards in the Big Ten",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Anthony Colandrea",
+"no_sub_title": "Anthony Colandrea",
+"rules_primary": "If Anthony Colandrea records the most passing yards in the Big Ten Conference in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Big Ten: Passing Yards Leader"
+},
+{
+"ticker": "KXNCAAFBIGTENLEADER-26RECYDS-NEBJBAR",
+"title": "Jacory Barney Jr. records the most receiving yards in the Big Ten",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Jacory Barney Jr.",
+"no_sub_title": "Jacory Barney Jr.",
+"rules_primary": "If Jacory Barney Jr. records the most receiving yards in the Big Ten Conference in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Big Ten: Receiving Yards Leader"
+},
+{
+"ticker": "KXNCAAFBIGTENLEADER-26RECYDS-NEBKGIL",
+"title": "Kwazi Gilmer records the most receiving yards in the Big Ten",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Kwazi Gilmer",
+"no_sub_title": "Kwazi Gilmer",
+"rules_primary": "If Kwazi Gilmer records the most receiving yards in the Big Ten Conference in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Big Ten: Receiving Yards Leader"
+},
+{
+"ticker": "KXNCAAFBIGTENLEADER-26RECYDS-NEBNHUN",
+"title": "Nyziah Hunter records the most receiving yards in the Big Ten",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Nyziah Hunter",
+"no_sub_title": "Nyziah Hunter",
+"rules_primary": "If Nyziah Hunter records the most receiving yards in the Big Ten Conference in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Big Ten: Receiving Yards Leader"
+},
+{
+"ticker": "KXNCAAFBIGTENLEADER-26RSHYDS-NEBACOL",
+"title": "Anthony Colandrea records the most rushing yards in the Big Ten",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Anthony Colandrea",
+"no_sub_title": "Anthony Colandrea",
+"rules_primary": "If Anthony Colandrea records the most rushing yards in the Big Ten Conference in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Big Ten: Rushing Yards Leader"
+},
+{
+"ticker": "KXNCAAFBIGTENLEADER-26RSHYDS-NEBMNEL",
+"title": "Mekhi Nelson records the most rushing yards in the Big Ten",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Mekhi Nelson",
+"no_sub_title": "Mekhi Nelson",
+"rules_primary": "If Mekhi Nelson records the most rushing yards in the Big Ten Conference in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Big Ten: Rushing Yards Leader"
+},
+{
+"ticker": "KXNCAAFBIGTENLEADER-26SACK-NEBOCHA",
+"title": "Owen Chambliss records the most sacks in the Big Ten",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Owen Chambliss",
+"no_sub_title": "Owen Chambliss",
+"rules_primary": "If Owen Chambliss records the most sacks in the Big Ten Conference in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Big Ten: Sacks Leader"
+},
+{
+"ticker": "KXNCAAFBIGTENLEADER-26SACK-NEBWNWA",
+"title": "Williams Nwaneri records the most sacks in the Big Ten",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Williams Nwaneri",
+"no_sub_title": "Williams Nwaneri",
+"rules_primary": "If Williams Nwaneri records the most sacks in the Big Ten Conference in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Big Ten: Sacks Leader"
+},
+{
+"ticker": "KXNCAAFBIGTENREGTOP-27T3-NEB",
+"title": "Will Nebraska finish in the top 3 in the Big Ten in the 2026 college football regular season?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska finishes in the top 3 in the Big Ten in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Big Ten Regular Season: Top 3 Finishers"
+},
+{
+"ticker": "KXNCAAFBIGTENREGTOP-27T4-NEB",
+"title": "Will Nebraska finish in the top 4 in the Big Ten in the 2026 college football regular season?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska finishes in the top 4 in the Big Ten in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Big Ten Regular Season: Top 4 Finishers"
+},
+{
+"ticker": "KXNCAAFBIGTENREGTOP-27T5-NEB",
+"title": "Will Nebraska finish in the top 5 in the Big Ten in the 2026 college football regular season?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska finishes in the top 5 in the Big Ten in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Big Ten Regular Season: Top 5 Finishers"
+},
+{
+"ticker": "KXNCAAFBOWLGAME-26-NEB",
+"title": "Nebraska selected to play in a bowl game or the College Football Playoff",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is selected to play in a bowl game or the College Football Playoff (CFP) in the 2026-27 college football season, then the market resolves to Yes.",
+"event_title": "College Football Teams to Qualify for a Bowl Game"
+},
+{
+"ticker": "KXNCAAFCOACHOUT-27FEB01-MRHU",
+"title": "Matt Rhule out before Feb 1, 2027",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Matt Rhule",
+"no_sub_title": "Matt Rhule",
+"rules_primary": "If the head coach of the Nebraska college football team leaves, or announces they will leave, before Feb 1, 2027, then the market resolves to Yes.",
+"event_title": "College Football Coaches Out Before February"
+},
+{
+"ticker": "KXNCAAFGAME-26SEP05OHIONEB-NEB",
+"title": "Nebraska wins",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska wins the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska"
+},
+{
+"ticker": "KXNCAAFGAME-26SEP05OHIONEB-OHIO",
+"title": "Ohio wins",
+"subtitle": null,
+"yes_sub_title": "Ohio",
+"no_sub_title": "Ohio",
+"rules_primary": "If Ohio wins the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska"
+},
+{
+"ticker": "KXNCAAFGAME-26SEP12BGSUNEB-BGSU",
+"title": "Bowling Green wins",
+"subtitle": null,
+"yes_sub_title": "Bowling Green",
+"no_sub_title": "Bowling Green",
+"rules_primary": "If Bowling Green wins the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska"
+},
+{
+"ticker": "KXNCAAFGAME-26SEP12BGSUNEB-NEB",
+"title": "Nebraska wins",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska wins the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska"
+},
+{
+"ticker": "KXNCAAFGAME-26SEP19UNDNEB-NEB",
+"title": "Nebraska wins",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska wins the North Dakota vs Nebraska college football game originally scheduled for Sep 19, 2026, then the market resolves to Yes.",
+"event_title": "North Dakota vs Nebraska"
+},
+{
+"ticker": "KXNCAAFGAME-26SEP19UNDNEB-UND",
+"title": "North Dakota wins",
+"subtitle": null,
+"yes_sub_title": "North Dakota",
+"no_sub_title": "North Dakota",
+"rules_primary": "If North Dakota wins the North Dakota vs Nebraska college football game originally scheduled for Sep 19, 2026, then the market resolves to Yes.",
+"event_title": "North Dakota vs Nebraska"
+},
+{
+"ticker": "KXNCAAFLEADER-26PASSTD-NEBACOL",
+"title": "Anthony Colandrea records the most passing touchdowns in college football",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Anthony Colandrea",
+"no_sub_title": "Anthony Colandrea",
+"rules_primary": "If Anthony Colandrea records the most passing touchdowns in Division I college football in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Division I: Passing Touchdowns Leader"
+},
+{
+"ticker": "KXNCAAFLEADER-26PASSYDS-NEBACOL",
+"title": "Anthony Colandrea records the most passing yards in college football",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Anthony Colandrea",
+"no_sub_title": "Anthony Colandrea",
+"rules_primary": "If Anthony Colandrea records the most passing yards in Division I college football in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Division I: Passing Yards Leader"
+},
+{
+"ticker": "KXNCAAFLEADER-26RECYDS-NEBNHUN",
+"title": "Nyziah Hunter records the most receiving yards in college football",
+"subtitle": ":: Nebraska",
+"yes_sub_title": "Nyziah Hunter",
+"no_sub_title": "Nyziah Hunter",
+"rules_primary": "If Nyziah Hunter records the most receiving yards in Division I college football in the 2026 college football regular season, then the market resolves to Yes.",
+"event_title": "Division I: Receiving Yards Leader"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB10",
+"title": "Nebraska wins by over 9.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 9.5 points",
+"no_sub_title": "Nebraska wins by over 9.5 points",
+"rules_primary": "If Nebraska wins by more than 9.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB11",
+"title": "Nebraska wins by over 10.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 10.5 points",
+"no_sub_title": "Nebraska wins by over 10.5 points",
+"rules_primary": "If Nebraska wins by more than 10.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB12",
+"title": "Nebraska wins by over 11.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 11.5 points",
+"no_sub_title": "Nebraska wins by over 11.5 points",
+"rules_primary": "If Nebraska wins by more than 11.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB14",
+"title": "Nebraska wins by over 13.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 13.5 points",
+"no_sub_title": "Nebraska wins by over 13.5 points",
+"rules_primary": "If Nebraska wins by more than 13.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB15",
+"title": "Nebraska wins by over 14.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 14.5 points",
+"no_sub_title": "Nebraska wins by over 14.5 points",
+"rules_primary": "If Nebraska wins by more than 14.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB17",
+"title": "Nebraska wins by over 16.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 16.5 points",
+"no_sub_title": "Nebraska wins by over 16.5 points",
+"rules_primary": "If Nebraska wins by more than 16.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB18",
+"title": "Nebraska wins by over 17.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 17.5 points",
+"no_sub_title": "Nebraska wins by over 17.5 points",
+"rules_primary": "If Nebraska wins by more than 17.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB21",
+"title": "Nebraska wins by over 20.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 20.5 points",
+"no_sub_title": "Nebraska wins by over 20.5 points",
+"rules_primary": "If Nebraska wins by more than 20.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB22",
+"title": "Nebraska wins by over 21.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 21.5 points",
+"no_sub_title": "Nebraska wins by over 21.5 points",
+"rules_primary": "If Nebraska wins by more than 21.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB24",
+"title": "Nebraska wins by over 23.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 23.5 points",
+"no_sub_title": "Nebraska wins by over 23.5 points",
+"rules_primary": "If Nebraska wins by more than 23.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB25",
+"title": "Nebraska wins by over 24.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 24.5 points",
+"no_sub_title": "Nebraska wins by over 24.5 points",
+"rules_primary": "If Nebraska wins by more than 24.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB28",
+"title": "Nebraska wins by over 27.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 27.5 points",
+"no_sub_title": "Nebraska wins by over 27.5 points",
+"rules_primary": "If Nebraska wins by more than 27.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB3",
+"title": "Nebraska wins by over 2.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 2.5 points",
+"no_sub_title": "Nebraska wins by over 2.5 points",
+"rules_primary": "If Nebraska wins by more than 2.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB31",
+"title": "Nebraska wins by over 30.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 30.5 points",
+"no_sub_title": "Nebraska wins by over 30.5 points",
+"rules_primary": "If Nebraska wins by more than 30.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB34",
+"title": "Nebraska wins by over 33.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 33.5 points",
+"no_sub_title": "Nebraska wins by over 33.5 points",
+"rules_primary": "If Nebraska wins by more than 33.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB36",
+"title": "Nebraska wins by over 35.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 35.5 points",
+"no_sub_title": "Nebraska wins by over 35.5 points",
+"rules_primary": "If Nebraska wins by more than 35.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB39",
+"title": "Nebraska wins by over 38.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 38.5 points",
+"no_sub_title": "Nebraska wins by over 38.5 points",
+"rules_primary": "If Nebraska wins by more than 38.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB4",
+"title": "Nebraska wins by over 3.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 3.5 points",
+"no_sub_title": "Nebraska wins by over 3.5 points",
+"rules_primary": "If Nebraska wins by more than 3.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB42",
+"title": "Nebraska wins by over 41.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 41.5 points",
+"no_sub_title": "Nebraska wins by over 41.5 points",
+"rules_primary": "If Nebraska wins by more than 41.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB5",
+"title": "Nebraska wins by over 4.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 4.5 points",
+"no_sub_title": "Nebraska wins by over 4.5 points",
+"rules_primary": "If Nebraska wins by more than 4.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB6",
+"title": "Nebraska wins by over 5.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 5.5 points",
+"no_sub_title": "Nebraska wins by over 5.5 points",
+"rules_primary": "If Nebraska wins by more than 5.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB7",
+"title": "Nebraska wins by over 6.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 6.5 points",
+"no_sub_title": "Nebraska wins by over 6.5 points",
+"rules_primary": "If Nebraska wins by more than 6.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-NEB8",
+"title": "Nebraska wins by over 7.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 7.5 points",
+"no_sub_title": "Nebraska wins by over 7.5 points",
+"rules_primary": "If Nebraska wins by more than 7.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP05OHIONEB-OHIO4",
+"title": "Ohio wins by over 3.5 points",
+"subtitle": null,
+"yes_sub_title": "Ohio wins by over 3.5 points",
+"no_sub_title": "Ohio wins by over 3.5 points",
+"rules_primary": "If Ohio wins by more than 3.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB10",
+"title": "Nebraska wins by over 9.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 9.5 points",
+"no_sub_title": "Nebraska wins by over 9.5 points",
+"rules_primary": "If Nebraska wins by more than 9.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB11",
+"title": "Nebraska wins by over 10.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 10.5 points",
+"no_sub_title": "Nebraska wins by over 10.5 points",
+"rules_primary": "If Nebraska wins by more than 10.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB12",
+"title": "Nebraska wins by over 11.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 11.5 points",
+"no_sub_title": "Nebraska wins by over 11.5 points",
+"rules_primary": "If Nebraska wins by more than 11.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB14",
+"title": "Nebraska wins by over 13.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 13.5 points",
+"no_sub_title": "Nebraska wins by over 13.5 points",
+"rules_primary": "If Nebraska wins by more than 13.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB15",
+"title": "Nebraska wins by over 14.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 14.5 points",
+"no_sub_title": "Nebraska wins by over 14.5 points",
+"rules_primary": "If Nebraska wins by more than 14.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB17",
+"title": "Nebraska wins by over 16.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 16.5 points",
+"no_sub_title": "Nebraska wins by over 16.5 points",
+"rules_primary": "If Nebraska wins by more than 16.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB18",
+"title": "Nebraska wins by over 17.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 17.5 points",
+"no_sub_title": "Nebraska wins by over 17.5 points",
+"rules_primary": "If Nebraska wins by more than 17.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB21",
+"title": "Nebraska wins by over 20.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 20.5 points",
+"no_sub_title": "Nebraska wins by over 20.5 points",
+"rules_primary": "If Nebraska wins by more than 20.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB22",
+"title": "Nebraska wins by over 21.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 21.5 points",
+"no_sub_title": "Nebraska wins by over 21.5 points",
+"rules_primary": "If Nebraska wins by more than 21.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB24",
+"title": "Nebraska wins by over 23.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 23.5 points",
+"no_sub_title": "Nebraska wins by over 23.5 points",
+"rules_primary": "If Nebraska wins by more than 23.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB25",
+"title": "Nebraska wins by over 24.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 24.5 points",
+"no_sub_title": "Nebraska wins by over 24.5 points",
+"rules_primary": "If Nebraska wins by more than 24.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB28",
+"title": "Nebraska wins by over 27.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 27.5 points",
+"no_sub_title": "Nebraska wins by over 27.5 points",
+"rules_primary": "If Nebraska wins by more than 27.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB29",
+"title": "Nebraska wins by over 28.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 28.5 points",
+"no_sub_title": "Nebraska wins by over 28.5 points",
+"rules_primary": "If Nebraska wins by more than 28.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB31",
+"title": "Nebraska wins by over 30.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 30.5 points",
+"no_sub_title": "Nebraska wins by over 30.5 points",
+"rules_primary": "If Nebraska wins by more than 30.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB34",
+"title": "Nebraska wins by over 33.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 33.5 points",
+"no_sub_title": "Nebraska wins by over 33.5 points",
+"rules_primary": "If Nebraska wins by more than 33.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB36",
+"title": "Nebraska wins by over 35.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 35.5 points",
+"no_sub_title": "Nebraska wins by over 35.5 points",
+"rules_primary": "If Nebraska wins by more than 35.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB39",
+"title": "Nebraska wins by over 38.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 38.5 points",
+"no_sub_title": "Nebraska wins by over 38.5 points",
+"rules_primary": "If Nebraska wins by more than 38.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB42",
+"title": "Nebraska wins by over 41.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 41.5 points",
+"no_sub_title": "Nebraska wins by over 41.5 points",
+"rules_primary": "If Nebraska wins by more than 41.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB46",
+"title": "Nebraska wins by over 45.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 45.5 points",
+"no_sub_title": "Nebraska wins by over 45.5 points",
+"rules_primary": "If Nebraska wins by more than 45.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB49",
+"title": "Nebraska wins by over 48.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 48.5 points",
+"no_sub_title": "Nebraska wins by over 48.5 points",
+"rules_primary": "If Nebraska wins by more than 48.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFSPREAD-26SEP12BGSUNEB-NEB8",
+"title": "Nebraska wins by over 7.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska wins by over 7.5 points",
+"no_sub_title": "Nebraska wins by over 7.5 points",
+"rules_primary": "If Nebraska wins by more than 7.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Spread"
+},
+{
+"ticker": "KXNCAAFTEAMTD-26SEP05OHIONEB-NEB4",
+"title": "Nebraska: 4+ touchdowns",
+"subtitle": null,
+"yes_sub_title": "Nebraska: 4+",
+"no_sub_title": "Nebraska: 4+",
+"rules_primary": "If Nebraska records 4+ touchdowns in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Touchdowns"
+},
+{
+"ticker": "KXNCAAFTEAMTD-26SEP05OHIONEB-NEB5",
+"title": "Nebraska: 5+ touchdowns",
+"subtitle": null,
+"yes_sub_title": "Nebraska: 5+",
+"no_sub_title": "Nebraska: 5+",
+"rules_primary": "If Nebraska records 5+ touchdowns in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Touchdowns"
+},
+{
+"ticker": "KXNCAAFTEAMTD-26SEP05OHIONEB-NEB6",
+"title": "Nebraska: 6+ touchdowns",
+"subtitle": null,
+"yes_sub_title": "Nebraska: 6+",
+"no_sub_title": "Nebraska: 6+",
+"rules_primary": "If Nebraska records 6+ touchdowns in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Touchdowns"
+},
+{
+"ticker": "KXNCAAFTEAMTD-26SEP05OHIONEB-OHIO1",
+"title": "Ohio: 1+ touchdowns",
+"subtitle": null,
+"yes_sub_title": "Ohio: 1+",
+"no_sub_title": "Ohio: 1+",
+"rules_primary": "If Ohio records 1+ touchdowns in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Touchdowns"
+},
+{
+"ticker": "KXNCAAFTEAMTD-26SEP05OHIONEB-OHIO2",
+"title": "Ohio: 2+ touchdowns",
+"subtitle": null,
+"yes_sub_title": "Ohio: 2+",
+"no_sub_title": "Ohio: 2+",
+"rules_primary": "If Ohio records 2+ touchdowns in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Touchdowns"
+},
+{
+"ticker": "KXNCAAFTEAMTD-26SEP05OHIONEB-OHIO3",
+"title": "Ohio: 3+ touchdowns",
+"subtitle": null,
+"yes_sub_title": "Ohio: 3+",
+"no_sub_title": "Ohio: 3+",
+"rules_primary": "If Ohio records 3+ touchdowns in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Touchdowns"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB14",
+"title": "Nebraska scores over 13.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 13.5 points scored",
+"no_sub_title": "Nebraska over 13.5 points scored",
+"rules_primary": "If Nebraska scores over 13.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB17",
+"title": "Nebraska scores over 16.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 16.5 points scored",
+"no_sub_title": "Nebraska over 16.5 points scored",
+"rules_primary": "If Nebraska scores over 16.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB20",
+"title": "Nebraska scores over 19.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 19.5 points scored",
+"no_sub_title": "Nebraska over 19.5 points scored",
+"rules_primary": "If Nebraska scores over 19.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB21",
+"title": "Nebraska scores over 20.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 20.5 points scored",
+"no_sub_title": "Nebraska over 20.5 points scored",
+"rules_primary": "If Nebraska scores over 20.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB24",
+"title": "Nebraska scores over 23.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 23.5 points scored",
+"no_sub_title": "Nebraska over 23.5 points scored",
+"rules_primary": "If Nebraska scores over 23.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB28",
+"title": "Nebraska scores over 27.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 27.5 points scored",
+"no_sub_title": "Nebraska over 27.5 points scored",
+"rules_primary": "If Nebraska scores over 27.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB31",
+"title": "Nebraska scores over 30.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 30.5 points scored",
+"no_sub_title": "Nebraska over 30.5 points scored",
+"rules_primary": "If Nebraska scores over 30.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB35",
+"title": "Nebraska scores over 34.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 34.5 points scored",
+"no_sub_title": "Nebraska over 34.5 points scored",
+"rules_primary": "If Nebraska scores over 34.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB38",
+"title": "Nebraska scores over 37.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 37.5 points scored",
+"no_sub_title": "Nebraska over 37.5 points scored",
+"rules_primary": "If Nebraska scores over 37.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB42",
+"title": "Nebraska scores over 41.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 41.5 points scored",
+"no_sub_title": "Nebraska over 41.5 points scored",
+"rules_primary": "If Nebraska scores over 41.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB46",
+"title": "Nebraska scores over 45.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 45.5 points scored",
+"no_sub_title": "Nebraska over 45.5 points scored",
+"rules_primary": "If Nebraska scores over 45.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB49",
+"title": "Nebraska scores over 48.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 48.5 points scored",
+"no_sub_title": "Nebraska over 48.5 points scored",
+"rules_primary": "If Nebraska scores over 48.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB52",
+"title": "Nebraska scores over 51.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 51.5 points scored",
+"no_sub_title": "Nebraska over 51.5 points scored",
+"rules_primary": "If Nebraska scores over 51.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-NEB55",
+"title": "Nebraska scores over 54.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 54.5 points scored",
+"no_sub_title": "Nebraska over 54.5 points scored",
+"rules_primary": "If Nebraska scores over 54.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO10",
+"title": "Ohio scores over 9.5 points",
+"subtitle": null,
+"yes_sub_title": "Ohio over 9.5 points scored",
+"no_sub_title": "Ohio over 9.5 points scored",
+"rules_primary": "If Ohio scores over 9.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO11",
+"title": "Ohio scores over 10.5 points",
+"subtitle": null,
+"yes_sub_title": "Ohio over 10.5 points scored",
+"no_sub_title": "Ohio over 10.5 points scored",
+"rules_primary": "If Ohio scores over 10.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO14",
+"title": "Ohio scores over 13.5 points",
+"subtitle": null,
+"yes_sub_title": "Ohio over 13.5 points scored",
+"no_sub_title": "Ohio over 13.5 points scored",
+"rules_primary": "If Ohio scores over 13.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO17",
+"title": "Ohio scores over 16.5 points",
+"subtitle": null,
+"yes_sub_title": "Ohio over 16.5 points scored",
+"no_sub_title": "Ohio over 16.5 points scored",
+"rules_primary": "If Ohio scores over 16.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO20",
+"title": "Ohio scores over 19.5 points",
+"subtitle": null,
+"yes_sub_title": "Ohio over 19.5 points scored",
+"no_sub_title": "Ohio over 19.5 points scored",
+"rules_primary": "If Ohio scores over 19.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO21",
+"title": "Ohio scores over 20.5 points",
+"subtitle": null,
+"yes_sub_title": "Ohio over 20.5 points scored",
+"no_sub_title": "Ohio over 20.5 points scored",
+"rules_primary": "If Ohio scores over 20.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO24",
+"title": "Ohio scores over 23.5 points",
+"subtitle": null,
+"yes_sub_title": "Ohio over 23.5 points scored",
+"no_sub_title": "Ohio over 23.5 points scored",
+"rules_primary": "If Ohio scores over 23.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO3",
+"title": "Ohio scores over 2.5 points",
+"subtitle": null,
+"yes_sub_title": "Ohio over 2.5 points scored",
+"no_sub_title": "Ohio over 2.5 points scored",
+"rules_primary": "If Ohio scores over 2.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP05OHIONEB-OHIO7",
+"title": "Ohio scores over 6.5 points",
+"subtitle": null,
+"yes_sub_title": "Ohio over 6.5 points scored",
+"no_sub_title": "Ohio over 6.5 points scored",
+"rules_primary": "If Ohio scores over 6.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU10",
+"title": "Bowling Green scores over 9.5 points",
+"subtitle": null,
+"yes_sub_title": "Bowling Green over 9.5 points scored",
+"no_sub_title": "Bowling Green over 9.5 points scored",
+"rules_primary": "If Bowling Green scores over 9.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU12",
+"title": "Bowling Green scores over 11.5 points",
+"subtitle": null,
+"yes_sub_title": "Bowling Green over 11.5 points scored",
+"no_sub_title": "Bowling Green over 11.5 points scored",
+"rules_primary": "If Bowling Green scores over 11.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU14",
+"title": "Bowling Green scores over 13.5 points",
+"subtitle": null,
+"yes_sub_title": "Bowling Green over 13.5 points scored",
+"no_sub_title": "Bowling Green over 13.5 points scored",
+"rules_primary": "If Bowling Green scores over 13.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU17",
+"title": "Bowling Green scores over 16.5 points",
+"subtitle": null,
+"yes_sub_title": "Bowling Green over 16.5 points scored",
+"no_sub_title": "Bowling Green over 16.5 points scored",
+"rules_primary": "If Bowling Green scores over 16.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU20",
+"title": "Bowling Green scores over 19.5 points",
+"subtitle": null,
+"yes_sub_title": "Bowling Green over 19.5 points scored",
+"no_sub_title": "Bowling Green over 19.5 points scored",
+"rules_primary": "If Bowling Green scores over 19.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU21",
+"title": "Bowling Green scores over 20.5 points",
+"subtitle": null,
+"yes_sub_title": "Bowling Green over 20.5 points scored",
+"no_sub_title": "Bowling Green over 20.5 points scored",
+"rules_primary": "If Bowling Green scores over 20.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU24",
+"title": "Bowling Green scores over 23.5 points",
+"subtitle": null,
+"yes_sub_title": "Bowling Green over 23.5 points scored",
+"no_sub_title": "Bowling Green over 23.5 points scored",
+"rules_primary": "If Bowling Green scores over 23.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU3",
+"title": "Bowling Green scores over 2.5 points",
+"subtitle": null,
+"yes_sub_title": "Bowling Green over 2.5 points scored",
+"no_sub_title": "Bowling Green over 2.5 points scored",
+"rules_primary": "If Bowling Green scores over 2.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-BGSU7",
+"title": "Bowling Green scores over 6.5 points",
+"subtitle": null,
+"yes_sub_title": "Bowling Green over 6.5 points scored",
+"no_sub_title": "Bowling Green over 6.5 points scored",
+"rules_primary": "If Bowling Green scores over 6.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB17",
+"title": "Nebraska scores over 16.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 16.5 points scored",
+"no_sub_title": "Nebraska over 16.5 points scored",
+"rules_primary": "If Nebraska scores over 16.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB20",
+"title": "Nebraska scores over 19.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 19.5 points scored",
+"no_sub_title": "Nebraska over 19.5 points scored",
+"rules_primary": "If Nebraska scores over 19.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB21",
+"title": "Nebraska scores over 20.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 20.5 points scored",
+"no_sub_title": "Nebraska over 20.5 points scored",
+"rules_primary": "If Nebraska scores over 20.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB24",
+"title": "Nebraska scores over 23.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 23.5 points scored",
+"no_sub_title": "Nebraska over 23.5 points scored",
+"rules_primary": "If Nebraska scores over 23.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB28",
+"title": "Nebraska scores over 27.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 27.5 points scored",
+"no_sub_title": "Nebraska over 27.5 points scored",
+"rules_primary": "If Nebraska scores over 27.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB31",
+"title": "Nebraska scores over 30.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 30.5 points scored",
+"no_sub_title": "Nebraska over 30.5 points scored",
+"rules_primary": "If Nebraska scores over 30.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB35",
+"title": "Nebraska scores over 34.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 34.5 points scored",
+"no_sub_title": "Nebraska over 34.5 points scored",
+"rules_primary": "If Nebraska scores over 34.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB38",
+"title": "Nebraska scores over 37.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 37.5 points scored",
+"no_sub_title": "Nebraska over 37.5 points scored",
+"rules_primary": "If Nebraska scores over 37.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB41",
+"title": "Nebraska scores over 40.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 40.5 points scored",
+"no_sub_title": "Nebraska over 40.5 points scored",
+"rules_primary": "If Nebraska scores over 40.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB42",
+"title": "Nebraska scores over 41.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 41.5 points scored",
+"no_sub_title": "Nebraska over 41.5 points scored",
+"rules_primary": "If Nebraska scores over 41.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB46",
+"title": "Nebraska scores over 45.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 45.5 points scored",
+"no_sub_title": "Nebraska over 45.5 points scored",
+"rules_primary": "If Nebraska scores over 45.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB49",
+"title": "Nebraska scores over 48.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 48.5 points scored",
+"no_sub_title": "Nebraska over 48.5 points scored",
+"rules_primary": "If Nebraska scores over 48.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB52",
+"title": "Nebraska scores over 51.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 51.5 points scored",
+"no_sub_title": "Nebraska over 51.5 points scored",
+"rules_primary": "If Nebraska scores over 51.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB55",
+"title": "Nebraska scores over 54.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 54.5 points scored",
+"no_sub_title": "Nebraska over 54.5 points scored",
+"rules_primary": "If Nebraska scores over 54.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB58",
+"title": "Nebraska scores over 57.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 57.5 points scored",
+"no_sub_title": "Nebraska over 57.5 points scored",
+"rules_primary": "If Nebraska scores over 57.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB61",
+"title": "Nebraska scores over 60.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 60.5 points scored",
+"no_sub_title": "Nebraska over 60.5 points scored",
+"rules_primary": "If Nebraska scores over 60.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMTOTAL-26SEP12BGSUNEB-NEB64",
+"title": "Nebraska scores over 63.5 points",
+"subtitle": null,
+"yes_sub_title": "Nebraska over 63.5 points scored",
+"no_sub_title": "Nebraska over 63.5 points scored",
+"rules_primary": "If Nebraska scores over 63.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Team Total"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB275",
+"title": "Nebraska: 275+ total yards",
+"subtitle": null,
+"yes_sub_title": "Nebraska: 275+",
+"no_sub_title": "Nebraska: 275+",
+"rules_primary": "If Nebraska records 275+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB300",
+"title": "Nebraska: 300+ total yards",
+"subtitle": null,
+"yes_sub_title": "Nebraska: 300+",
+"no_sub_title": "Nebraska: 300+",
+"rules_primary": "If Nebraska records 300+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB325",
+"title": "Nebraska: 325+ total yards",
+"subtitle": null,
+"yes_sub_title": "Nebraska: 325+",
+"no_sub_title": "Nebraska: 325+",
+"rules_primary": "If Nebraska records 325+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB350",
+"title": "Nebraska: 350+ total yards",
+"subtitle": null,
+"yes_sub_title": "Nebraska: 350+",
+"no_sub_title": "Nebraska: 350+",
+"rules_primary": "If Nebraska records 350+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB375",
+"title": "Nebraska: 375+ total yards",
+"subtitle": null,
+"yes_sub_title": "Nebraska: 375+",
+"no_sub_title": "Nebraska: 375+",
+"rules_primary": "If Nebraska records 375+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB400",
+"title": "Nebraska: 400+ total yards",
+"subtitle": null,
+"yes_sub_title": "Nebraska: 400+",
+"no_sub_title": "Nebraska: 400+",
+"rules_primary": "If Nebraska records 400+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB425",
+"title": "Nebraska: 425+ total yards",
+"subtitle": null,
+"yes_sub_title": "Nebraska: 425+",
+"no_sub_title": "Nebraska: 425+",
+"rules_primary": "If Nebraska records 425+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB450",
+"title": "Nebraska: 450+ total yards",
+"subtitle": null,
+"yes_sub_title": "Nebraska: 450+",
+"no_sub_title": "Nebraska: 450+",
+"rules_primary": "If Nebraska records 450+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO275",
+"title": "Ohio: 275+ total yards",
+"subtitle": null,
+"yes_sub_title": "Ohio: 275+",
+"no_sub_title": "Ohio: 275+",
+"rules_primary": "If Ohio records 275+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO300",
+"title": "Ohio: 300+ total yards",
+"subtitle": null,
+"yes_sub_title": "Ohio: 300+",
+"no_sub_title": "Ohio: 300+",
+"rules_primary": "If Ohio records 300+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO325",
+"title": "Ohio: 325+ total yards",
+"subtitle": null,
+"yes_sub_title": "Ohio: 325+",
+"no_sub_title": "Ohio: 325+",
+"rules_primary": "If Ohio records 325+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO350",
+"title": "Ohio: 350+ total yards",
+"subtitle": null,
+"yes_sub_title": "Ohio: 350+",
+"no_sub_title": "Ohio: 350+",
+"rules_primary": "If Ohio records 350+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO375",
+"title": "Ohio: 375+ total yards",
+"subtitle": null,
+"yes_sub_title": "Ohio: 375+",
+"no_sub_title": "Ohio: 375+",
+"rules_primary": "If Ohio records 375+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO400",
+"title": "Ohio: 400+ total yards",
+"subtitle": null,
+"yes_sub_title": "Ohio: 400+",
+"no_sub_title": "Ohio: 400+",
+"rules_primary": "If Ohio records 400+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO425",
+"title": "Ohio: 425+ total yards",
+"subtitle": null,
+"yes_sub_title": "Ohio: 425+",
+"no_sub_title": "Ohio: 425+",
+"rules_primary": "If Ohio records 425+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-OHIO450",
+"title": "Ohio: 450+ total yards",
+"subtitle": null,
+"yes_sub_title": "Ohio: 450+",
+"no_sub_title": "Ohio: 450+",
+"rules_primary": "If Ohio records 450+ total yards of offense in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Team Total Yards"
+},
+{
+"ticker": "KXNCAAFTFUT-30NEB-Y",
+"title": "Will Nebraska qualify for the CFP after Issuance and before the 2030-31 season?",
+"subtitle": null,
+"yes_sub_title": "Nebraska reach the CFP before 2030",
+"no_sub_title": "Nebraska reach the CFP before 2030",
+"rules_primary": "If the Nebraska football team qualifies for the College Football Playoffs after Issuance and before the 2030-31 college football season, then the market resolves to Yes.",
+"event_title": "Nebraska to Reach the CFP before the 2030 season"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W10T10-NEB",
+"title": "Will Nebraska be a top 10 ranked team on the College Football AP Poll Week 10 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 10 on the College Football AP Poll Week 10 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 10 Ranked Teams on Week 10 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W10T25-NEB",
+"title": "Will Nebraska be a top 25 ranked team on the College Football AP Poll Week 10 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 25 on the College Football AP Poll Week 10 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 25 Ranked Teams on Week 10 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W10T5-NEB",
+"title": "Will Nebraska be a top 5 ranked team on the College Football AP Poll Week 10 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 5 on the College Football AP Poll Week 10 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 5 Ranked Teams on Week 10 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W11T10-NEB",
+"title": "Will Nebraska be a top 10 ranked team on the College Football AP Poll Week 11 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 10 on the College Football AP Poll Week 11 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 10 Ranked Teams on Week 11 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W11T25-NEB",
+"title": "Will Nebraska be a top 25 ranked team on the College Football AP Poll Week 11 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 25 on the College Football AP Poll Week 11 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 25 Ranked Teams on Week 11 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W11T5-NEB",
+"title": "Will Nebraska be a top 5 ranked team on the College Football AP Poll Week 11 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 5 on the College Football AP Poll Week 11 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 5 Ranked Teams on Week 11 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W12T10-NEB",
+"title": "Will Nebraska be a top 10 ranked team on the College Football AP Poll Week 12 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 10 on the College Football AP Poll Week 12 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 10 Ranked Teams on Week 12 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W12T25-NEB",
+"title": "Will Nebraska be a top 25 ranked team on the College Football AP Poll Week 12 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 25 on the College Football AP Poll Week 12 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 25 Ranked Teams on Week 12 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W12T5-NEB",
+"title": "Will Nebraska be a top 5 ranked team on the College Football AP Poll Week 12 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 5 on the College Football AP Poll Week 12 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 5 Ranked Teams on Week 12 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W3T10-NEB",
+"title": "Will Nebraska be a top 10 ranked team on the College Football AP Poll Week 3 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 10 on the College Football AP Poll Week 3 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 10 Ranked Teams on Week 3 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W3T25-NEB",
+"title": "Will Nebraska be a top 25 ranked team on the College Football AP Poll Week 3 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 25 on the College Football AP Poll Week 3 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 25 Ranked Teams on Week 3 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W3T5-NEB",
+"title": "Will Nebraska be a top 5 ranked team on the College Football AP Poll Week 3 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 5 on the College Football AP Poll Week 3 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 5 Ranked Teams on Week 3 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W4T10-NEB",
+"title": "Will Nebraska be a top 10 ranked team on the College Football AP Poll Week 4 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 10 on the College Football AP Poll Week 4 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 10 Ranked Teams on Week 4 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W4T25-NEB",
+"title": "Will Nebraska be a top 25 ranked team on the College Football AP Poll Week 4 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 25 on the College Football AP Poll Week 4 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 25 Ranked Teams on Week 4 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W4T5-NEB",
+"title": "Will Nebraska be a top 5 ranked team on the College Football AP Poll Week 4 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 5 on the College Football AP Poll Week 4 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 5 Ranked Teams on Week 4 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W5T10-NEB",
+"title": "Will Nebraska be a top 10 ranked team on the College Football AP Poll Week 5 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 10 on the College Football AP Poll Week 5 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 10 Ranked Teams on Week 5 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W5T25-NEB",
+"title": "Will Nebraska be a top 25 ranked team on the College Football AP Poll Week 5 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 25 on the College Football AP Poll Week 5 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 25 Ranked Teams on Week 5 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W5T5-NEB",
+"title": "Will Nebraska be a top 5 ranked team on the College Football AP Poll Week 5 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 5 on the College Football AP Poll Week 5 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 5 Ranked Teams on Week 5 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W6T10-NEB",
+"title": "Will Nebraska be a top 10 ranked team on the College Football AP Poll Week 6 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 10 on the College Football AP Poll Week 6 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 10 Ranked Teams on Week 6 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W6T25-NEB",
+"title": "Will Nebraska be a top 25 ranked team on the College Football AP Poll Week 6 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 25 on the College Football AP Poll Week 6 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 25 Ranked Teams on Week 6 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W6T5-NEB",
+"title": "Will Nebraska be a top 5 ranked team on the College Football AP Poll Week 6 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 5 on the College Football AP Poll Week 6 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 5 Ranked Teams on Week 6 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W7T10-NEB",
+"title": "Will Nebraska be a top 10 ranked team on the College Football AP Poll Week 7 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 10 on the College Football AP Poll Week 7 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 10 Ranked Teams on Week 7 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W7T25-NEB",
+"title": "Will Nebraska be a top 25 ranked team on the College Football AP Poll Week 7 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 25 on the College Football AP Poll Week 7 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 25 Ranked Teams on Week 7 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W7T5-NEB",
+"title": "Will Nebraska be a top 5 ranked team on the College Football AP Poll Week 7 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 5 on the College Football AP Poll Week 7 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 5 Ranked Teams on Week 7 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W8T10-NEB",
+"title": "Will Nebraska be a top 10 ranked team on the College Football AP Poll Week 8 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 10 on the College Football AP Poll Week 8 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 10 Ranked Teams on Week 8 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W8T25-NEB",
+"title": "Will Nebraska be a top 25 ranked team on the College Football AP Poll Week 8 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 25 on the College Football AP Poll Week 8 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 25 Ranked Teams on Week 8 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W8T5-NEB",
+"title": "Will Nebraska be a top 5 ranked team on the College Football AP Poll Week 8 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 5 on the College Football AP Poll Week 8 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 5 Ranked Teams on Week 8 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W9T10-NEB",
+"title": "Will Nebraska be a top 10 ranked team on the College Football AP Poll Week 9 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 10 on the College Football AP Poll Week 9 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 10 Ranked Teams on Week 9 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W9T25-NEB",
+"title": "Will Nebraska be a top 25 ranked team on the College Football AP Poll Week 9 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 25 on the College Football AP Poll Week 9 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 25 Ranked Teams on Week 9 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOPAPRANK-26W9T5-NEB",
+"title": "Will Nebraska be a top 5 ranked team on the College Football AP Poll Week 9 rankings?",
+"subtitle": null,
+"yes_sub_title": "Nebraska",
+"no_sub_title": "Nebraska",
+"rules_primary": "If Nebraska is ranked top 5 on the College Football AP Poll Week 9 Rankings for the 2026-27 season, then the market resolves to Yes.",
+"event_title": "College Football: Top 5 Ranked Teams on Week 9 AP Poll"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-28",
+"title": "Over 27.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 27.5 points scored",
+"no_sub_title": "Over 27.5 points scored",
+"rules_primary": "If the teams collectively score more than 27.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-31",
+"title": "Over 30.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 30.5 points scored",
+"no_sub_title": "Over 30.5 points scored",
+"rules_primary": "If the teams collectively score more than 30.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-34",
+"title": "Over 33.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 33.5 points scored",
+"no_sub_title": "Over 33.5 points scored",
+"rules_primary": "If the teams collectively score more than 33.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-37",
+"title": "Over 36.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 36.5 points scored",
+"no_sub_title": "Over 36.5 points scored",
+"rules_primary": "If the teams collectively score more than 36.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-40",
+"title": "Over 39.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 39.5 points scored",
+"no_sub_title": "Over 39.5 points scored",
+"rules_primary": "If the teams collectively score more than 39.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-43",
+"title": "Over 42.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 42.5 points scored",
+"no_sub_title": "Over 42.5 points scored",
+"rules_primary": "If the teams collectively score more than 42.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-46",
+"title": "Over 45.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 45.5 points scored",
+"no_sub_title": "Over 45.5 points scored",
+"rules_primary": "If the teams collectively score more than 45.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-47",
+"title": "Over 46.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 46.5 points scored",
+"no_sub_title": "Over 46.5 points scored",
+"rules_primary": "If the teams collectively score more than 46.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-48",
+"title": "Over 47.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 47.5 points scored",
+"no_sub_title": "Over 47.5 points scored",
+"rules_primary": "If the teams collectively score more than 47.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-49",
+"title": "Over 48.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 48.5 points scored",
+"no_sub_title": "Over 48.5 points scored",
+"rules_primary": "If the teams collectively score more than 48.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-50",
+"title": "Over 49.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 49.5 points scored",
+"no_sub_title": "Over 49.5 points scored",
+"rules_primary": "If the teams collectively score more than 49.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-51",
+"title": "Over 50.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 50.5 points scored",
+"no_sub_title": "Over 50.5 points scored",
+"rules_primary": "If the teams collectively score more than 50.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-52",
+"title": "Over 51.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 51.5 points scored",
+"no_sub_title": "Over 51.5 points scored",
+"rules_primary": "If the teams collectively score more than 51.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-55",
+"title": "Over 54.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 54.5 points scored",
+"no_sub_title": "Over 54.5 points scored",
+"rules_primary": "If the teams collectively score more than 54.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-58",
+"title": "Over 57.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 57.5 points scored",
+"no_sub_title": "Over 57.5 points scored",
+"rules_primary": "If the teams collectively score more than 57.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-61",
+"title": "Over 60.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 60.5 points scored",
+"no_sub_title": "Over 60.5 points scored",
+"rules_primary": "If the teams collectively score more than 60.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-64",
+"title": "Over 63.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 63.5 points scored",
+"no_sub_title": "Over 63.5 points scored",
+"rules_primary": "If the teams collectively score more than 63.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-67",
+"title": "Over 66.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 66.5 points scored",
+"no_sub_title": "Over 66.5 points scored",
+"rules_primary": "If the teams collectively score more than 66.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP05OHIONEB-70",
+"title": "Over 69.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 69.5 points scored",
+"no_sub_title": "Over 69.5 points scored",
+"rules_primary": "If the teams collectively score more than 69.5 points in the Ohio vs Nebraska college football game originally scheduled for Sep 5, 2026, then the market resolves to Yes.",
+"event_title": "Ohio vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-33",
+"title": "Over 32.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 32.5 points scored",
+"no_sub_title": "Over 32.5 points scored",
+"rules_primary": "If the teams collectively score more than 32.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-36",
+"title": "Over 35.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 35.5 points scored",
+"no_sub_title": "Over 35.5 points scored",
+"rules_primary": "If the teams collectively score more than 35.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-39",
+"title": "Over 38.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 38.5 points scored",
+"no_sub_title": "Over 38.5 points scored",
+"rules_primary": "If the teams collectively score more than 38.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-42",
+"title": "Over 41.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 41.5 points scored",
+"no_sub_title": "Over 41.5 points scored",
+"rules_primary": "If the teams collectively score more than 41.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-45",
+"title": "Over 44.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 44.5 points scored",
+"no_sub_title": "Over 44.5 points scored",
+"rules_primary": "If the teams collectively score more than 44.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-48",
+"title": "Over 47.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 47.5 points scored",
+"no_sub_title": "Over 47.5 points scored",
+"rules_primary": "If the teams collectively score more than 47.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-51",
+"title": "Over 50.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 50.5 points scored",
+"no_sub_title": "Over 50.5 points scored",
+"rules_primary": "If the teams collectively score more than 50.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-52",
+"title": "Over 51.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 51.5 points scored",
+"no_sub_title": "Over 51.5 points scored",
+"rules_primary": "If the teams collectively score more than 51.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-53",
+"title": "Over 52.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 52.5 points scored",
+"no_sub_title": "Over 52.5 points scored",
+"rules_primary": "If the teams collectively score more than 52.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-54",
+"title": "Over 53.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 53.5 points scored",
+"no_sub_title": "Over 53.5 points scored",
+"rules_primary": "If the teams collectively score more than 53.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-55",
+"title": "Over 54.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 54.5 points scored",
+"no_sub_title": "Over 54.5 points scored",
+"rules_primary": "If the teams collectively score more than 54.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-56",
+"title": "Over 55.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 55.5 points scored",
+"no_sub_title": "Over 55.5 points scored",
+"rules_primary": "If the teams collectively score more than 55.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-57",
+"title": "Over 56.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 56.5 points scored",
+"no_sub_title": "Over 56.5 points scored",
+"rules_primary": "If the teams collectively score more than 56.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-60",
+"title": "Over 59.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 59.5 points scored",
+"no_sub_title": "Over 59.5 points scored",
+"rules_primary": "If the teams collectively score more than 59.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-63",
+"title": "Over 62.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 62.5 points scored",
+"no_sub_title": "Over 62.5 points scored",
+"rules_primary": "If the teams collectively score more than 62.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-66",
+"title": "Over 65.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 65.5 points scored",
+"no_sub_title": "Over 65.5 points scored",
+"rules_primary": "If the teams collectively score more than 65.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-69",
+"title": "Over 68.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 68.5 points scored",
+"no_sub_title": "Over 68.5 points scored",
+"rules_primary": "If the teams collectively score more than 68.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-72",
+"title": "Over 71.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 71.5 points scored",
+"no_sub_title": "Over 71.5 points scored",
+"rules_primary": "If the teams collectively score more than 71.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFTOTAL-26SEP12BGSUNEB-75",
+"title": "Over 74.5 points scored",
+"subtitle": null,
+"yes_sub_title": "Over 74.5 points scored",
+"no_sub_title": "Over 74.5 points scored",
+"rules_primary": "If the teams collectively score more than 74.5 points in the Bowling Green vs Nebraska college football game originally scheduled for Sep 12, 2026, then the market resolves to Yes.",
+"event_title": "Bowling Green vs Nebraska: Total Points"
+},
+{
+"ticker": "KXNCAAFWINS-26NEB-10",
+"title": "Will Nebraska win at least 10 games this season?",
+"subtitle": null,
+"yes_sub_title": "10+ wins",
+"no_sub_title": "10+ wins",
+"rules_primary": "If the Nebraska college football team has at least 10 wins in the 2026 regular season, then the market resolves to Yes.",
+"event_title": "College Football: Nebraska Regular Season Wins"
+},
+{
+"ticker": "KXNCAAFWINS-26NEB-11",
+"title": "Will Nebraska win at least 11 games this season?",
+"subtitle": null,
+"yes_sub_title": "11+ wins",
+"no_sub_title": "11+ wins",
+"rules_primary": "If the Nebraska college football team has at least 11 wins in the 2026 regular season, then the market resolves to Yes.",
+"event_title": "College Football: Nebraska Regular Season Wins"
+},
+{
+"ticker": "KXNCAAFWINS-26NEB-12",
+"title": "Will Nebraska win at least 12 games this season?",
+"subtitle": null,
+"yes_sub_title": "12 wins",
+"no_sub_title": "12 wins",
+"rules_primary": "If the Nebraska college football team has at least 12 wins in the 2026 regular season, then the market resolves to Yes.",
+"event_title": "College Football: Nebraska Regular Season Wins"
+},
+{
+"ticker": "KXNCAAFWINS-26NEB-4",
+"title": "Will Nebraska win at least 4 games this season?",
+"subtitle": "4+ wins",
+"yes_sub_title": "4+ wins",
+"no_sub_title": "4+ wins",
+"rules_primary": "If the Nebraska college football team has at least 4 wins in the 2026 regular season, then the market resolves to Yes.",
+"event_title": "College Football: Nebraska Regular Season Wins"
+},
+{
+"ticker": "KXNCAAFWINS-26NEB-5",
+"title": "Will Nebraska win at least 5 games this season?",
+"subtitle": null,
+"yes_sub_title": "5+ wins",
+"no_sub_title": "5+ wins",
+"rules_primary": "If the Nebraska college football team has at least 5 wins in the 2026 regular season, then the market resolves to Yes.",
+"event_title": "College Football: Nebraska Regular Season Wins"
+},
+{
+"ticker": "KXNCAAFWINS-26NEB-6",
+"title": "Will Nebraska win at least 6 games this season?",
+"subtitle": null,
+"yes_sub_title": "6+ wins",
+"no_sub_title": "6+ wins",
+"rules_primary": "If the Nebraska college football team has at least 6 wins in the 2026 regular season, then the market resolves to Yes.",
+"event_title": "College Football: Nebraska Regular Season Wins"
+},
+{
+"ticker": "KXNCAAFWINS-26NEB-7",
+"title": "Will Nebraska win at least 7 games this season?",
+"subtitle": null,
+"yes_sub_title": "7+ wins",
+"no_sub_title": "7+ wins",
+"rules_primary": "If the Nebraska college football team has at least 7 wins in the 2026 regular season, then the market resolves to Yes.",
+"event_title": "College Football: Nebraska Regular Season Wins"
+},
+{
+"ticker": "KXNCAAFWINS-26NEB-8",
+"title": "Will Nebraska win at least 8 games this season?",
+"subtitle": null,
+"yes_sub_title": "8+ wins",
+"no_sub_title": "8+ wins",
+"rules_primary": "If the Nebraska college football team has at least 8 wins in the 2026 regular season, then the market resolves to Yes.",
+"event_title": "College Football: Nebraska Regular Season Wins"
+},
+{
+"ticker": "KXNCAAFWINS-26NEB-9",
+"title": "Will Nebraska win at least 9 games this season?",
+"subtitle": null,
+"yes_sub_title": "9+ wins",
+"no_sub_title": "9+ wins",
+"rules_primary": "If the Nebraska college football team has at least 9 wins in the 2026 regular season, then the market resolves to Yes.",
+"event_title": "College Football: Nebraska Regular Season Wins"
+}
+]
