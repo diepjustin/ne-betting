@@ -1,0 +1,16 @@
+KalshiEX LLC 
+ 
+KalshiEX LLC  
+Announcement of Updated Calculation of Open Interest and Volume 
+12.24.21 
+ 
+As of Friday, December 24, 2021, the Exchange has updated the way that it calculates open 
+interest and volume. The Exchange will now count each pair of Yes and No positions as a single 
+contract. The Exchange originally counted each Yes and each No position as a separate contract.  
+However, representing a Yes and No pair as a single contract is more helpful and consistent with 
+standard industry and regulatory terminology. You'll see the effects of this change in our 
+calculations of volume and open interest, including historical data. 
+ 
+Should you have any question or require further information, please contact us through our 
+support email: support@kalshi.com  
+ 

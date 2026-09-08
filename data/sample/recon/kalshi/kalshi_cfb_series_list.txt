@@ -1,0 +1,130 @@
+  KXNCAAF2HSPREAD | College Football 2nd Half Spread | custom
+  KXNCAAF2HTOTAL | College Football 2nd Half Total | custom
+  KXNCAAF2PT | College Football 2-Point Conversion | custom
+  KXNCAAF2Q | College Football 2nd Quarter Winner | custom
+  KXNCAAF2QBTTS | College Football Both Teams to Score in 2nd Quarter | custom
+  KXNCAAF2QSPREAD | College Football 2nd Quarter Spread | custom
+  KXNCAAF2QTOTAL | College Football 2nd Quarter Total | custom
+  KXNCAAF3Q | College Football 3rd Quarter Winner | custom
+  KXNCAAF3QBTTS | College Football Both Teams to Score in 3rd Quarter | custom
+  KXNCAAF3QSPREAD | College Football 3rd Quarter Spread | custom
+  KXNCAAF3QTOTAL | College Football 3rd Quarter Total | custom
+  KXNCAAF4Q | College Football 4th Quarter Winner | custom
+  KXNCAAF4QBTTS | College Football Both Teams to Score in 4th Quarter | custom
+  KXNCAAF4QSPREAD | College Football 4th Quarter Spread | custom
+  KXNCAAF4QTOTAL | College Football 4th Quarter Total | custom
+  KXNCAAFAAC | American Athletic Conference Champion | annual
+  KXNCAAFAACQUAL | College Football American Athletic Conference Championship Qualifiers | custom
+  KXNCAAFACC | ACC Champion | annual
+  KXNCAAFACCAWARD | College Football ACC Award Winner | custom
+  KXNCAAFACCLEADER | College Football ACC Stats Leaders | annual
+  KXNCAAFACCQUAL | College Football ACC Championship Qualifiers | annual
+  KXNCAAFACCREGTOP | College Football ACC Regular Season Top Finishers | annual
+  KXNCAAFACCWINS | College Football ACC Teams to Win | annual
+  KXNCAAFAPANY | College Football AP Rank Anytime in Season | custom
+  KXNCAAFAPCHURN | College Football AP Poll Churn | custom
+  KXNCAAFAPRANK | College Football AP Rank | custom
+  KXNCAAFAWARD | College Football Award Winner | custom
+  KXNCAAFB10 | Big Ten Champion | annual
+  KXNCAAFB10QUAL | College Football Big Ten Championship Qualifiers | annual
+  KXNCAAFB12 | Big 12 Champion | annual
+  KXNCAAFB12QUAL | College Football Big 12 Championship Qualifiers | annual
+  KXNCAAFB12REGTOP | College Football Big 12 Regular Season Top Finishers | annual
+  KXNCAAFBACC | ACC Champion | annual
+  KXNCAAFBB10 | Big Ten Champion | annual
+  KXNCAAFBB12 | Big 12 Champion | annual
+  KXNCAAFBIG12AWARD | College Football Big 12 Award Winner | custom
+  KXNCAAFBIG12LEADER | College Football Big 12 Stats Leaders | annual
+  KXNCAAFBIG12WINS | College Football Big 12 Teams to Win | annual
+  KXNCAAFBIGTENAWARD | College Football Big Ten Award Winner | custom
+  KXNCAAFBIGTENLEADER | College Football Big Ten Stats Leaders | annual
+  KXNCAAFBIGTENREGTOP | College Football Big Ten Regular Season Top Finishers | annual
+  KXNCAAFBIGTENWINS | College Football Big Ten Teams to Win | annual
+  KXNCAAFBOWLGAME | College Football Teams to Make a Bowl Game | custom
+  KXNCAAFBSEC | SEC Champion | annual
+  KXNCAAFCFPCONF | College Football Playoff Conference Representation | custom
+  KXNCAAFCFPPOLL | College Football CFP Poll | custom
+  KXNCAAFCOACHLEAVE | College Football Coach Out By | custom
+  KXNCAAFCOACHOUT | College Football Coaches Out | custom
+  KXNCAAFCONF | NCAAF Championship Conference | annual
+  KXNCAAFCONFAWARD | College Football Conference Awards | custom
+  KXNCAAFCONFLEAVE | College Football Conference Leave | custom
+  KXNCAAFCONFMATCHUP | College Football Conference Championship Matchup | custom
+  KXNCAAFCOTW | College Football Coach of the Week | custom
+  KXNCAAFCOTY | College Football Coach of the Year | annual
+  KXNCAAFCS | FCS Football Champion | annual
+  KXNCAAFCSGAME | College Football FCS Game | custom
+  KXNCAAFCUSA | Conference USA Champion | annual
+  KXNCAAFCUSAQUAL | College Football Conference USA Championship Qualifiers | annual
+  KXNCAAFD3 | D3 College Football Champion | annual
+  KXNCAAFD3GAME | DIII College Football Game | custom
+  KXNCAAFDSTTD | College Football Defense Special Teams Touchdown | custom
+  KXNCAAFEQBTTS | College Football Both Teams to Score in Every Quarter | custom
+  KXNCAAFFCS | College Football FCS Champion | custom
+  KXNCAAFFINALIST | College Football Finalist | annual
+  KXNCAAFFIRSTTDTEAM | College Football First Team to Score a Touchdown | custom
+  KXNCAAFFTTS | College Football First Team to Score | custom
+  KXNCAAFGAME | College Football Game | custom
+  KXNCAAFH2HWINS | College Football Head-to-Head Regular Season Wins | custom
+  KXNCAAFHIGHSCORE | College Football Highest Scoring Game | custom
+  KXNCAAFIVY | Ivy League Champion | annual
+  KXNCAAFJOINCONF | College Football Join Conference | custom
+  KXNCAAFLEADER | College Football Stats Leaders | custom
+  KXNCAAFMAC | MAC Champion | annual
+  KXNCAAFMACQUAL | College Football Mid-American Conference Championship Qualifiers | annual
+  KXNCAAFMOSTOT | College Football Most Amount of Overtimes | custom
+  KXNCAAFMWC | Mountain West Champion | annual
+  KXNCAAFMWCQUAL | College Football Mountain West Conference Championship Qualifiers | annual
+  KXNCAAFOT | College Football Overtime | custom
+  KXNCAAFPAC10 | Pac-10 Champion | annual
+  KXNCAAFPAC12 | Pac-12 Champion | annual
+  KXNCAAFPAC12QUAL | College Football Pac-12 Championship Qualifiers | annual
+  KXNCAAFPLAYOFF | College Football Playoff Qualifiers | annual
+  KXNCAAFPREPACK2ML | MVE NCAAF Pre Pack | custom
+  KXNCAAFPREPACK3ML | MVE NCAAF Pre Pack | custom
+  KXNCAAFPREPACK4ML | MVE NCAAF Pre Pack | custom
+  KXNCAAFPREPACKSGP | MVE NCAAF Pre Pack | custom
+  KXNCAAFQF | College Football Playoff Quarterfinals Qualifiers | custom
+  KXNCAAFQHIGHSCORE | College Football Highest Scoring Quarter | custom
+  KXNCAAFSBELT | Sun Belt Champion | annual
+  KXNCAAFSBELTQUAL | College Football Sun Belt Championship Qualifiers | annual
+  KXNCAAFSEC | SEC Champion | annual
+  KXNCAAFSECAWARD | College Football SEC Award Winner | custom
+  KXNCAAFSECLEADER | College Football SEC Stats Leaders | annual
+  KXNCAAFSECQ | College Football SEC Championship Qualifiers | annual
+  KXNCAAFSECREGTOP | College Football SEC Regular Season Top Finishers | annual
+  KXNCAAFSECWINS | College Football SEC Teams to Win | annual
+  KXNCAAFSEED | College Football Playoff Seed | custom
+  KXNCAAFSF | College Football Playoff Semifinals Qualifiers | custom
+  KXNCAAFSPREAD | College Football Spread | custom
+  KXNCAAFSTADIUM | College Football Stadiums | custom
+  KXNCAAFTEAMFG | College Football Team Total Field Goals | custom
+  KXNCAAFTEAMINT | College Football Team Total Defensive Interceptions | custom
+  KXNCAAFTEAMREC | College Football Team Total Receptions | custom
+  KXNCAAFTEAMRECTD | College Football Team Receiving Touchdowns | custom
+  KXNCAAFTEAMRECYDS | College Football Team Receiving Yards | custom
+  KXNCAAFTEAMRSHATT | College Football Team Total Rushing Attempts | custom
+  KXNCAAFTEAMRSHTD | College Football Team Rushing Touchdowns | custom
+  KXNCAAFTEAMRSHYDS | College Football Team Rushing Yards | custom
+  KXNCAAFTEAMSACK | College Football Team Total Sacks | custom
+  KXNCAAFTEAMTD | College Football Team Total Touchdowns | custom
+  KXNCAAFTEAMTO | College Football Team Total Forced Turnovers | custom
+  KXNCAAFTEAMTOTAL | College Football Team Total Points | custom
+  KXNCAAFTEAMYDS | College Football Team Total Yards | custom
+  KXNCAAFTFUT | Team to Make the College Football Playoffs before 2030 | custom
+  KXNCAAFTOPAPRANK | College Football AP Poll Top Rank | custom
+  KXNCAAFTOPCFPPOLL | College Football CFP Poll | custom
+  KXNCAAFTOPSEED | College Football Playoff Top Seed | custom
+  KXNCAAFTOTAL | College Football Total Points | custom
+  KXNCAAFTOTALFG | College Football Total Field Goals | custom
+  KXNCAAFTOTALTD | College Football Total Touchdowns | custom
+  KXNCAAFUNDEFEATED | Undefeated in College Football Regular Season | annual
+  KXNCAAFUNDEFEATEDHOME | College Football Teams to go Undefeated at Home | custom
+  KXNCAAFWINS | College Football Win Total | annual
+  KXNCAAMBBIG10 | Big Ten Conference Tournament | custom
+  KXNCAAMBBIG10REG | Men's College Basketball Big Ten Regular Season Champion | custom
+  KXNCAAMBBIG10REGTOP | Men's College Basketball Big Ten Regular Season Top Finishers | custom
+  KXNCAAMBBIGTENREG | Men's College Basketball Big Ten Regular Season Champion | custom
+  KXNCAAMBBIGTENREGTOP | Men's College Basketball Big Ten Regular Season Top Finishers | custom
+  KXNCAAMBIGTEN | big ten MEN'S BASKETBALL TOURNAMENT | custom
+  KXNCAAPLAYOFF | College Football Playoff Qualifiers | annual
