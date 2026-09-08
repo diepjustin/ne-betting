@@ -107,11 +107,11 @@ has nothing to fetch, and skipping those saves about five hours a pass. Their
 metadata is not lost, because the normalizer now reads markets out of the
 archived discovery pages.
 
-**The scheduled job has not been switched.** Two things have to happen first.
-Raw needs somewhere to live, and the state file needs to move out of git: at
-this scale it lists 22,564 markets and would be committed daily, which is the
-same multi-megabyte-file-per-day pattern this repo has already had to purge
-from its history once.
+**The scheduled job has not been switched.** One thing still gates it. State
+has moved out of git into the Actions cache, so that objection is gone, but
+the first wide pass writes roughly three gigabytes of raw archive and where
+that lives is undecided. Daily runs after it are small increments; it is the
+first pass that needs an answer, and it should be run by hand anyway.
 
 ## 5. Steps that follow
 

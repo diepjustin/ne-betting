@@ -216,6 +216,25 @@ retrieved yet (RECON §1). The API is the primary source until then.
   `data/reference/polymarket_team_codes.json.gz`. Six of 406 codes were
   refused because no single reading dominated.
 
+## Where the run's own outputs live
+
+- **2026-09-08.** Collector watermarks moved from a daily git commit into the
+  Actions cache. At the Nebraska scope the file is 130 KB; at the wide scope
+  it tracks 22,564 markets, and a file that size rewritten by a commit every
+  day is how a repository's history gets heavy. This one has already been
+  cleaned once.
+
+  The cache key carries the run id so each run writes a fresh entry, and a
+  prefix restore-key picks up the newest previous one. State is saved even
+  when a collector fails, because the watermarks it did advance are still
+  correct and re-fetching them costs hours at the wide scope.
+
+  **Losing the cache is survivable, not a data gap.** GitHub evicts entries
+  untouched for a week, so a job left disabled that long starts cold; the
+  collectors then refetch from the beginning of each platform's live window,
+  which is slow rather than lossy, and the run log says which happened. The
+  job now needs no write access to the repository at all.
+
 ## Limitations
 
 - Kalshi publishes no taker identity. Nothing here can say who traded.
@@ -239,11 +258,9 @@ retrieved yet (RECON §1). The API is the primary source until then.
 - About 1,050 game markets carry no game identifier, mostly older events whose
   slugs or tickers use a code that names more than one school. They are left
   unidentified rather than guessed.
-- The scheduled job runs the Nebraska scope. Running the wide scope daily
-  would commit a state file listing 22,564 markets, which is the kind of
-  multi-megabyte file changing every day that this repo has already had to
-  clean out of its history once. That has to move to the Actions cache before
-  the wide scope goes on a schedule.
+- The scheduled job runs the Nebraska scope. What still gates the wide scope
+  is where three gigabytes of first-pass raw archive lives, not the state
+  file.
 - No sportsbook or DFS prop lines are collected, by decision on 8 Sep 2026
   (RECON "Phase 0b"). Any claim about how many chances there were to bet on a
   Nebraska athlete at a sportsbook is therefore out of this project's reach;

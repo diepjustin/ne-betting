@@ -13,6 +13,11 @@ data/analysis/
 data/sample/recon/*.log
 data/state/*.log
 
+# Collector watermarks. These live in the Actions cache, not in git: at the
+# wide scope the file tracks 22,564 markets, and a multi-megabyte file
+# rewritten by a daily commit is how a repository's history gets heavy.
+data/state/*.json
+
 # R writes these into whatever directory it is started in
 .Rhistory
 .RData
