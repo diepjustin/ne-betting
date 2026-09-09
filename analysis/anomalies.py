@@ -268,39 +268,58 @@ def large_trades(db, min_contracts, min_cost) -> list[dict]:
     return out
 
 
-def timeline_daily(db) -> list[dict]:
+def timeline_daily(db) -> tuple[list[dict], list[dict]]:
     """Daily notional by school, type and platform, dated in Central time.
 
     A 6:30pm Central kickoff is 23:30 UTC, so a UTC date cuts a game in half
     and puts the second half on the following day. The UTC date is carried
     alongside so a figure can be checked against a UTC-stamped source.
+
+    **These rows must not be summed across schools.** A market on a game
+    names two schools and is counted under both, because "money traded on
+    games involving Ole Miss" is the question a per-school row answers. Add
+    those rows together and every game market is counted twice: on 7 Sep 2026
+    SMU and Florida State each show about $19.9m, and it is the same $19.9m.
+    `shared_trades` says how many of a row's trades come from a market naming
+    two schools, and the companion totals table is the figure to quote when a
+    total is wanted -- it never joins to a school, so nothing is doubled.
     """
     cur = db.execute("""
-        WITH involved AS (
-            SELECT source, source_market_id, market_type, team AS school
+        WITH named AS (
+            SELECT source, source_market_id, market_type, team AS school,
+                   0 AS shared
               FROM market WHERE team IS NOT NULL
-            UNION
-            SELECT source, source_market_id, market_type, away_team
+            UNION ALL
+            SELECT source, source_market_id, market_type, away_team, 1
               FROM market WHERE away_team IS NOT NULL
-            UNION
-            SELECT source, source_market_id, market_type, home_team
+            UNION ALL
+            SELECT source, source_market_id, market_type, home_team, 1
               FROM market WHERE home_team IS NOT NULL
+        ),
+        -- One row per school per market. A spread market names its school in
+        -- `team` and again as one side of the game, so without this collapse a
+        -- school is counted twice on its own market and its own total inflates.
+        involved AS (
+            SELECT source, source_market_id, market_type, school,
+                   MAX(shared) AS shared
+              FROM named GROUP BY source, source_market_id, market_type, school
         )
-        SELECT i.school, i.market_type, t.source, t.executed_ts,
+        SELECT i.school, i.market_type, i.shared, t.source, t.executed_ts,
                t.count, COALESCE(t.taker_cost_usd, 0)
           FROM involved i
           JOIN trade t ON t.source = i.source
                       AND t.source_market_id = i.source_market_id
     """)
     agg: dict[tuple, dict] = {}
-    for school, mtype, source, ts, count, cost in cur:
+    for school, mtype, shared, source, ts, count, cost in cur:
         key = (central_day(ts), school, mtype, source)
         a = agg.setdefault(key, {
             "day_central": key[0], "school": school, "market_type": mtype,
-            "source": source, "trades": 0, "units": 0.0, "taker_cost_usd": 0.0,
-            "utc_days": set(),
+            "source": source, "trades": 0, "shared_trades": 0, "units": 0.0,
+            "taker_cost_usd": 0.0, "utc_days": set(),
         })
         a["trades"] += 1
+        a["shared_trades"] += shared
         a["units"] += count
         a["taker_cost_usd"] += cost
         a["utc_days"].add(dt.datetime.fromtimestamp(ts, dt.timezone.utc).strftime("%Y-%m-%d"))
@@ -311,6 +330,32 @@ def timeline_daily(db) -> list[dict]:
         a["taker_cost_usd"] = round(a["taker_cost_usd"], 2)
         rows.append(a)
     rows.sort(key=lambda r: (r["day_central"], -r["taker_cost_usd"]))
+    return rows, timeline_totals(db)
+
+
+def timeline_totals(db) -> list[dict]:
+    """The same days without the school join, so each trade is counted once.
+
+    This is the table to quote a total from. The per-school table cannot give
+    one: a game market belongs to both schools playing.
+    """
+    cur = db.execute("""
+        SELECT source, executed_ts, COUNT(*), SUM(count),
+               SUM(COALESCE(taker_cost_usd, 0))
+          FROM trade GROUP BY source, executed_ts
+    """)
+    agg: dict[tuple, dict] = {}
+    for source, ts, n, units, cost in cur:
+        key = (central_day(ts), source)
+        a = agg.setdefault(key, {"day_central": key[0], "source": source,
+                                 "trades": 0, "units": 0.0, "taker_cost_usd": 0.0})
+        a["trades"] += n
+        a["units"] += units or 0
+        a["taker_cost_usd"] += cost or 0
+    rows = sorted(agg.values(), key=lambda r: (r["day_central"], r["source"]))
+    for r in rows:
+        r["units"] = round(r["units"], 2)
+        r["taker_cost_usd"] = round(r["taker_cost_usd"], 2)
     return rows
 
 
@@ -348,13 +393,14 @@ def main(argv=None) -> int:
     events, leads = find_ladder_events(
         db, series_rung, tiers, args.window_minutes * 60,
         args.min_contracts, args.min_taker_cost)
-    daily = timeline_daily(db)
+    daily, totals = timeline_daily(db)
 
     write_csv(blocks, args.out, "block_trades")
     write_csv(larges, args.out, "large_trades")
     write_csv(events, args.out, "ladder_events")
     write_csv(leads, args.out, "ladder_leads")
     write_csv(daily, args.out, "timeline_daily")
+    write_csv(totals, args.out, "timeline_daily_totals")
 
     print("BLOCK TRADES (the exchange's own flag)")
     if not blocks:
@@ -387,7 +433,11 @@ def main(argv=None) -> int:
 
     print("\n%d single-rung leads, %d large trades, %d school-days"
           % (len(leads), len(larges), len(daily)))
-    print("Wrote 5 CSVs to %s" % args.out)
+    shared = sum(1 for r in daily if r["shared_trades"])
+    print("  %d of those school-days include a game market, which names two\n"
+          "  schools and is counted under both. Do not add school rows together;\n"
+          "  timeline_daily_totals.csv is the table to take a total from." % shared)
+    print("Wrote 6 CSVs to %s" % args.out)
     db.close()
     return 0
 

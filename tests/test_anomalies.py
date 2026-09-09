@@ -167,3 +167,31 @@ def test_central_time_moves_a_late_kickoff_back_a_day():
     """23:30 UTC on the 6th is 6:30pm Central on the 5th."""
     assert a.central_day(ts("2026-09-06T23:30:00Z")) == "2026-09-06"
     assert a.central_day(ts("2026-09-06T01:30:00Z")) == "2026-09-05"
+
+
+def test_a_school_is_counted_once_on_its_own_market(db, ladder):
+    """A spread names its school in `team` and again as a side of the game.
+
+    Counted from both columns without collapsing, a school's own total nearly
+    doubles. This is the same class of error as the attribution bug that once
+    made Nebraska look like 87% of all college football money, so it gets a
+    test rather than a comment.
+    """
+    db.execute("UPDATE market SET away_team='MIA', home_team='STAN'"
+               " WHERE source_market_id LIKE 'KXNCAAFSPREAD%'")
+    db.commit()
+    rows, _totals = a.timeline_daily(db)
+    mia = [r for r in rows if r["school"] == "MIA"]
+    assert len(mia) == 1
+    assert mia[0]["trades"] == 1, "the one Miami spread trade is counted once"
+    assert mia[0]["shared_trades"] == 1, "and is marked as naming two schools"
+
+
+def test_totals_table_counts_every_trade_exactly_once(db, ladder):
+    """The per-school table cannot give a total; this one can."""
+    db.execute("UPDATE market SET away_team='MIA', home_team='STAN'"
+               " WHERE source_market_id LIKE 'KXNCAAFSPREAD%'")
+    db.commit()
+    rows, totals = a.timeline_daily(db)
+    assert sum(t["trades"] for t in totals) == 8
+    assert sum(r["trades"] for r in rows) > 8, "school rows double-count on purpose"

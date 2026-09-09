@@ -65,6 +65,11 @@ VIEWS = {
         GROUP BY 1, 2, 3 ORDER BY 6 DESC, 4 DESC""",
     # Every market involving a school, whether it names one team (a spread) or
     # two (a game). A school's row is the union, counted once per market.
+    #
+    # These rows do not add up to a national total and must never be summed
+    # across schools: a game market names two schools and is counted under
+    # both, so the sum runs about twice the real figure. `daily_volume` below
+    # never joins to a school and is the table to take a total from.
     "by_school": """
         WITH involved AS (
             SELECT m.source, m.source_market_id, m.market_type, m.team AS school

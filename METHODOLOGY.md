@@ -381,6 +381,23 @@ book at settlement. That is real trading, not a loading error, and it is why
 rank within a market is computed with a window function rather than by
 joining a trade to its own market on the time it executed.
 
+**A per-school figure is not a share of a total.** A game market names two
+schools and is counted under both, because "money traded on games involving
+Ole Miss" is the question a per-school row answers. Sum those rows and every
+game market is counted twice: on 7 Sep 2026 SMU and Florida State each show
+about $19.9m and it is the same $19.9m. Adding the school rows gives $573m on
+Polymarket against a real $310,970,572, and $475m on Kalshi against
+$241,145,893 -- inflation of 1.84x and 1.97x. The timeline therefore ships a
+companion totals table that never joins to a school, and every per-school row
+carries a `shared_trades` count so the overlap is visible in the data rather
+than only in this paragraph.
+
+Collapsing a school to one row per market is part of that. A spread names its
+school in `team` and again as one side of the game, so a school counted from
+both columns nearly doubles its own total. This is the same shape as the
+attribution bug that once made Nebraska look like 87% of all college football
+money, and it now has a test.
+
 **What it currently finds.** Across 4.6 million trade rows: seven block
 trades, one ladder event, 49 single-rung leads. The ladder event is LSU.
 
