@@ -23,7 +23,7 @@ import json
 import logging
 import re
 import sys
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 
 from .common import PROJECT_ROOT, Client, RawArchive, State, load_yaml, setup_logging
@@ -341,6 +341,7 @@ def main(argv: list[str] | None = None) -> int:
                          m.market_id, m.reason)
                 collect_market(gamma, data, archive, cfg, state, m, stats)
     finally:
+        state.save(force=True)
         stats.requests = gamma.requests_made + data.requests_made
         stats.retries = gamma.retries + data.retries
         gamma.close()

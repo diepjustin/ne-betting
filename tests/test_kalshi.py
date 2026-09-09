@@ -1,5 +1,4 @@
 """Collector tests against recorded fixtures. No network."""
-import gzip
 import json
 from pathlib import Path
 
@@ -97,6 +96,7 @@ def run_once(tmp_path, router, cfg, matcher, historical=False):
     matched = kalshi.discover(client, archive, cfg, matcher, historical, stats)
     for m in matched:
         kalshi.collect_market(client, archive, cfg, state, m, historical, stats)
+    state.save(force=True)   # what main() does at the end of a run
     client.close()
     return matched, state, archive, stats
 
@@ -244,3 +244,16 @@ def test_network_errors_get_a_longer_budget_than_http_errors(monkeypatch):
     c.close()
     # max_attempts is 2; the network budget must have carried it well past that
     assert calls["n"] > 2, f"gave up after {calls['n']} attempts, ignoring the budget"
+
+
+def test_state_is_batched_but_never_lost(tmp_path):
+    """1.3 MB rewritten per market is tens of gigabytes across a wide pass.
+    Batching is fine as long as the run ends with everything on disk."""
+    p = tmp_path / "state" / "kalshi.json"
+    s = State(p, flush_every=10)
+    for i in range(9):
+        s.market(f"T{i}")["watermark_ts"] = i
+        s.save()
+    assert not p.exists(), "should not have written yet"
+    s.save(force=True)
+    assert len(State(p).data["markets"]) == 9

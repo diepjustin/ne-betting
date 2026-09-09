@@ -269,6 +269,7 @@ def main(argv: list[str] | None = None) -> int:
                     log.warning("giving up on %s and continuing: %s", m.ticker, e)
                     stats.failed_markets.append(m.ticker)
     finally:
+        state.save(force=True)
         client.close()
         stats.requests = client.requests_made
         stats.retries = client.retries

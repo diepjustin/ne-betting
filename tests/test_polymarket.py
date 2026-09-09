@@ -101,6 +101,7 @@ def run_once(tmp_path, router, cfg, matcher):
     matched = polymarket.discover(gamma, archive, cfg, matcher, stats)
     for m in matched:
         polymarket.collect_market(gamma, data, archive, cfg, state, m, stats)
+    state.save(force=True)   # what main() does at the end of a run
     gamma.close()
     data.close()
     return matched, state, archive, stats

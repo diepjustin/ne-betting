@@ -64,7 +64,7 @@ def load_markets_from_discovery(db, root: Path, stats: Counter,
         rel = str(p.relative_to(PROJECT_ROOT))
         for e in (body.get("events") or []):
             for m in (e.get("markets") or []):
-                r = resolve_kalshi(m)
+                r = resolve_kalshi(m, e.get("title") or "")
                 db.execute("""INSERT OR IGNORE INTO market VALUES
                               (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
                            ("kalshi", m["ticker"], m.get("title"), m.get("yes_sub_title"),

@@ -235,6 +235,25 @@ retrieved yet (RECON §1). The API is the primary source until then.
   which is slow rather than lossy, and the run log says which happened. The
   job now needs no write access to the repository at all.
 
+## Which school a market belongs to
+
+- **2026-09-08.** Game identity now comes from the event title's team names,
+  with the ticker's codes as a fallback and a check. This reverses an earlier
+  decision to split the ticker's team blob, which was safe but lossy: Kalshi
+  reuses short codes across divisions, so `WSU` is Winona State in
+  `26AUG27WSUUST` ("Winona State Warriors vs St. Thomas") and Washington State
+  in `25DEC22WSUUSU` ("Washington St. at Utah St."). Splitting refused both
+  rather than guess, which erased 140 Kansas State, 212 Washington State, 210
+  Colorado State, 245 Weber State and 121 Lane markets from any per-school
+  view. Each would have appeared as a real program with almost no betting on
+  it, which is the kind of wrong number that looks plausible.
+- **2026-09-08.** Titles on non-game series append what the market measures
+  after a colon ("Kansas St. at Arizona: Spread"); everything from the colon on
+  describes the market, not the school. Both "A vs B" and "A at B" put the
+  first-named school first, matching the order in the ticker.
+- After both fixes, Kalshi game markets without a game identifier fell from
+  over 1,050 to 125 of 16,090, and all five reused-code schools resolve fully.
+
 ## Surviving a long pass
 
 - **2026-09-08.** Network errors now get a budget measured in elapsed time

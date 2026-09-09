@@ -21,7 +21,6 @@ import re
 import unicodedata
 from dataclasses import dataclass
 from functools import lru_cache
-from pathlib import Path
 
 from collectors.common import PROJECT_ROOT, load_yaml
 

@@ -164,6 +164,43 @@ def _split_kalshi_teams(blob: str) -> tuple[str, str] | None:
     return splits[0] if len(splits) == 1 else None
 
 
+# Event titles come as "Ohio vs Nebraska" or "Washington St. at Utah St.".
+# In both forms the first named school is the one that appears first in the
+# ticker's team blob, so first is away and second is home.
+_KALSHI_TITLE = re.compile(r"^\s*(.+?)\s+(?:vs\.?|at)\s+(.+?)\s*$", re.I)
+
+
+def _kalshi_game_id_from_title(ticker: str, event_title: str) -> str | None:
+    """Game identity from the event title's team names.
+
+    Preferred over splitting the ticker's team blob, because Kalshi reuses
+    short codes across divisions: in this archive WSU is Winona State in
+    `26AUG27WSUUST` ("Winona State Warriors vs St. Thomas") and Washington
+    State in `25DEC22WSUUSU` ("Washington St. at Utah St."). Splitting refuses
+    both to avoid picking wrong, which erases 140 Kansas State, 212 Washington
+    State and 210 Colorado State markets from any per-school view. The title
+    says which school it is, so ask the title.
+    """
+    m = _KALSHI_GAME.search(ticker)
+    t = _KALSHI_TITLE.match(event_title or "")
+    if not m or not t:
+        return None
+    yy, mon, dd, _blob = m.groups()
+    if mon not in _MONTHS:
+        return None
+    # Non-game series append what the market measures: "Washington St. vs
+    # Kansas St.: Team Total", "UCF at Kansas St.: Spread". Everything from
+    # the colon on describes the market, not the school.
+    strip = lambda s: re.sub(r"\s*:.*$", "", s).strip()
+    away, home = resolve_team(strip(t.group(1))), resolve_team(strip(t.group(2)))
+    if not away.team or not home.team:
+        return None
+    a, h = _abbr(away.team.id), _abbr(home.team.id)
+    if not a or not h or a == h:
+        return None
+    return f"20{yy}-{_MONTHS[mon]:02d}-{dd}-{a}-{h}"
+
+
 def _kalshi_game_id(ticker: str) -> str | None:
     """`...-26SEP05OHIONEB-...` -> `2026-09-05-OHIO-NEB`, away then home."""
     m = _KALSHI_GAME.search(ticker)
@@ -261,7 +298,7 @@ def _line_from_title(title: str) -> float | None:
     return float(m.group(1)) if m else None
 
 
-def resolve_kalshi(market: dict) -> Resolved:
+def resolve_kalshi(market: dict, event_title: str = "") -> Resolved:
     ticker = market.get("ticker") or ""
     family = ticker.split("-")[0]
     mtype = KALSHI_FAMILY.get(family)
@@ -279,9 +316,11 @@ def resolve_kalshi(market: dict) -> Resolved:
             player = m.group(1).strip() if m else None
     if mtype is None:
         return Resolved(OTHER, reason=f"unknown Kalshi series family {family!r}")
+    # Title first, ticker codes as the fallback and the check.
+    game_id = _kalshi_game_id_from_title(ticker, event_title) or _kalshi_game_id(ticker)
     return Resolved(
         market_type=mtype,
-        game_id=_kalshi_game_id(ticker),
+        game_id=game_id,
         team=_kalshi_team(ticker) or team_in_text(title),
         player=player,
         line=_line_from_title(title) if mtype in (SPREAD, TOTAL, TEAM_STAT) else None,

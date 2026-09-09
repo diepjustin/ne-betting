@@ -171,3 +171,35 @@ def test_single_team_markets_name_their_team(question, team):
 def test_kalshi_reads_the_team_from_its_own_ticker():
     assert r.resolve_kalshi({"ticker": "KXNCAAFGAME-26SEP05OHIONEB-OHIO", "title": ""}).team == "OHIO"
     assert r.resolve_kalshi({"ticker": "KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB275", "title": ""}).team == "NEB"
+
+
+@pytest.mark.parametrize("ticker,title,game", [
+    # The same code, two different schools, told apart by the title.
+    ("KXNCAAFGAME-26AUG27WSUUST-WSU", "Winona State Warriors vs St. Thomas",
+     "2026-08-27-WNST-STMN"),
+    ("KXNCAAFGAME-25DEC22WSUUSU-WSU", "Washington St. at Utah St.",
+     "2025-12-22-WSU-USU"),
+    # Non-game series append what the market measures, after a colon.
+    ("KXNCAAFSPREAD-25SEP12KSUARIZ-KSU", "Kansas St. at Arizona: Spread",
+     "2025-09-12-KSU-ARIZ"),
+    ("KXNCAAFTEAMTOTAL-26SEP12WSUKSU-KSU", "Washington St. vs Kansas St.: Team Total",
+     "2026-09-12-WSU-KSU"),
+    # "at" and "vs" both put the first-named school first, matching the ticker.
+    ("KXNCAAFGAME-26SEP05OHIONEB-NEB", "Ohio vs Nebraska", "2026-09-05-OHIO-NEB"),
+])
+def test_game_identity_comes_from_the_title_not_the_code(ticker, title, game):
+    """Kalshi reuses short codes across divisions, so splitting the ticker's
+    team blob either guesses or refuses. Refusing erased 140 Kansas State, 212
+    Washington State and 210 Colorado State markets from any per-school view.
+    The event title says which school it is."""
+    assert r.resolve_kalshi({"ticker": ticker, "title": ""}, title).game_id == game
+
+
+def test_a_title_naming_one_school_twice_is_refused():
+    assert r._kalshi_game_id_from_title(
+        "KXNCAAFGAME-26SEP05NEBNEB-NEB", "Nebraska vs Nebraska") is None
+
+
+def test_ticker_codes_still_work_when_there_is_no_title():
+    assert r.resolve_kalshi({"ticker": "KXNCAAFGAME-26SEP05OHIONEB-NEB",
+                             "title": ""}).game_id == "2026-09-05-OHIO-NEB"

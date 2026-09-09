@@ -209,8 +209,10 @@ def read_raw(path: Path) -> dict:
 class State:
     """Small JSON file of per-market watermarks. Rewritten atomically."""
 
-    def __init__(self, path: Path):
+    def __init__(self, path: Path, flush_every: int = 50):
         self.path = path
+        self.flush_every = flush_every
+        self._pending = 0
         self.data: dict = {"markets": {}}
         if path.exists():
             with open(path) as f:
@@ -220,7 +222,21 @@ class State:
     def market(self, ticker: str) -> dict:
         return self.data["markets"].setdefault(ticker, {})
 
-    def save(self) -> None:
+    def save(self, force: bool = False) -> None:
+        """Write the watermarks, batched.
+
+        At the Nebraska scope this file is 130 KB and writing it after every
+        market is free. At the wide scope it tracks 22,564 markets and is
+        around 1.3 MB, so writing per market means tens of gigabytes of writes
+        across one pass and a visible share of the wall clock. Batching costs
+        at most `flush_every` markets of progress if the process is killed,
+        and the watermarks it does hold stay correct because the write is
+        atomic. Callers that must not lose a step pass force=True.
+        """
+        self._pending += 1
+        if not force and self._pending < self.flush_every:
+            return
+        self._pending = 0
         self.path.parent.mkdir(parents=True, exist_ok=True)
         tmp = self.path.with_suffix(".tmp")
         with open(tmp, "w") as f:
