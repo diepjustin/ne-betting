@@ -16,7 +16,9 @@ CREATE TABLE IF NOT EXISTS market (
   settled_outcome   TEXT,
   game_id           TEXT,                   -- resolved, nullable
   market_type       TEXT,                   -- resolved, nullable
-  team              TEXT,                   -- resolved, nullable
+  team              TEXT,                   -- the one school, when a market is about one
+  away_team         TEXT,                   -- both schools of a game, resolved at load
+  home_team         TEXT,
   player            TEXT,                   -- resolved, nullable
   line              REAL,                   -- spread/total strike where known
   first_seen_at     INTEGER NOT NULL,
@@ -65,3 +67,5 @@ CREATE INDEX IF NOT EXISTS trade_market  ON trade (source, source_market_id);
 CREATE INDEX IF NOT EXISTS trade_time    ON trade (executed_ts);
 CREATE INDEX IF NOT EXISTS market_type_i ON market (market_type);
 CREATE INDEX IF NOT EXISTS market_player ON market (player);
+CREATE INDEX IF NOT EXISTS market_away   ON market (away_team);
+CREATE INDEX IF NOT EXISTS market_home   ON market (home_team);

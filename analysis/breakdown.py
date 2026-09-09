@@ -63,6 +63,30 @@ VIEWS = {
           ON m.source = t.source AND m.source_market_id = t.source_market_id
         WHERE m.market_type = 'player_prop' AND m.player IS NOT NULL
         GROUP BY 1, 2, 3 ORDER BY 6 DESC, 4 DESC""",
+    # Every market involving a school, whether it names one team (a spread) or
+    # two (a game). A school's row is the union, counted once per market.
+    "by_school": """
+        WITH involved AS (
+            SELECT m.source, m.source_market_id, m.market_type, m.team AS school
+              FROM market m WHERE m.team IS NOT NULL
+            UNION
+            SELECT m.source, m.source_market_id, m.market_type, m.away_team
+              FROM market m WHERE m.away_team IS NOT NULL
+            UNION
+            SELECT m.source, m.source_market_id, m.market_type, m.home_team
+              FROM market m WHERE m.home_team IS NOT NULL
+        )
+        SELECT i.school, i.source,
+               COUNT(DISTINCT i.source_market_id)          AS markets,
+               COUNT(t.source_trade_id)                    AS trades,
+               ROUND(COALESCE(SUM(t.count), 0), 2)         AS units,
+               ROUND(COALESCE(SUM(t.taker_cost_usd), 0), 2) AS taker_cost_usd,
+               COUNT(DISTINCT CASE WHEN i.market_type = 'player_prop'
+                                   THEN i.source_market_id END) AS athlete_markets
+        FROM involved i
+        LEFT JOIN trade t
+          ON t.source = i.source AND t.source_market_id = i.source_market_id
+        GROUP BY 1, 2 ORDER BY 6 DESC""",
     "daily_volume": """
         SELECT DATE(t.executed_ts, 'unixepoch') AS day, t.source,
                COUNT(*) AS trades,

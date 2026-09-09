@@ -235,6 +235,25 @@ retrieved yet (RECON §1). The API is the primary source until then.
   which is slow rather than lossy, and the run log says which happened. The
   job now needs no write access to the repository at all.
 
+## Which school, continued
+
+- **2026-09-08.** The ticker suffix is only shortened for the families that
+  append a player code. Shortening everything invented teams: `NWIA` is
+  Northwestern (Iowa), an NAIA school, and trimming it to `NW` made it
+  Northwestern of the Big Ten; `TCHA` became `TUSC` and `MCRA` became `MRHO`
+  the same way. A suffix that is not a known code now names no team.
+- **2026-09-08.** Kalshi market titles name their own team in a few shapes
+  ("Kansas St. wins by over 9.5 points", "Nebraska: 275+ total yards"), which
+  is the only way the reused-code schools can be named at all, since they are
+  deliberately absent from the code vocabulary.
+- **2026-09-08.** `away_team` and `home_team` are resolved at load time rather
+  than by splitting `game_id` on hyphens, because real abbreviations contain
+  one: `M-OH`, `W&M`, `TA&M`. The date is a fixed width and the split is taken
+  at the separator that leaves two known abbreviations.
+- The per-school view counts a market once for a school whether the market
+  names one team or two. 310 schools have markets; the schools that the old
+  code erased now carry real volume.
+
 ## What a cost figure means
 
 - **2026-09-08.** Kalshi serves a Yes price and a No price on every trade, and

@@ -153,11 +153,35 @@ _PM_GAME_UNDATED = re.compile(r"^cfb-([a-z0-9]+)-vs-([a-z0-9]+)$")
 _PM_NEB = re.compile(r"^(neb|nebr|nebraska)$")
 
 
+def _teams_of(game_id: str | None) -> tuple[str | None, str | None]:
+    """Split a game identifier back into its two schools.
+
+    Not done by splitting on "-": real abbreviations contain one (M-OH, W&M,
+    TA&M). The date is a fixed ten characters, so the remainder is taken from
+    there and split on the single separator that follows a known abbreviation.
+    """
+    if not game_id or len(game_id) < 12:
+        return None, None
+    rest = game_id[11:]
+    from .teams import _load
+    by_id, index, _, _ = _load()
+    known = {(t.abbr or t.name).upper().replace(" ", "") for t in by_id.values() if t.abbr}
+    for i in range(1, len(rest)):
+        if rest[i] != "-":
+            continue
+        a, h = rest[:i], rest[i + 1:]
+        if a in known and h in known:
+            return a, h
+    return None, None
+
+
 @dataclass
 class Resolved:
     market_type: str
     game_id: str | None = None
     team: str | None = None
+    away_team: str | None = None
+    home_team: str | None = None
     player: str | None = None
     line: float | None = None
     reason: str | None = None      # why it is unresolved, when it is
@@ -189,18 +213,34 @@ def _abbr(team_id: str) -> str | None:
     return (t.abbr or t.name).upper().replace(" ", "") if t else None
 
 
+# Families whose ticker suffix is a team code followed by a player code
+# (KXNCAAFLEADER-26RECYDS-NEBNHUN). Only these may be shortened to find the
+# team, because only these are known to carry something after it.
+_PLAYER_CODE_FAMILIES = ("KXNCAAFLEADER", "KXNCAAFBIGTENLEADER", "KXNCAAFAWARD",
+                         "KXNCAAFACCAWARD", "KXNCAAFBIG12AWARD",
+                         "KXNCAAFBIGTENAWARD", "KXNCAAFSECAWARD",
+                         "KXNCAAFCONFAWARD")
+
+
 def _kalshi_team(ticker: str) -> str | None:
     """The school a Kalshi market is about, from its own ticker suffix.
 
-    Suffixes look like NEB, NEB275 or NEBOCHA, so digits and any player code
-    are trimmed back to the longest segment that is a known team code.
+    Trailing digits are a strike (NEB275), so they come off. Beyond that the
+    suffix is only shortened for the families that append a player code,
+    because shortening anything else invents teams: NWIA is Northwestern
+    (Iowa), an NAIA school, and trimming it to NW made it Northwestern the Big
+    Ten program. TCHA became TUSC and MCRA became MRHO the same way. A suffix
+    that is not a known code now resolves to nothing, which is honest.
     """
-    seg = ticker.rsplit("-", 1)[-1]
+    family = ticker.split("-")[0]
+    seg = re.sub(r"\d+$", "", ticker.rsplit("-", 1)[-1])
     codes = _kalshi_codes()
-    seg = re.sub(r"\d+$", "", seg)
-    for cut in range(len(seg), 1, -1):
-        if seg[:cut] in codes:
-            return _abbr(codes[seg[:cut]])
+    if seg in codes:
+        return _abbr(codes[seg])
+    if family in _PLAYER_CODE_FAMILIES:
+        for cut in range(len(seg) - 1, 1, -1):
+            if seg[:cut] in codes:
+                return _abbr(codes[seg[:cut]])
     return None
 
 
@@ -329,6 +369,11 @@ def team_in_text(text: str) -> str | None:
     """
     text = (text or "").strip()
     for pat in (r"^(?:Spread|Team Total|Total):\s*([A-Za-z][A-Za-z .'&()-]+?)\s*[(:]",
+                # Kalshi shapes: "Nebraska wins", "Kansas St. wins by over 9.5
+                # points", "Nebraska scores over 16.5 points", "Nebraska: 275+
+                # total yards", "Nebraska: 4+ touchdowns".
+                r"^([A-Z][A-Za-z .'&()-]+?)\s+(?:wins|scores|records)\b",
+                r"^([A-Z][A-Za-z .'&()-]+?):\s*\d",
                 r"(?i:^will (?:the )?)([A-Z][A-Za-z .'&()-]+?) (?i:win|beat|have|qualify|be|make|go|finish)\b",
                 r"^([A-Z][A-Za-z .'&()-]+?) Team Total\b"):
         m = re.search(pat, text)
@@ -371,10 +416,13 @@ def resolve_kalshi(market: dict, event_title: str = "") -> Resolved:
         return Resolved(OTHER, reason=f"unknown Kalshi series family {family!r}")
     # Title first, ticker codes as the fallback and the check.
     game_id = _kalshi_game_id_from_title(ticker, event_title) or _kalshi_game_id(ticker)
+    away, home = _teams_of(game_id)
     return Resolved(
         market_type=mtype,
         game_id=game_id,
         team=_kalshi_team(ticker) or team_in_text(title),
+        away_team=away,
+        home_team=home,
         player=player,
         line=_line_from_title(title) if mtype in (SPREAD, TOTAL, TEAM_STAT) else None,
     )
@@ -453,10 +501,13 @@ def resolve_polymarket(market: dict, event_slug: str = "") -> Resolved:
     # Only set when the market is about one school. Game markets involve two,
     # and game_id already names both.
     team = team_in_text(question)
+    away, home = _teams_of(game_id)
     return Resolved(
         market_type=mtype,
         game_id=game_id,
         team=team,
+        away_team=away,
+        home_team=home,
         player=player,
         line=line if line is not None else _line_from_title(question),
     )

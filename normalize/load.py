@@ -66,13 +66,13 @@ def load_markets_from_discovery(db, root: Path, stats: Counter,
             for m in (e.get("markets") or []):
                 r = resolve_kalshi(m, e.get("title") or "")
                 db.execute("""INSERT OR IGNORE INTO market VALUES
-                              (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                              (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
                            ("kalshi", m["ticker"], m.get("title"), m.get("yes_sub_title"),
                             m["ticker"].split("-")[0], e.get("event_ticker"),
                             _ts(m["open_time"]) if m.get("open_time") else None,
                             _ts(m["close_time"]) if m.get("close_time") else None,
                             m.get("status"), m.get("result"),
-                            r.game_id, r.market_type, r.team, r.player, r.line,
+                            r.game_id, r.market_type, r.team, r.away_team, r.home_team, r.player, r.line,
                             fetched, rel))
                 stats["markets_from_discovery"] += 1
 
@@ -89,12 +89,12 @@ def load_markets_from_discovery(db, root: Path, stats: Counter,
                     continue
                 r = resolve_polymarket(m, slug)
                 db.execute("""INSERT OR IGNORE INTO market VALUES
-                              (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                              (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
                            ("polymarket", cid, m.get("question"), m.get("groupItemTitle"),
                             m.get("sportsMarketType"), str(e.get("id") or ""),
                             None, None,
                             "closed" if m.get("closed") else "open", None,
-                            r.game_id, r.market_type, r.team, r.player, r.line,
+                            r.game_id, r.market_type, r.team, r.away_team, r.home_team, r.player, r.line,
                             fetched, rel))
                 stats["markets_from_discovery"] += 1
 
@@ -111,7 +111,7 @@ def load_kalshi(db, root: Path, stats: Counter) -> None:
                 db.execute("INSERT INTO unresolved VALUES (?,?,?,?,?)",
                            ("kalshi", m["ticker"], m.get("title"), r.reason, _ts(env["fetched_at"])))
                 stats["unresolved"] += 1
-            db.execute("""INSERT INTO market VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+            db.execute("""INSERT INTO market VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
                           ON CONFLICT(source, source_market_id) DO UPDATE SET
                             status=excluded.status, settled_outcome=excluded.settled_outcome,
                             close_ts=excluded.close_ts""",
@@ -120,7 +120,7 @@ def load_kalshi(db, root: Path, stats: Counter) -> None:
                         _ts(m["open_time"]) if m.get("open_time") else None,
                         _ts(m["close_time"]) if m.get("close_time") else None,
                         m.get("status"), m.get("result"),
-                        r.game_id, r.market_type, r.team, r.player, r.line,
+                        r.game_id, r.market_type, r.team, r.away_team, r.home_team, r.player, r.line,
                         _ts(env["fetched_at"]), str(p.relative_to(PROJECT_ROOT))))
             stats["markets"] += 1
 
@@ -200,14 +200,14 @@ def load_polymarket(db, root: Path, stats: Counter) -> None:
             db.execute("INSERT INTO unresolved VALUES (?,?,?,?,?)",
                        ("polymarket", cid, body.get("question"), r.reason, _ts(env["fetched_at"])))
             stats["unresolved"] += 1
-        db.execute("""INSERT INTO market VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+        db.execute("""INSERT INTO market VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
                       ON CONFLICT(source, source_market_id) DO UPDATE SET
                         status=excluded.status, close_ts=excluded.close_ts""",
                    ("polymarket", cid, body.get("question"), body.get("groupItemTitle"),
                     body.get("sportsMarketType"), str((ev[0].get("id") if isinstance(ev, list) and ev else "") or ""),
                     None, None,
                     "closed" if body.get("closed") else "open", body.get("umaResolutionStatus"),
-                    r.game_id, r.market_type, r.team, r.player, r.line,
+                    r.game_id, r.market_type, r.team, r.away_team, r.home_team, r.player, r.line,
                     _ts(env["fetched_at"]), str(p.relative_to(PROJECT_ROOT))))
         stats["markets"] += 1
 

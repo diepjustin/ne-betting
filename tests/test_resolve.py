@@ -242,3 +242,43 @@ def test_taker_cost_uses_the_price_the_taker_actually_paid():
     assert abs(cost - yes * n) < 0.01, "cost_usd stays the Yes-side figure"
     assert abs(taker - no * n) < 0.01, "taker paid the No price"
     assert taker != cost
+
+
+@pytest.mark.parametrize("suffix", ["NWIA", "TCHA", "MCRA"])
+def test_a_suffix_that_is_not_a_known_code_names_no_team(suffix):
+    """Trimming any suffix down to something familiar invents teams: NWIA is
+    Northwestern (Iowa), an NAIA school, and trimming it to NW made it
+    Northwestern of the Big Ten."""
+    assert r.resolve_kalshi({"ticker": f"KXNCAAFSPREAD-26SEP05XXYY-{suffix}",
+                             "title": ""}).team is None
+
+
+@pytest.mark.parametrize("ticker,team", [
+    ("KXNCAAFGAME-26SEP05OHIONEB-OHIO", "OHIO"),        # exact code
+    ("KXNCAAFTEAMYDS-26SEP05OHIONEB-NEB275", "NEB"),    # code plus a strike
+    ("KXNCAAFLEADER-26RECYDS-NEBNHUN", "NEB"),          # code plus a player
+])
+def test_legitimate_suffixes_still_name_their_team(ticker, team):
+    assert r.resolve_kalshi({"ticker": ticker, "title": ""}).team == team
+
+
+@pytest.mark.parametrize("title,team", [
+    ("Kansas St. wins by over 9.5 points", "KSU"),
+    ("Washington St. wins", "WSU"),
+    ("Nebraska scores over 16.5 points", "NEB"),
+    ("Nebraska: 275+ total yards", "NEB"),
+])
+def test_the_title_names_the_team_for_reused_code_schools(title, team):
+    """KSU, WSU and CSU are absent from the code vocabulary on purpose, so the
+    title is the only thing that can name them."""
+    assert r.resolve_kalshi({"ticker": "KXNCAAFSPREAD-26SEP05XXYY-ZZZ",
+                             "title": title}).team == team
+
+
+@pytest.mark.parametrize("game_id,pair", [
+    ("2026-09-05-OHIO-NEB", ("OHIO", "NEB")),
+    ("2024-10-19-M-OH-NEB", ("M-OH", "NEB")),      # a hyphen inside the abbreviation
+    ("2026-09-05-TA&M-LSU", ("TA&M", "LSU")),      # and an ampersand
+])
+def test_a_game_splits_into_two_schools_without_splitting_on_hyphens(game_id, pair):
+    assert r._teams_of(game_id) == pair
