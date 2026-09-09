@@ -195,3 +195,18 @@ def test_totals_table_counts_every_trade_exactly_once(db, ladder):
     rows, totals = a.timeline_daily(db)
     assert sum(t["trades"] for t in totals) == 8
     assert sum(r["trades"] for r in rows) > 8, "school rows double-count on purpose"
+
+
+def test_a_run_that_finds_nothing_still_writes_a_readable_file(tmp_path):
+    """"No hedge found" is a result. A zero-byte file is not."""
+    a.write_csv([], tmp_path, "ladder_events", header="ladder")
+    text = (tmp_path / "ladder_events.csv").read_text()
+    assert text.startswith("school,taker_side,rungs")
+    assert len(text.splitlines()) == 1
+
+
+def test_column_drift_fails_loudly(tmp_path):
+    """A renamed column silently dropped from a CSV is a number that vanishes."""
+    with pytest.raises(KeyError):
+        a.write_csv([{"school": "LSU", "surprise": 1}], tmp_path,
+                    "ladder_events", header="ladder")

@@ -359,9 +359,40 @@ def timeline_totals(db) -> list[dict]:
     return rows
 
 
-def write_csv(rows: list[dict], out: Path, name: str, header: list[str] | None = None) -> None:
+# Column order for each output, so a file with no rows still has its header.
+# A zero-byte ladder_events.csv cannot be told apart from a run that never
+# happened, and "no hedge found today" is a result worth being able to read.
+HEADERS = {
+    "block_trades": [
+        "source", "source_market_id", "series_id", "team", "title",
+        "executed_utc", "day_central", "count", "price_dollars", "taker_side",
+        "taker_cost_usd", "raw_path"],
+    "large_trades": [
+        "source", "source_market_id", "series_id", "market_type", "team",
+        "title", "executed_utc", "day_central", "count", "price_dollars",
+        "taker_side", "taker_cost_usd", "is_block_trade", "count_is_round_2500",
+        "market_trades", "rank_in_market", "pct_of_market", "raw_path"],
+    "ladder": [
+        "school", "taker_side", "rungs", "rung_list", "trades", "first_utc",
+        "last_utc", "span_seconds", "day_central", "contracts",
+        "taker_cost_usd", "payout_if_all_settle_usd", "block_trades",
+        "all_counts_round_2500", "tier_match_exact", "tier_match_within_1pct",
+        "markets", "raw_paths"],
+    "timeline_daily": [
+        "day_central", "utc_days", "school", "market_type", "source", "trades",
+        "shared_trades", "units", "taker_cost_usd"],
+    "timeline_daily_totals": [
+        "day_central", "source", "trades", "units", "taker_cost_usd"],
+}
+
+
+def write_csv(rows: list[dict], out: Path, name: str, header: str | None = None) -> None:
+    cols = HEADERS[header or name]
+    if rows:
+        missing = set(rows[0]) ^ set(cols)
+        if missing:
+            raise KeyError(f"{name}.csv columns drifted from HEADERS: {sorted(missing)}")
     out.mkdir(parents=True, exist_ok=True)
-    cols = header or (list(rows[0]) if rows else [])
     with open(out / f"{name}.csv", "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=cols)
         w.writeheader()
@@ -397,8 +428,8 @@ def main(argv=None) -> int:
 
     write_csv(blocks, args.out, "block_trades")
     write_csv(larges, args.out, "large_trades")
-    write_csv(events, args.out, "ladder_events")
-    write_csv(leads, args.out, "ladder_leads")
+    write_csv(events, args.out, "ladder_events", header="ladder")
+    write_csv(leads, args.out, "ladder_leads", header="ladder")
     write_csv(daily, args.out, "timeline_daily")
     write_csv(totals, args.out, "timeline_daily_totals")
 
