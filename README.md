@@ -18,6 +18,11 @@ football (Kalshi, Polymarket). Owner: Justin Diep, The Daily Nebraskan.
   player) and `load.py` (raw to SQLite, rebuilt from scratch each run).
 - `analysis/breakdown.py` — tidy CSVs by market type, game, market, player and
   day. Output is gitignored; the per-player view names athletes.
+- `analysis/anomalies.py` — block trades, outsized trades, and clusters that
+  walk a school's season ladder in one window, which is what hedging a coach's
+  bonus schedule looks like. `config/milestones.yml` defines the ladder and
+  holds the bonus-tier table, which ships empty on purpose: a tier is only
+  entered from a contract document that can be cited.
 
 ## Run
 
@@ -36,6 +41,7 @@ uv run python -m collectors.polymarket --scope all --dry-run
 
 uv run python -m normalize.load        # raw -> data/husker.db
 uv run python -m analysis.breakdown    # CSVs into data/analysis/
+uv run python -m analysis.anomalies    # block trades, ladder clusters, timeline
 
 uv run pytest
 ```

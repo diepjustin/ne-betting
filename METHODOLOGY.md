@@ -316,6 +316,74 @@ retrieved yet (RECON §1). The API is the primary source until then.
   where reporting works from. Kalshi files are copied byte for byte, because
   the exchange publishes no identity for the parties to a trade.
 
+## Looking for a hedge, not a bet
+
+`analysis/anomalies.py`, added 9 Sep 2026.
+
+A coach's contract pays bonuses at season milestones. A Kalshi contract
+settles at $1. So a party who owes those bonuses can buy a number of
+contracts equal to the money owed and be covered if the team wins. On
+13 Aug 2026, four block trades on LSU milestone markets executed in 72
+seconds: 2,462,500 contracts bought for $597,550, reported by CBS and InGame
+as exactly that. Those trades are in this project's archive, and the detector
+was written to find them.
+
+**It uses trading evidence only.** No coach's contract is consulted, because
+this project holds none. `config/milestones.yml` carries an empty
+`bonus_tiers` table with the shape a cited entry would take; until a contract
+document is in hand, no trade is matched to a bonus figure. Plan §7: a tier
+invented to make a match is a fabricated number in a story.
+
+**What counts as a finding.** One school, one side of the market, several
+different rungs of the season ladder, inside one window. A cluster on a
+single rung is filed as a lead instead. The distinction matters because the
+pattern that makes the LSU trades legible is not their size, it is that they
+walk the ladder in one go.
+
+**Why a trade must be big in two ways.** A contract floor alone is a bad
+filter. The largest counts in this archive are penny sweeps of markets that
+had already been decided: 400,139 contracts at $0.01 is $4,001, not a whale.
+A trade must clear a floor in contracts *and* in what the taker paid.
+
+**Why the thresholds are what they are.** Sweeping the archive at floors of
+1,000 / 5,000 / 10,000 / 25,000 contracts returned 11 / 1 / 1 / 1 multi-rung
+clusters. The one that survives every floor is the LSU hedge. The default is
+5,000, the loosest floor that is not yet noisy. These are settings, not
+findings, and they are printed with the output so a figure can be checked
+against the threshold that produced it.
+
+**Roundness is recorded and not used.** Every LSU count is a multiple of
+2,500, which is suggestive. It is also unremarkable: 101 of the 266 non-block
+Kalshi trades over 50,000 contracts are multiples of 2,500, because round
+order sizes are ordinary. The column is in the output as an attribute of a
+cluster, never as a filter.
+
+**Clusters are found by gap, not by clock.** A fixed 15-minute bucket splits
+any cluster that happens to straddle a boundary, so consecutive trades are
+grouped while each gap between them is short.
+
+**Percentiles need a distribution.** In a market with five trades the largest
+is trivially the highest, so no percentile is reported below 30 trades in the
+market; the cell reads "market too thin" instead of carrying a number that
+only reflects thinness. 310 of 12,786 large trades fall in that class.
+
+**Days are Central.** A 6:30pm Central kickoff is 23:30 UTC, so UTC dates cut
+games in half. The daily timeline is dated in America/Chicago and carries the
+UTC dates alongside so a figure can still be checked against a UTC-stamped
+source. Two platforms serve time differently and the store keeps both
+verbatim: Kalshi sends RFC 3339 to the microsecond, Polymarket sends a
+whole-second unix epoch. The output renders the epoch as UTC rather than
+inventing precision Polymarket did not send.
+
+**A timestamp is not a key.** One market in this archive has 24 distinct
+trades stamped to the same microsecond, where a single taker order swept the
+book at settlement. That is real trading, not a loading error, and it is why
+rank within a market is computed with a window function rather than by
+joining a trade to its own market on the time it executed.
+
+**What it currently finds.** Across 4.6 million trade rows: seven block
+trades, one ladder event, 49 single-rung leads. The ladder event is LSU.
+
 ## Limitations
 
 - Kalshi publishes no taker identity. Nothing here can say who traded.
@@ -386,3 +454,13 @@ retrieved yet (RECON §1). The API is the primary source until then.
   traded, carrying 824,128,445 contracts. A full first pass is roughly 7.7
   hours at one request a second. Nothing at that scale has been collected yet;
   where three gigabytes of raw archive lives is still undecided.
+- **2026-09-09, hedging detector first run.** Over the 4,633,771 trade rows and
+  53,845 markets loaded so far: seven trades carry Kalshi's block flag, three
+  on South Carolina's playoff market in July and four on LSU's ladder in
+  August. 12,786 trades clear both the 5,000-contract and $5,000 floors. One
+  multi-rung cluster exists in the whole archive, and it is the LSU hedge:
+  four rungs in 72 seconds, 2,462,500 contracts for $597,550. 49 single-rung
+  clusters are filed as leads. No bonus tier was matched, because no coach's
+  contract is on file. The Kalshi side of this is still the partial pass that
+  stopped at market 6,453 of 22,564, and `KXNCAAFFINALIST` -- the fifth LSU
+  rung -- is configured but not yet collected.

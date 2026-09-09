@@ -1,0 +1,56 @@
+# The season-outcome ladder, and the coach bonus tiers to match it against.
+#
+# Why this file exists separately from targets.yml: targets.yml says what to
+# collect, this says what a rung of a coach's bonus ladder looks like. A
+# coach's contract typically pays at conference title, playoff berth,
+# quarterfinal, semifinal, title game and national title. Someone hedging
+# those payments buys contracts whose $1-a-piece settlement equals the bonus.
+#
+# Series tickers below are a subset of targets.yml and were read from the same
+# live /series dump (docs/RECON.md). Game-level series are deliberately absent:
+# a single Saturday result is not a contract milestone.
+
+ladder:
+  # Rungs are ordered low to high. `rung` is this project's label, not
+  # Kalshi's; the series id is the thing that came from the exchange.
+  - rung: conference_qualify
+    series: [KXNCAAFB10QUAL, KXNCAAFAACQUAL, KXNCAAFACCQUAL, KXNCAAFB12QUAL,
+             KXNCAAFCUSAQUAL, KXNCAAFMACQUAL, KXNCAAFMWCQUAL, KXNCAAFPAC12QUAL,
+             KXNCAAFSBELTQUAL, KXNCAAFSECQ]
+  - rung: conference_title
+    series: [KXNCAAFB10, KXNCAAFAAC, KXNCAAFACC, KXNCAAFBACC, KXNCAAFB12,
+             KXNCAAFBB12, KXNCAAFBB10, KXNCAAFSEC, KXNCAAFBSEC, KXNCAAFCUSA,
+             KXNCAAFMAC, KXNCAAFMWC, KXNCAAFPAC10, KXNCAAFPAC12, KXNCAAFSBELT,
+             KXNCAAFIVY, KXNCAAFCS, KXNCAAFFCS, KXNCAAFD3, KXNCAAFCFPCONF,
+             KXNCAAFCONF]
+  - rung: playoff_berth
+    series: [KXNCAAFPLAYOFF]
+  - rung: quarterfinal
+    series: [KXNCAAFQF]
+  - rung: semifinal
+    series: [KXNCAAFSF]
+  - rung: title_game
+    series: [KXNCAAFFINALIST]
+  - rung: national_title
+    series: [KXNCAAF]
+
+# Contract counts a school's coach bonus schedule would pay at each rung.
+#
+# EMPTY ON PURPOSE. Every figure here must come from a contract document that
+# can be cited in print -- a public-records copy, a filed contract, a reported
+# figure attributed to one. Plan section 7: never guess a mapping. A tier
+# invented to make a match is a fabricated number in a story.
+#
+# Shape, when a document is in hand:
+#
+#   bonus_tiers:
+#     LSU:
+#       source: "Employment agreement obtained via LSU public records, p. 14"
+#       retrieved: 2026-09-09
+#       tiers:
+#         playoff_berth: 837500      # dollars, which is also contracts at $1
+#         semifinal: 470000
+#
+# Until then the detector reports ladder clusters on trading evidence alone
+# and matches no tiers, which is what it should do.
+bonus_tiers: {}
