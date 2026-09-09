@@ -235,6 +235,18 @@ retrieved yet (RECON §1). The API is the primary source until then.
   which is slow rather than lossy, and the run log says which happened. The
   job now needs no write access to the repository at all.
 
+## What a cost figure means
+
+- **2026-09-08.** Kalshi serves a Yes price and a No price on every trade, and
+  `cost_usd` multiplies the Yes price by the count whichever side took it. That
+  is a fine definition and a wrong answer to "what did the taker pay": 853,418
+  of the Kalshi trades collected were taken by the No side, and the export
+  column was labelled `taker_cost_usd`. Both are now stored. Summed across the
+  archive the difference is $69.7m against $78.9m, so a "money bet" figure
+  built on the old column understated the No side by about 13%.
+- Polymarket prices the side actually bought, so its taker cost and quoted cost
+  are the same number.
+
 ## Which school a market belongs to
 
 - **2026-09-08.** Game identity now comes from the event title's team names,
@@ -251,6 +263,10 @@ retrieved yet (RECON §1). The API is the primary source until then.
   after a colon ("Kansas St. at Arizona: Spread"); everything from the colon on
   describes the market, not the school. Both "A vs B" and "A at B" put the
   first-named school first, matching the order in the ticker.
+- Widening the series list without widening the market-type map would have
+  typed all 43 new series `other`, flooding `unresolved` and making the wider
+  scope look emptier than the narrow one. A test now fails if a configured
+  series has no type.
 - After both fixes, Kalshi game markets without a game identifier fell from
   over 1,050 to 125 of 16,090, and all five reused-code schools resolve fully.
 

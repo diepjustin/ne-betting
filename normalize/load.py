@@ -131,12 +131,24 @@ def load_kalshi(db, root: Path, stats: Counter) -> None:
             for t in (body.get("trades") or []):
                 count = float(t["count_fp"])
                 price = float(t["yes_price_dollars"])
+                try:
+                    price_no = float(t["no_price_dollars"])
+                except (KeyError, TypeError, ValueError):
+                    price_no = None
+                # cost_usd is the Yes side's outlay whichever side took the
+                # trade. That is fine as a definition and wrong as an answer to
+                # "what did the taker pay", so both are stored: 853,418 of the
+                # Kalshi trades here were taken by the No side.
+                side = t.get("taker_side")
+                taker_cost = (price_no if side == "no" and price_no is not None
+                              else price) * count
                 db.execute("""INSERT OR IGNORE INTO trade VALUES
-                              (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                              (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
                            ("kalshi", t["trade_id"], t["ticker"],
                             _ts(t["created_time"]), t["created_time"],
-                            price, count, t.get("taker_side"), None,
-                            price * count, count, int(bool(t.get("is_block_trade"))),
+                            price, price_no, count, side, None,
+                            price * count, taker_cost, count,
+                            int(bool(t.get("is_block_trade"))),
                             0, fetched, rel))
                 stats["trades"] += 1
 
@@ -208,12 +220,14 @@ def load_polymarket(db, root: Path, stats: Counter) -> None:
         for t in body:
             tid, synth = _pm_trade_id(t, seen)
             size, price = float(t["size"]), float(t["price"])
+            # Polymarket prices the side actually bought, so the taker's cost
+            # and the quoted cost are the same number.
             db.execute("""INSERT OR IGNORE INTO trade VALUES
-                          (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                          (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
                        ("polymarket", tid, t.get("conditionId"),
                         int(t["timestamp"]), str(t["timestamp"]),
-                        price, size, t.get("side"), t.get("proxyWallet"),
-                        price * size, size, 0, synth, fetched, rel))
+                        price, None, size, t.get("side"), t.get("proxyWallet"),
+                        price * size, price * size, size, 0, synth, fetched, rel))
             stats["trades"] += 1
 
 

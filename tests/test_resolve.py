@@ -203,3 +203,42 @@ def test_a_title_naming_one_school_twice_is_refused():
 def test_ticker_codes_still_work_when_there_is_no_title():
     assert r.resolve_kalshi({"ticker": "KXNCAAFGAME-26SEP05OHIONEB-NEB",
                              "title": ""}).game_id == "2026-09-05-OHIO-NEB"
+
+
+def test_every_configured_series_has_a_market_type():
+    """Widening the series list without widening the type map types every new
+    series `other`, floods `unresolved`, and makes the wider scope look
+    emptier than the narrow one. This is the guard against that."""
+    import yaml
+    from collectors.common import PROJECT_ROOT
+    cfg = yaml.safe_load(open(PROJECT_ROOT / "config" / "targets.yml"))["kalshi"]
+    missing = [s for s in cfg["series"] if s not in r.KALSHI_FAMILY]
+    assert missing == [], f"configured but untyped: {missing}"
+
+
+def test_the_lsu_ladders_fifth_rung_is_typed_as_a_playoff_market():
+    got = r.resolve_kalshi({"ticker": "KXNCAAFFINALIST-27-LSU", "title": "LSU"})
+    assert got.market_type == r.PLAYOFF_BERTH
+
+
+def test_taker_cost_uses_the_price_the_taker_actually_paid():
+    """cost_usd is the Yes side's outlay whichever side took the trade. For
+    the 853,418 Kalshi trades taken by the No side that is the wrong answer to
+    "what did the taker pay", and the export column was labelled taker cost."""
+    import sqlite3
+    from collectors.common import PROJECT_ROOT
+    db_path = PROJECT_ROOT / "data" / "husker.db"
+    if not db_path.exists():
+        import pytest
+        pytest.skip("no store built")
+    db = sqlite3.connect(db_path)
+    row = db.execute("""SELECT price_dollars, price_no_dollars, count, cost_usd, taker_cost_usd
+                        FROM trade WHERE source='kalshi' AND taker_side='no'
+                        AND price_no_dollars IS NOT NULL LIMIT 1""").fetchone()
+    if not row:
+        import pytest
+        pytest.skip("no no-side trades loaded")
+    yes, no, n, cost, taker = row
+    assert abs(cost - yes * n) < 0.01, "cost_usd stays the Yes-side figure"
+    assert abs(taker - no * n) < 0.01, "taker paid the No price"
+    assert taker != cost

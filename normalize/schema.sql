@@ -30,11 +30,13 @@ CREATE TABLE IF NOT EXISTS trade (
   source_market_id  TEXT NOT NULL,
   executed_ts       INTEGER NOT NULL,       -- seconds, UTC
   executed_iso      TEXT NOT NULL,          -- full precision as served
-  price_dollars     REAL NOT NULL,
+  price_dollars     REAL NOT NULL,          -- Kalshi: the Yes price, as served
+  price_no_dollars  REAL,                   -- Kalshi only; Polymarket prices the side bought
   count             REAL NOT NULL,          -- contracts (Kalshi) | shares (Polymarket)
   taker_side        TEXT,
   taker_address     TEXT,                   -- Polymarket only
-  cost_usd          REAL,                   -- price x count
+  cost_usd          REAL,                   -- price_dollars x count (Yes side on Kalshi)
+  taker_cost_usd    REAL,                   -- what the taker actually paid
   payout_usd        REAL,                   -- count x $1 face
   is_block_trade    INTEGER,
   id_is_synthetic   INTEGER NOT NULL DEFAULT 0,

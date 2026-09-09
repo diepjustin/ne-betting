@@ -25,7 +25,7 @@ VIEWS = {
         SELECT m.source, m.market_type,
                COUNT(*)                AS trades,
                ROUND(SUM(t.count), 2)  AS units,
-               ROUND(SUM(t.cost_usd), 2) AS taker_cost_usd,
+               ROUND(SUM(t.taker_cost_usd), 2) AS taker_cost_usd,
                MIN(t.executed_iso)     AS first_trade,
                MAX(t.executed_iso)     AS last_trade
         FROM trade t JOIN market m
@@ -36,7 +36,7 @@ VIEWS = {
         SELECT m.game_id, m.source,
                COUNT(*) AS trades,
                ROUND(SUM(t.count), 2) AS units,
-               ROUND(SUM(t.cost_usd), 2) AS taker_cost_usd
+               ROUND(SUM(t.taker_cost_usd), 2) AS taker_cost_usd
         FROM trade t JOIN market m
           ON m.source = t.source AND m.source_market_id = t.source_market_id
         WHERE m.game_id IS NOT NULL
@@ -47,7 +47,7 @@ VIEWS = {
                m.title, m.status, m.settled_outcome,
                COUNT(t.source_trade_id) AS trades,
                ROUND(COALESCE(SUM(t.count), 0), 2) AS units,
-               ROUND(COALESCE(SUM(t.cost_usd), 0), 2) AS taker_cost_usd,
+               ROUND(COALESCE(SUM(t.taker_cost_usd), 0), 2) AS taker_cost_usd,
                m.raw_path
         FROM market m LEFT JOIN trade t
           ON m.source = t.source AND m.source_market_id = t.source_market_id
@@ -58,7 +58,7 @@ VIEWS = {
                COUNT(DISTINCT m.source_market_id) AS markets_listed,
                COUNT(t.source_trade_id) AS trades,
                ROUND(COALESCE(SUM(t.count), 0), 2) AS units,
-               ROUND(COALESCE(SUM(t.cost_usd), 0), 2) AS taker_cost_usd
+               ROUND(COALESCE(SUM(t.taker_cost_usd), 0), 2) AS taker_cost_usd
         FROM market m LEFT JOIN trade t
           ON m.source = t.source AND m.source_market_id = t.source_market_id
         WHERE m.market_type = 'player_prop' AND m.player IS NOT NULL
@@ -67,7 +67,7 @@ VIEWS = {
         SELECT DATE(t.executed_ts, 'unixepoch') AS day, t.source,
                COUNT(*) AS trades,
                ROUND(SUM(t.count), 2) AS units,
-               ROUND(SUM(t.cost_usd), 2) AS taker_cost_usd
+               ROUND(SUM(t.taker_cost_usd), 2) AS taker_cost_usd
         FROM trade t GROUP BY 1, 2 ORDER BY 1""",
 }
 

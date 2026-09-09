@@ -76,6 +76,59 @@ KALSHI_FAMILY = {
     "KXCOACHOUTNCAAFB": COACH,
     "KXNCAAFCOTY": COACH,
     "KXNCAAFCOTW": COACH,
+    # --- added 8 Sep 2026 alongside the series-list audit. Widening the list
+    # without widening this map would have typed all 43 new series `other`,
+    # flooding `unresolved` and making the wider scope look emptier than the
+    # narrow one. `tests/test_resolve.py` now fails if a configured series has
+    # no type here.
+    "KXNCAAFFINALIST": PLAYOFF_BERTH,      # reaching the title game: the LSU ladder's fifth rung
+    "KXNCAAFTOPSEED": PLAYOFF_BERTH,
+    "KXNCAAFCFPCONF": PLAYOFF_BERTH,
+    "KXNCAAFCONF": NATTY,                  # which conference the champion comes from
+    "KXNCAAFCONFMATCHUP": CONFERENCE_CHAMP,
+    # Conference champions, one series per league plus an older "B" product line
+    "KXNCAAFAAC": CONFERENCE_CHAMP,
+    "KXNCAAFACC": CONFERENCE_CHAMP,
+    "KXNCAAFBACC": CONFERENCE_CHAMP,
+    "KXNCAAFB12": CONFERENCE_CHAMP,
+    "KXNCAAFBB12": CONFERENCE_CHAMP,
+    "KXNCAAFSEC": CONFERENCE_CHAMP,
+    "KXNCAAFBSEC": CONFERENCE_CHAMP,
+    "KXNCAAFCUSA": CONFERENCE_CHAMP,
+    "KXNCAAFMAC": CONFERENCE_CHAMP,
+    "KXNCAAFMWC": CONFERENCE_CHAMP,
+    "KXNCAAFPAC10": CONFERENCE_CHAMP,
+    "KXNCAAFPAC12": CONFERENCE_CHAMP,
+    "KXNCAAFSBELT": CONFERENCE_CHAMP,
+    "KXNCAAFIVY": CONFERENCE_CHAMP,
+    "KXNCAAFCS": CONFERENCE_CHAMP,
+    "KXNCAAFFCS": CONFERENCE_CHAMP,
+    "KXNCAAFD3": CONFERENCE_CHAMP,
+    # Championship qualifiers and regular-season finish
+    "KXNCAAFAACQUAL": CONFERENCE_CHAMP,
+    "KXNCAAFACCQUAL": CONFERENCE_CHAMP,
+    "KXNCAAFB12QUAL": CONFERENCE_CHAMP,
+    "KXNCAAFCUSAQUAL": CONFERENCE_CHAMP,
+    "KXNCAAFMACQUAL": CONFERENCE_CHAMP,
+    "KXNCAAFMWCQUAL": CONFERENCE_CHAMP,
+    "KXNCAAFPAC12QUAL": CONFERENCE_CHAMP,
+    "KXNCAAFSBELTQUAL": CONFERENCE_CHAMP,
+    "KXNCAAFSECQ": CONFERENCE_CHAMP,
+    "KXNCAAFACCREGTOP": CONFERENCE_CHAMP,
+    "KXNCAAFB12REGTOP": CONFERENCE_CHAMP,
+    "KXNCAAFSECREGTOP": CONFERENCE_CHAMP,
+    # Win totals
+    "KXNCAAFACCWINS": SEASON_WINS,
+    "KXNCAAFBIG12WINS": SEASON_WINS,
+    "KXNCAAFSECWINS": SEASON_WINS,
+    "KXNCAAFH2HWINS": SEASON_WINS,
+    # Conference awards. resolve_kalshi separates coach awards from player
+    # awards by the award named in the market's rules.
+    "KXNCAAFACCAWARD": PLAYER_PROP,
+    "KXNCAAFBIG12AWARD": PLAYER_PROP,
+    "KXNCAAFBIGTENAWARD": PLAYER_PROP,
+    "KXNCAAFSECAWARD": PLAYER_PROP,
+    "KXNCAAFCONFAWARD": PLAYER_PROP,
 }
 
 # Polymarket sportsMarketType -> market type.
