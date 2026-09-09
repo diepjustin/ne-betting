@@ -374,19 +374,45 @@ filter. The largest counts in this archive are penny sweeps of markets that
 had already been decided: 400,139 contracts at $0.01 is $4,001, not a whale.
 A trade must clear a floor in contracts *and* in what the taker paid.
 
-**Why the thresholds are what they are.** Sweeping the archive at floors of
-1,000 / 5,000 / 10,000 / 25,000 contracts returned 11 / 1 / 1 / 1 multi-rung
-clusters. The one that survives every floor is the LSU hedge. The default is
-5,000, the loosest floor that is not yet noisy. These are settings, not
-findings, and they are printed with the output so a figure can be checked
-against the threshold that produced it.
+**Why the thresholds are what they are.** `analysis/calibrate.py`, added
+9 Sep 2026, sweeps window, contract floor and cost floor together and prints
+which settings still find the LSU hedge and how much else each drags in. It
+exists because the first justification for these numbers was a set of SQL
+queries typed into a shell, which nobody could re-run or check.
 
-They are also **provisional**, and the reason is worth stating plainly: the
-archive holds markets for six of the ladder's 36 series. There is no SEC,
-ACC or Big 12 title market in it, no `KXNCAAFFINALIST`, and no qualifying
-series outside the Big Ten. A conference title is the commonest coach bonus
-rung, so the floors were tuned on an archive missing the rung that matters
-most. Re-derive and re-date them once the wide pass lands.
+Running it corrected that justification. **The cost floor is doing the work
+and the contract floor is close to inert.** Once any cost floor of $1,000 or
+more is applied, every contract floor from 1,000 to 50,000 returns the same
+single event, at every window from five minutes to an hour. The original
+sweep varied only the contract floor and credited it with an effect that
+belongs to the other knob. What a contract floor does do is silently drop a
+*small* rung: a ladder whose lowest rung is 3,000 contracts loses that rung
+at a 5,000 floor, falls to one rung, and is reclassified from a finding to a
+lead without anything appearing to fail. A $25,000 bonus rung bought at ten
+cents is 25,000 contracts costing $2,500, and today's floors would not see
+it.
+
+The thresholds are **provisional**, and the reason is worth stating plainly.
+As of the 9 Sep 2026 run the archive has no traded market at all on the
+title-game rung, and one series with markets out of the nineteen configured
+for conference titles. A conference title is the commonest coach bonus rung,
+so these floors are tuned largely without it. Re-run `calibrate` and re-date
+this paragraph once the wide historical pass has loaded.
+
+**One confirmed case is not a calibration.** There is exactly one hedge in
+the record that an outside source confirms. One true positive cannot support
+a false-negative rate or a claim that a setting is optimal; it supports only
+"which settings still find the case we can check, and how much else comes
+with them." The tool prints the quietest setting that still finds LSU and
+then says in the same breath that quietest is not best, because a floor tight
+enough to return one event also drops every hedge smaller than the one case
+we happen to know about.
+
+**What the takers on ladder markets actually pay**, from the same run and the
+grounds for the near-certainty cut: of 37,689 orders, 657 were priced at 95
+cents or more per contract and 649 of those were No takers. That is the
+cash-parking pattern at full scale rather than the 39 orders visible above
+the size floors.
 
 **The window is a gap, not a span.** `--window-minutes` bounds the time
 between one order and the next, so a long chain of closely spaced orders is
