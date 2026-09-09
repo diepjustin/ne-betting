@@ -63,6 +63,62 @@ kalshi:
     - KXNCAAFAWARD
     - KXHEISMAN
     - KXHEISMANFINALIST
+    # --- added 8 Sep 2026, auditing the list against the full /series dump
+    # for the widened scope. The original 33 were "every series where Nebraska
+    # could plausibly appear", which is why conference titles outside the Big
+    # Ten were missing, and why the LSU reference case came back four rungs of
+    # five: its fifth sits in KXNCAAFFINALIST. A conference title is the
+    # commonest coach-bonus rung, so the detector was blind to it for every
+    # league but one.
+    # Playoff rungs and championship shapes
+    - KXNCAAFFINALIST
+    - KXNCAAFTOPSEED
+    - KXNCAAFCFPCONF
+    - KXNCAAFCONF
+    - KXNCAAFCONFMATCHUP
+    # Conference champions
+    - KXNCAAFAAC
+    - KXNCAAFACC
+    - KXNCAAFBACC
+    - KXNCAAFB12
+    - KXNCAAFBB12
+    - KXNCAAFBB10
+    - KXNCAAFSEC
+    - KXNCAAFBSEC
+    - KXNCAAFCUSA
+    - KXNCAAFMAC
+    - KXNCAAFMWC
+    - KXNCAAFPAC10
+    - KXNCAAFPAC12
+    - KXNCAAFSBELT
+    - KXNCAAFIVY
+    - KXNCAAFCS
+    - KXNCAAFFCS
+    - KXNCAAFD3
+    # Championship qualifiers
+    - KXNCAAFAACQUAL
+    - KXNCAAFACCQUAL
+    - KXNCAAFB12QUAL
+    - KXNCAAFCUSAQUAL
+    - KXNCAAFMACQUAL
+    - KXNCAAFMWCQUAL
+    - KXNCAAFPAC12QUAL
+    - KXNCAAFSBELTQUAL
+    - KXNCAAFSECQ
+    # Regular-season finish and win totals by conference
+    - KXNCAAFACCREGTOP
+    - KXNCAAFB12REGTOP
+    - KXNCAAFSECREGTOP
+    - KXNCAAFACCWINS
+    - KXNCAAFBIG12WINS
+    - KXNCAAFSECWINS
+    - KXNCAAFH2HWINS
+    # Conference awards (player and coach; the resolver separates them)
+    - KXNCAAFACCAWARD
+    - KXNCAAFBIG12AWARD
+    - KXNCAAFBIGTENAWARD
+    - KXNCAAFSECAWARD
+    - KXNCAAFCONFAWARD
 
   match:
     # Case-insensitive; tested against title, subtitle, yes/no sub-titles,

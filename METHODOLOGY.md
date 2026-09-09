@@ -235,6 +235,19 @@ retrieved yet (RECON §1). The API is the primary source until then.
   which is slow rather than lossy, and the run log says which happened. The
   job now needs no write access to the repository at all.
 
+## What the scheduled job publishes
+
+- **2026-09-08.** The job uploaded `data/raw` as a 90-day workflow artifact.
+  On a public repository any GitHub account can download one, and raw
+  Polymarket trades carry `proxyWallet`, `name` and `pseudonym`, so that
+  artifact was a compiled per-market listing of who traded. It contradicted the
+  redaction promise above: an artifact is not a commit, but it is a
+  publication. The job now stages a separate redacted copy
+  (`scripts/redact_for_upload.py`) and uploads only that. The raw archive is
+  append-only and is not rewritten; unredacted responses stay local, which is
+  where reporting works from. Kalshi files are copied byte for byte, because
+  the exchange publishes no identity for the parties to a trade.
+
 ## Limitations
 
 - Kalshi publishes no taker identity. Nothing here can say who traded.
@@ -289,6 +302,16 @@ retrieved yet (RECON §1). The API is the primary source until then.
   keys, zero markets unresolved. Of 24 named players with markets listed
   across both platforms, three have any trade at all, totalling 12 trades and
   668 contracts.
+- **2026-09-08, series list re-audited for the wide scope.** The original 33
+  series were chosen as "every series where Nebraska could plausibly appear",
+  which was right for Nebraska and wrong once the scope widened. Checked
+  against the full `/series` dump, 44 college-football series were missing,
+  including every conference championship outside the Big Ten and
+  `KXNCAAFFINALIST`. That last one matters: the four LSU block trades in our
+  archive sum to $2,462,500, and the fifth rung of the $3,000,000 ladder the
+  CBS story describes sits in the series we were not walking. The list is now
+  77 series. The four basketball series that matched the audit filter were
+  deliberately excluded.
 - **2026-09-08, measured for all of college football.** Discovery costs the
   same 49 requests as the Nebraska scope, because those pages were always
   being walked. It finds 22,564 Kalshi markets, of which 13,791 have ever
