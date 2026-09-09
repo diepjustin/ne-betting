@@ -13,16 +13,24 @@
 ladder:
   # Rungs are ordered low to high. `rung` is this project's label, not
   # Kalshi's; the series id is the thing that came from the exchange.
+  - rung: bowl_selection
+    # "Notre Dame selected to play in a bowl game or the College Football
+    # Playoff" -- bowl eligibility, and the rung a mid-tier program is most
+    # likely to be paid on. It is the lowest rung and the one a detector
+    # scoped to playoff markets would have been blind to.
+    series: [KXNCAAFBOWLGAME]
   - rung: conference_qualify
     series: [KXNCAAFB10QUAL, KXNCAAFAACQUAL, KXNCAAFACCQUAL, KXNCAAFB12QUAL,
              KXNCAAFCUSAQUAL, KXNCAAFMACQUAL, KXNCAAFMWCQUAL, KXNCAAFPAC12QUAL,
              KXNCAAFSBELTQUAL, KXNCAAFSECQ]
   - rung: conference_title
+    # KXNCAAFCONF and KXNCAAFCFPCONF are deliberately absent: they ask which
+    # conference the champion comes from, which is a league-level question and
+    # not a rung any one school's coach is paid on.
     series: [KXNCAAFB10, KXNCAAFAAC, KXNCAAFACC, KXNCAAFBACC, KXNCAAFB12,
              KXNCAAFBB12, KXNCAAFBB10, KXNCAAFSEC, KXNCAAFBSEC, KXNCAAFCUSA,
              KXNCAAFMAC, KXNCAAFMWC, KXNCAAFPAC10, KXNCAAFPAC12, KXNCAAFSBELT,
-             KXNCAAFIVY, KXNCAAFCS, KXNCAAFFCS, KXNCAAFD3, KXNCAAFCFPCONF,
-             KXNCAAFCONF]
+             KXNCAAFIVY, KXNCAAFCS, KXNCAAFFCS, KXNCAAFD3]
   - rung: playoff_berth
     series: [KXNCAAFPLAYOFF]
   - rung: quarterfinal
@@ -41,16 +49,27 @@ ladder:
 # figure attributed to one. Plan section 7: never guess a mapping. A tier
 # invented to make a match is a fabricated number in a story.
 #
-# Shape, when a document is in hand:
+# The shape below uses a school that does not exist and figures that are
+# obviously not a bonus schedule, on purpose. An example naming a real school
+# is a fabricated citation sitting in the repository waiting to be
+# uncommented, and one carrying figures copied from the trades would make the
+# detector "confirm" a match against numbers it took from the trades itself.
 #
 #   bonus_tiers:
-#     LSU:
-#       source: "Employment agreement obtained via LSU public records, p. 14"
-#       retrieved: 2026-09-09
+#     EXAMPLE_U:
+#       source: "replace with a document that can be cited in print"
+#       retrieved: 2026-01-01
 #       tiers:
-#         playoff_berth: 837500      # dollars, which is also contracts at $1
-#         semifinal: 470000
+#         bowl_selection: 111111     # dollars, which is also contracts at $1
+#         conference_title: 222222
 #
-# Until then the detector reports ladder clusters on trading evidence alone
-# and matches no tiers, which is what it should do.
+# Until a document is in hand the detector reports ladder clusters on trading
+# evidence alone and matches no tiers, which is what it should do.
 bonus_tiers: {}
+
+# Deliberately not rungs, recorded so the reasoning is not re-litigated:
+#   KXNCAAFSEED       a named seed number (#9), not a milestone anyone is paid on
+#   KXNCAAFUNDEFEATED a record, not a selection or a title
+#   KXNCAAFWINS       a win total; a real bonus rung, but a strike ladder of its
+#                     own whose rungs are win counts rather than milestones
+#   KXNCAAF*GAME/SPREAD/TOTAL   one Saturday is not a contract milestone

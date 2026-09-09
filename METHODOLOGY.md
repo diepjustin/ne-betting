@@ -334,11 +334,40 @@ this project holds none. `config/milestones.yml` carries an empty
 document is in hand, no trade is matched to a bonus figure. Plan §7: a tier
 invented to make a match is a fabricated number in a story.
 
-**What counts as a finding.** One school, one side of the market, several
-different rungs of the season ladder, inside one window. A cluster on a
-single rung is filed as a lead instead. The distinction matters because the
-pattern that makes the LSU trades legible is not their size, it is that they
-walk the ladder in one go.
+**What counts as a finding.** One school, several different rungs of the
+season ladder, inside one window, bought at prices that are not a sure thing.
+Everything else ladder-shaped is filed as a lead carrying the reason it was
+set aside. The pattern that makes the LSU trades legible is not their size,
+it is that they walk the ladder in one go.
+
+**Direction and price decide it, and they were nearly missed.** A bonus hedge
+is a Yes purchase: the person owes money when the team succeeds, so they buy
+the success. Reviewing the first version turned up the false positive that
+would have been published. Of the 73 orders clearing the size floors on
+ladder markets, 62 are No takers and 39 of those paid 95 cents or more per
+contract -- parking cash for a 1-to-5% return on a team that will not win.
+That is a yield trade, and a cash-parker doing it across three rungs of one
+school in fifteen minutes has the exact shape of a hedge. A cluster is now
+set aside when it is mostly a No purchase or when the taker paid near
+certainty, with the reason recorded in the row.
+
+**Fills are not orders.** Kalshi returns fills and publishes no order id: one
+taker order crossing several resting orders comes back as several rows
+sharing a timestamp. Applying a size floor per fill discards any hedge routed
+through the book rather than negotiated as a block -- six such orders on
+ladder markets already clear the floors only once their fills are combined.
+Fills sharing a market, a timestamp and a taker side are treated as one
+order. That is a proxy, not an order id, because the feed does not carry one.
+
+**A flagged block skips the floors.** South Carolina's exchange-flagged
+40,000 contracts at $0.11 cost $4,400 and fell under the cost floor. Kalshi's
+own flag is better evidence than our threshold.
+
+**Clusters group on the school, not on the side.** `taker_side` names
+whoever crossed the spread, so a hedger who rests a bid and waits to be hit
+is the maker and their fill carries the opposite side. Splitting clusters on
+the side would cut such a ladder in half. The Yes/No split is reported
+instead, with a flag when a cluster is mixed.
 
 **Why a trade must be big in two ways.** A contract floor alone is a bad
 filter. The largest counts in this archive are penny sweeps of markets that
@@ -351,6 +380,21 @@ clusters. The one that survives every floor is the LSU hedge. The default is
 5,000, the loosest floor that is not yet noisy. These are settings, not
 findings, and they are printed with the output so a figure can be checked
 against the threshold that produced it.
+
+They are also **provisional**, and the reason is worth stating plainly: the
+archive holds markets for six of the ladder's 36 series. There is no SEC,
+ACC or Big 12 title market in it, no `KXNCAAFFINALIST`, and no qualifying
+series outside the Big Ten. A conference title is the commonest coach bonus
+rung, so the floors were tuned on an archive missing the rung that matters
+most. Re-derive and re-date them once the wide pass lands.
+
+**The window is a gap, not a span.** `--window-minutes` bounds the time
+between one order and the next, so a long chain of closely spaced orders is
+one cluster however long it runs. `span_seconds` in the output says how long
+that was. At the default the longest lead spans nine minutes; widening the
+window to days turns ordinary week-long accumulation into "events", which is
+why a wider window is not the way to catch a hedge spread over days. A
+per-day, per-rung roll-up would be.
 
 **Roundness is recorded and not used.** Every LSU count is a multiple of
 2,500, which is suggestive. It is also unremarkable: 101 of the 266 non-block
@@ -398,8 +442,25 @@ both columns nearly doubles its own total. This is the same shape as the
 attribution bug that once made Nebraska look like 87% of all college football
 money, and it now has a test.
 
+**Which markets are rungs.** Bowl selection, conference qualification,
+conference title, playoff berth, quarterfinal, semifinal, title game,
+national title. Bowl selection is in because Kalshi's market reads "selected
+to play in a bowl game or the College Football Playoff", which is bowl
+eligibility and the rung a mid-tier program is likeliest to be paid on -- a
+ladder scoped to playoff markets would be blind to it. Deliberately out, with
+the reasoning in `config/milestones.yml` so it is not re-litigated: seed
+number, undefeated season, win totals, single games, and the two markets that
+ask which *conference* the champion comes from, which is nobody's bonus.
+
+**Named athletes carry no dollar figure here.** The outsized-trade view
+excludes player and draft markets. Those markets are titled with an athlete's
+name, this view exists to chase school-level milestone trading, and plan §9
+keeps a dollar figure away from a named 20-year-old. `analysis/breakdown.py`
+holds the one view that names players and it carries the editor warning.
+
 **What it currently finds.** Across 4.6 million trade rows: seven block
-trades, one ladder event, 49 single-rung leads. The ladder event is LSU.
+trades, one ladder event, 64 leads, every one of them a single rung. The
+ladder event is LSU.
 
 ## Limitations
 

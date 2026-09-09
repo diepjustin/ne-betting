@@ -69,21 +69,22 @@ def ladder():
 
 
 def test_finds_the_lsu_hedge_and_nothing_else(db, ladder):
-    series_rung, _order, tiers = ladder
-    events, _leads = a.find_ladder_events(
-        db, series_rung, tiers, a.WINDOW_MINUTES * 60,
+    series_rung, order, tiers = ladder
+    events, _leads, _orphans = a.find_ladder_events(
+        db, series_rung, tiers, order, a.WINDOW_MINUTES * 60,
         a.MIN_CONTRACTS, a.MIN_TAKER_COST)
     assert len(events) == 1, [e["school"] for e in events]
     e = events[0]
     assert e["school"] == "LSU"
-    assert e["taker_side"] == "yes"
+    assert e["yes_contracts"] == 2_462_500 and e["no_contracts"] == 0
     assert e["rungs"] == 4
-    assert e["trades"] == 4
+    assert e["orders"] == 4
     assert e["first_utc"] == "2026-08-13T19:05:35.120042Z"
     assert e["last_utc"] == "2026-08-13T19:06:47.395669Z"
     assert e["span_seconds"] == 72
     assert e["contracts"] == 2_462_500
-    assert e["block_trades"] == 4
+    assert e["block_orders"] == 4
+    assert e["not_a_finding_because"] == ""
 
 
 def test_the_sum_is_the_four_rungs_we_have_not_the_reported_three_million(db, ladder):
@@ -94,35 +95,36 @@ def test_the_sum_is_the_four_rungs_we_have_not_the_reported_three_million(db, la
     collected. When a pass that includes it is loaded, this figure moves and
     this test should be updated against the new archive -- not before.
     """
-    series_rung, _order, tiers = ladder
-    events, _ = a.find_ladder_events(db, series_rung, tiers, 900,
-                                     a.MIN_CONTRACTS, a.MIN_TAKER_COST)
-    assert events[0]["payout_if_all_settle_usd"] == 2_462_500
+    series_rung, order, tiers = ladder
+    events, _, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
+                                        a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    assert events[0]["payout_if_every_rung_hits_usd"] == 2_462_500
     assert events[0]["taker_cost_usd"] == 597_550.0
     assert "title_game" not in events[0]["rung_list"]
 
 
 def test_single_rung_repeat_is_a_lead_not_a_finding(db, ladder):
     """Two big Oregon title trades 12 seconds apart are one rung, so a lead."""
-    series_rung, _order, tiers = ladder
-    events, leads = a.find_ladder_events(db, series_rung, tiers, 900,
-                                         a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    series_rung, order, tiers = ladder
+    events, leads, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
+                                            a.MIN_CONTRACTS, a.MIN_TAKER_COST)
     assert all(e["school"] != "ORE" for e in events)
     ore = [l for l in leads if l["school"] == "ORE"]
-    assert len(ore) == 1 and ore[0]["trades"] == 2
+    assert len(ore) == 1 and ore[0]["orders"] == 2
+    assert ore[0]["not_a_finding_because"] == "one rung only"
 
 
 def test_penny_sweep_is_huge_in_contracts_and_still_excluded(db, ladder):
     """400,139 contracts at a cent is $4,001. A contract floor alone lets it in."""
-    series_rung, _order, tiers = ladder
-    _, leads = a.find_ladder_events(db, series_rung, tiers, 900,
-                                    a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    series_rung, order, tiers = ladder
+    _, leads, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
+                                       a.MIN_CONTRACTS, a.MIN_TAKER_COST)
     assert all(l["school"] != "NWST" for l in leads)
 
 
 def test_game_markets_are_not_ladder_rungs(db, ladder):
     """A Saturday spread is not a contract milestone, however big."""
-    series_rung, _order, _ = ladder
+    series_rung, _order2, _ = ladder
     assert "KXNCAAFSPREAD" not in series_rung
     assert "KXNCAAFGAME" not in series_rung
 
@@ -154,17 +156,20 @@ def test_no_bonus_tier_is_matched_without_a_cited_document(ladder):
 
 
 def test_tier_match_reports_exact_and_near_separately():
-    group = [{"rung": "playoff_berth", "count": 837_500},
-             {"rung": "semifinal", "count": 469_000}]
+    group = [{"rung": "playoff_berth", "contracts": 400_000},
+             {"rung": "playoff_berth", "contracts": 437_500},
+             {"rung": "semifinal", "contracts": 469_000}]
     tiers = {"LSU": {"source": "hypothetical, for this test only",
                      "tiers": {"playoff_berth": 837_500, "semifinal": 470_000}}}
     exact, near = a.match_tiers("LSU", group, tiers)
+    # One rung bought in two goes still covers one bonus, so the rung's total
+    # is what a tier is compared against.
     assert exact == "playoff_berth=837,500"
     assert near.startswith("semifinal~469,000/470,000")
 
 
 def test_central_time_moves_a_late_kickoff_back_a_day():
-    """23:30 UTC on the 6th is 6:30pm Central on the 5th."""
+    """01:30 UTC on the 6th is 8:30pm Central on the 5th."""
     assert a.central_day(ts("2026-09-06T23:30:00Z")) == "2026-09-06"
     assert a.central_day(ts("2026-09-06T01:30:00Z")) == "2026-09-05"
 
@@ -201,7 +206,7 @@ def test_a_run_that_finds_nothing_still_writes_a_readable_file(tmp_path):
     """"No hedge found" is a result. A zero-byte file is not."""
     a.write_csv([], tmp_path, "ladder_events", header="ladder")
     text = (tmp_path / "ladder_events.csv").read_text()
-    assert text.startswith("school,taker_side,rungs")
+    assert text.startswith("school,rungs,rung_list")
     assert len(text.splitlines()) == 1
 
 
@@ -210,3 +215,164 @@ def test_column_drift_fails_loudly(tmp_path):
     with pytest.raises(KeyError):
         a.write_csv([{"school": "LSU", "surprise": 1}], tmp_path,
                     "ladder_events", header="ladder")
+
+
+# --- what Fable's review turned up -------------------------------------------
+
+def add(db, ticker, series, iso, count, price, side, team, block=0, tid=None):
+    db.execute(
+        "INSERT OR IGNORE INTO market (source, source_market_id, title, series_id,"
+        " team, first_seen_at, raw_path) VALUES ('kalshi', ?, ?, ?, ?, 0, 'x')",
+        (ticker, f"{team} market", series, team))
+    db.execute(
+        "INSERT INTO trade (source, source_trade_id, source_market_id, executed_ts,"
+        " executed_iso, price_dollars, count, taker_side, taker_cost_usd,"
+        " is_block_trade, fetched_at, raw_path)"
+        " VALUES ('kalshi', ?, ?, ?, ?, ?, ?, ?, ?, ?, 0, 'x')",
+        (tid or f"x{id(iso)}{count}{price}{side}", ticker, ts(iso), iso, price,
+         count, side, count * (price if side == "yes" else 1 - price), block))
+
+
+def test_a_cash_parker_walking_the_ladder_is_not_a_finding(db, ladder):
+    """The one that would have been published.
+
+    62 of the 73 orders clearing the size floors on ladder markets are No
+    takers, and 39 paid 95 cents or more a contract -- parking cash for a few
+    points on a team that will not win. Two rungs of that inside a minute has
+    the exact shape of a hedge and is the opposite trade.
+    """
+    series_rung, order, tiers = ladder
+    add(db, "KXNCAAFPLAYOFF-26-MICH", "KXNCAAFPLAYOFF", "2026-09-06T02:31:54.285215Z",
+        100_000, 0.01, "no", "MICH")
+    add(db, "KXNCAAFQF-27-MICH", "KXNCAAFQF", "2026-09-06T02:32:10.100000Z",
+        109_267, 0.02, "no", "MICH")
+    db.commit()
+    events, leads, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
+                                            a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    assert all(e["school"] != "MICH" for e in events)
+    mich = [l for l in leads if l["school"] == "MICH"][0]
+    assert mich["rungs"] == 2, "it really is ladder-shaped"
+    assert "No purchase" in mich["not_a_finding_because"]
+
+
+def test_a_yes_side_ladder_bought_near_certainty_is_also_set_aside(db, ladder):
+    """Buying at 97 cents is yield, whichever side of the book it is on."""
+    series_rung, order, tiers = ladder
+    add(db, "KXNCAAFPLAYOFF-26-OSU", "KXNCAAFPLAYOFF", "2026-09-06T02:31:54.285215Z",
+        100_000, 0.97, "yes", "OSU")
+    add(db, "KXNCAAFQF-27-OSU", "KXNCAAFQF", "2026-09-06T02:32:10.100000Z",
+        100_000, 0.96, "yes", "OSU")
+    db.commit()
+    events, leads, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
+                                            a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    assert all(e["school"] != "OSU" for e in events)
+    assert "near-certainty" in [l for l in leads if l["school"] == "OSU"][0]["not_a_finding_because"]
+
+
+def test_an_order_split_across_fills_still_clears_the_floor(db, ladder):
+    """Kalshi returns fills, not orders, and publishes no order id.
+
+    A hedge routed through the book arrives in pieces, every piece under the
+    floor. Fills sharing a market, a timestamp and a side are one order.
+    """
+    series_rung, order, tiers = ladder
+    for i in range(10):
+        add(db, "KXNCAAFPLAYOFF-26-TEX", "KXNCAAFPLAYOFF",
+            "2026-08-20T12:00:00.500000Z", 2_000, 0.30, "yes", "TEX", tid=f"tex-a{i}")
+        add(db, "KXNCAAFSF-27-TEX", "KXNCAAFSF",
+            "2026-08-20T12:00:30.500000Z", 2_000, 0.35, "yes", "TEX", tid=f"tex-b{i}")
+    db.commit()
+    orders, _ = a.fetch_milestone_orders(db, series_rung)
+    tex = [o for o in orders if o["team"] == "TEX"]
+    assert len(tex) == 2 and all(o["fills"] == 10 for o in tex)
+    events, _, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
+                                        a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    got = [e for e in events if e["school"] == "TEX"]
+    assert len(got) == 1 and got[0]["fills"] == 20 and got[0]["orders"] == 2
+
+
+def test_an_exchange_flagged_block_skips_the_floors(db, ladder):
+    """South Carolina's flagged 40,000 contracts at $0.11 cost $4,400.
+
+    Under the cost floor alone the exchange's own flag would be thrown away.
+    """
+    series_rung, order, tiers = ladder
+    add(db, "KXNCAAFPLAYOFF-26-SCAR", "KXNCAAFPLAYOFF", "2026-07-15T21:33:14.680024Z",
+        40_000, 0.11, "yes", "SC", block=1)
+    add(db, "KXNCAAFQF-27-SCAR", "KXNCAAFQF", "2026-07-15T21:33:44.680024Z",
+        30_000, 0.09, "yes", "SC", block=1)
+    db.commit()
+    orders, _ = a.fetch_milestone_orders(db, series_rung)
+    sc = [o for o in orders if o["team"] == "SC"]
+    assert all(o["taker_cost_usd"] < a.MIN_TAKER_COST for o in sc), "below the cost floor"
+    assert all(a.clears_floor(o, a.MIN_CONTRACTS, a.MIN_TAKER_COST) for o in sc)
+    events, _, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
+                                        a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    assert [e["school"] for e in events].count("SC") == 1
+
+
+def test_a_passive_hedger_is_not_cut_in_half(db, ladder):
+    """`taker_side` names whoever crossed the spread.
+
+    A hedger who rests a bid and is hit shows up on the opposite side, so
+    clusters group on the school and report the split instead.
+    """
+    series_rung, order, tiers = ladder
+    add(db, "KXNCAAFPLAYOFF-26-BAY", "KXNCAAFPLAYOFF", "2026-08-20T12:00:00Z",
+        100_000, 0.30, "yes", "BAY")
+    add(db, "KXNCAAFSF-27-BAY", "KXNCAAFSF", "2026-08-20T12:00:30Z",
+        40_000, 0.80, "no", "BAY")
+    db.commit()
+    events, _, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
+                                        a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    bay = [e for e in events if e["school"] == "BAY"]
+    assert len(bay) == 1
+    assert bay[0]["mixed_side"] is True
+    assert bay[0]["yes_contracts"] == 100_000 and bay[0]["no_contracts"] == 40_000
+
+
+def test_bowl_selection_is_a_rung(ladder):
+    """"Selected to play in a bowl game or the College Football Playoff".
+
+    The rung a mid-tier program is likeliest to be paid on, and the one a
+    detector scoped to playoff markets would be blind to.
+    """
+    series_rung, order, _ = ladder
+    assert series_rung["KXNCAAFBOWLGAME"] == "bowl_selection"
+    assert order[0] == "bowl_selection"
+
+
+def test_league_level_markets_are_not_a_schools_rung(ladder):
+    """Which conference the champion comes from is nobody's bonus."""
+    series_rung, _order, _ = ladder
+    assert "KXNCAAFCONF" not in series_rung
+    assert "KXNCAAFCFPCONF" not in series_rung
+    assert "KXNCAAFSEED" not in series_rung
+
+
+def test_the_example_tier_block_names_no_real_school():
+    """An example naming a real school is a fabricated citation in waiting.
+
+    Worse if its figures are copied from the trades: the detector would then
+    "confirm" a match against numbers it took from the trades itself.
+    """
+    text = (PROJECT_ROOT / "config" / "milestones.yml").read_text()
+    for real in ("LSU", "Nebraska", "public records"):
+        assert real not in text, f"{real!r} appears in the tier example"
+    for from_the_trades in ("837500", "470000", "787500", "367500"):
+        assert from_the_trades not in text
+
+
+def test_player_markets_carry_no_dollar_figure_here(db, ladder):
+    """Plan section 9. breakdown.py has the one view that names athletes."""
+    db.execute("INSERT INTO market (source, source_market_id, title, market_type,"
+               " first_seen_at, raw_path) VALUES ('kalshi', 'KXHEISMAN-26-XYZ',"
+               " 'Will Rasean Jones win the Heisman?', 'player_prop', 0, 'x')")
+    db.execute("INSERT INTO trade (source, source_trade_id, source_market_id,"
+               " executed_ts, executed_iso, price_dollars, count, taker_side,"
+               " taker_cost_usd, is_block_trade, fetched_at, raw_path)"
+               " VALUES ('kalshi', 'h1', 'KXHEISMAN-26-XYZ', 100, '100', 0.5,"
+               " 90000, 'yes', 45000, 0, 0, 'x')")
+    db.commit()
+    rows = a.large_trades(db, a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    assert all("Heisman" not in (r["title"] or "") for r in rows)
