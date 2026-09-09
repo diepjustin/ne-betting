@@ -235,6 +235,20 @@ retrieved yet (RECON §1). The API is the primary source until then.
   which is slow rather than lossy, and the run log says which happened. The
   job now needs no write access to the repository at all.
 
+## Surviving a long pass
+
+- **2026-09-08.** Network errors now get a budget measured in elapsed time
+  (20 minutes by default) rather than sharing the six-attempt limit used for
+  HTTP errors. A wide pass that had run 2.9 hours died at market 6,453 of
+  22,564 because the machine briefly lost DNS resolution and six attempts
+  across about a minute were not enough to wait it out. A remote 429 means
+  slow down; a local resolver failure means wait, because nothing else is
+  reachable either.
+- **2026-09-08.** A single market whose retries run out no longer ends the
+  run. It is logged, counted, and named in the run summary, and its watermark
+  is left untouched so the next pass picks it up. A silent gap would be worse
+  than a slow one.
+
 ## What the scheduled job publishes
 
 - **2026-09-08.** The job uploaded `data/raw` as a 90-day workflow artifact.

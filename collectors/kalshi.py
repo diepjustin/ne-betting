@@ -25,6 +25,7 @@ from pathlib import Path
 from .common import (
     PROJECT_ROOT,
     Client,
+    RetryError,
     RawArchive,
     State,
     load_yaml,
@@ -96,6 +97,7 @@ class RunStats:
     trades_rows: int = 0
     skipped_finalized: int = 0
     skipped_no_volume: int = 0
+    failed_markets: list = field(default_factory=list)
     requests: int = 0
     retries: int = 0
     files: int = 0
@@ -258,7 +260,14 @@ def main(argv: list[str] | None = None) -> int:
         if not args.dry_run:
             for i, m in enumerate(sorted(matched, key=lambda x: x.ticker), 1):
                 log.info("[%d/%d] %s (%s, %s)", i, len(matched), m.ticker, m.reason, m.status)
-                collect_market(client, archive, cfg, state, m, args.historical, stats)
+                try:
+                    collect_market(client, archive, cfg, state, m, args.historical, stats)
+                except RetryError as e:
+                    # One market must not end an eight-hour pass. Its watermark
+                    # is untouched, so the next run picks it up where this one
+                    # left off; the summary names it so a gap is visible.
+                    log.warning("giving up on %s and continuing: %s", m.ticker, e)
+                    stats.failed_markets.append(m.ticker)
     finally:
         client.close()
         stats.requests = client.requests_made
@@ -279,6 +288,8 @@ def main(argv: list[str] | None = None) -> int:
         "trades_rows_fetched": stats.trades_rows,
         "finalized_skipped": stats.skipped_finalized,
         "untraded_skipped": stats.skipped_no_volume,
+        "markets_that_failed": len(stats.failed_markets),
+        "failed_market_tickers": stats.failed_markets[:50],
         "scope": cfg.get("scope", "nebraska"),
         "http_requests": stats.requests,
         "http_retries": stats.retries,

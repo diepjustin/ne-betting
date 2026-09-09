@@ -86,6 +86,10 @@ class Client:
     base_url: str
     min_interval: float = 1.0
     max_attempts: int = 6
+    # Local network trouble is worth waiting out: 20 minutes of DNS or
+    # connection failures before giving up on a single request.
+    network_error_budget: float = 1200.0
+    max_backoff: float = 60.0
     timeout: float = 30.0
     transport: httpx.BaseTransport | None = None
     _last_request_at: float = field(default=0.0, init=False)
@@ -109,30 +113,47 @@ class Client:
             time.sleep(wait)
 
     def get(self, path: str, params: dict | None = None) -> Response:
+        """One GET, retried.
+
+        Network errors get a far longer budget than HTTP errors, measured in
+        elapsed time rather than attempts. A pass that had run 2.9 hours died
+        at market 6,453 of 22,564 because the machine briefly lost DNS
+        resolution and six attempts spanning about a minute were not enough to
+        wait it out. A remote 429 means slow down; a local resolver failure
+        means wait, because nothing else is reachable either.
+        """
         delay = 1.0
-        for attempt in range(1, self.max_attempts + 1):
+        attempt = 0
+        started = time.monotonic()
+        while True:
+            attempt += 1
             self._pace()
             self._last_request_at = time.monotonic()
             self.requests_made += 1
             fetched_at = utc_now()
+            network_error = False
             try:
                 r = self._http.get(path, params=params)
             except httpx.HTTPError as e:
                 log.warning("network error on %s (%s), attempt %d", path, e, attempt)
-                status = None
+                network_error = True
             else:
                 status = r.status_code
-                if status < 400:
-                    return Response(str(r.url), status, r.text, fetched_at)
-                if status == 404:
+                if status < 400 or status == 404:
                     return Response(str(r.url), status, r.text, fetched_at)
                 if status not in (429, 500, 502, 503, 504):
                     raise RetryError(f"{status} from {r.url}: {r.text[:200]}")
                 log.warning("%s from %s, attempt %d", status, r.url, attempt)
             self.retries += 1
+            elapsed = time.monotonic() - started
+            if network_error:
+                if elapsed >= self.network_error_budget:
+                    raise RetryError(
+                        f"gave up on {path} after {elapsed:.0f}s of network errors")
+            elif attempt >= self.max_attempts:
+                raise RetryError(f"gave up on {path} after {attempt} attempts")
             time.sleep(delay)
-            delay = min(delay * 2, 60)
-        raise RetryError(f"gave up on {path} after {self.max_attempts} attempts")
+            delay = min(delay * 2, self.max_backoff)
 
 
 _SAFE = re.compile(r"[^A-Za-z0-9._-]+")

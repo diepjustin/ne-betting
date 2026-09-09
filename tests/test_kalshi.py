@@ -193,3 +193,54 @@ def test_untraded_markets_cost_no_requests(tmp_path, small_cfg, matcher):
     assert stats.skipped_no_volume == 1
     assert router.calls == []
     assert state.market("KXNCAAFB10-26-NEB")["untraded"] is True
+
+
+def test_one_markets_failure_does_not_end_the_pass(tmp_path, small_cfg, matcher, monkeypatch):
+    """A 2.9-hour pass died at market 6,453 of 22,564 because a single market's
+    retries ran out. The run must record it and carry on."""
+    import collectors.common as common
+    monkeypatch.setattr(common.time, "sleep", lambda s: None)
+
+    class Failing(Router):
+        def handler(self, request):
+            if request.url.path.endswith("/markets/trades"):
+                return httpx.Response(503, text="down")
+            return super().handler(request)
+
+    router = Failing()
+    cfg = dict(small_cfg, max_attempts=2)
+    client = Client(cfg["base_url"], min_interval=0, max_attempts=2,
+                    transport=httpx.MockTransport(router.handler))
+    archive = RawArchive(tmp_path / "raw")
+    state = State(tmp_path / "state" / "kalshi.json")
+    stats = kalshi.RunStats()
+    matched = kalshi.discover(client, archive, cfg, matcher, False, stats)
+    failed = []
+    for m in matched:
+        try:
+            kalshi.collect_market(client, archive, cfg, state, m, False, stats)
+        except kalshi.RetryError:
+            failed.append(m.ticker)
+    client.close()
+    assert failed == ["KXNCAAFB10-26-NEB"]
+    assert state.market("KXNCAAFB10-26-NEB").get("watermark_ts") is None
+
+
+def test_network_errors_get_a_longer_budget_than_http_errors(monkeypatch):
+    """A remote 429 means slow down. A local resolver failure means wait,
+    because nothing else is reachable either."""
+    import collectors.common as common
+    monkeypatch.setattr(common.time, "sleep", lambda s: None)
+    calls = {"n": 0}
+
+    def always_down(request):
+        calls["n"] += 1
+        raise httpx.ConnectError("nodename nor servname provided")
+
+    c = Client("https://x.test", min_interval=0, max_attempts=2,
+               network_error_budget=5.0, transport=httpx.MockTransport(always_down))
+    with pytest.raises(kalshi.RetryError):
+        c.get("/markets/trades")
+    c.close()
+    # max_attempts is 2; the network budget must have carried it well past that
+    assert calls["n"] > 2, f"gave up after {calls['n']} attempts, ignoring the budget"
