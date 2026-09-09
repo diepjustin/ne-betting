@@ -542,3 +542,13 @@ ladder event is LSU.
   contract is on file. The Kalshi side of this is still the partial pass that
   stopped at market 6,453 of 22,564, and `KXNCAAFFINALIST` -- the fifth LSU
   rung -- is configured but not yet collected.
+- **2026-09-09, before the wide historical pass.** Two defects would have made
+  a twenty-hour run return almost none of what it was run for. The collector
+  passed one watermark to both trade endpoints, so `/historical/trades` was
+  asked for a window starting after the live watermark -- newer than every
+  pre-cutoff row, and the January-to-July window the pass exists to reach.
+  And 2,836 markets flagged `finalized_complete` by the live-only pass were
+  skipped before the historical sweep could run, because a settled market
+  cannot trade again. The historical side is now swept once per market and
+  flagged rather than watermarked, a settled market still gets its sweep, and
+  a settled market's frozen metadata is not re-fetched to do it. Three tests.

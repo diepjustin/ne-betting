@@ -173,29 +173,45 @@ def collect_market(client: Client, archive: RawArchive, cfg: dict, state: State,
         stats.skipped_no_volume += 1
         return
     st.pop("untraded", None)
-    if st.get("finalized_complete"):
+
+    # A live market that opened before Kalshi's live/historical cutoff has
+    # trades on both sides of it, and the two sides are reached by different
+    # endpoints. The historical side is immutable -- it is settled, pre-cutoff
+    # data -- so it is swept once and flagged, rather than watermarked.
+    wants_historical = historical and m.partition == "live" and not st.get("historical_done")
+
+    if st.get("finalized_complete") and not wants_historical:
         # trades cannot occur after settlement and metadata is frozen; the
         # last full fetch is already in the archive.
         stats.skipped_finalized += 1
         return
 
-    meta_path = "/markets/" if m.partition == "live" else "/historical/markets/"
-    resp = client.get(f"{meta_path}{m.ticker}")
-    archive.write(SOURCE, "market" if m.partition == "live" else "historical_market",
-                  m.ticker, resp)
     status = m.status
-    if resp.status == 200:
-        status = (resp.json().get("market") or {}).get("status", status)
+    if st.get("finalized_complete"):
+        # Settled, so its metadata is already archived and frozen. Only the
+        # historical sweep is outstanding; do not spend a request re-reading
+        # a market that cannot change.
+        endpoints = [("/historical/trades", None)]
+    else:
+        meta_path = "/markets/" if m.partition == "live" else "/historical/markets/"
+        resp = client.get(f"{meta_path}{m.ticker}")
+        archive.write(SOURCE, "market" if m.partition == "live" else "historical_market",
+                      m.ticker, resp)
+        if resp.status == 200:
+            status = (resp.json().get("market") or {}).get("status", status)
 
-    trades_path = "/markets/trades" if m.partition == "live" else "/historical/trades"
-    endpoints = [trades_path]
-    if historical and m.partition == "live":
-        # a live market that opened before the cutoff has trades on both sides
-        endpoints.append("/historical/trades")
+        # (endpoint, watermark). The live endpoint resumes from the newest
+        # trade seen. The historical endpoint must not: the live watermark is
+        # newer than every pre-cutoff trade, so passing it as min_ts asks the
+        # historical endpoint for a window that ends before its data begins
+        # and the whole point of --historical is lost.
+        trades_path = "/markets/trades" if m.partition == "live" else "/historical/trades"
+        endpoints = [(trades_path, st.get("watermark_ts"))]
+        if wants_historical:
+            endpoints.append(("/historical/trades", None))
 
-    newest = st.get("watermark_ts")  # epoch seconds, int
-    newest_seen = newest
-    for ep in endpoints:
+    newest_seen = st.get("watermark_ts")
+    for ep, newest in endpoints:
         cursor = None
         page = 0
         while True:
@@ -219,6 +235,8 @@ def collect_market(client: Client, archive: RawArchive, cfg: dict, state: State,
             cursor = body.get("cursor")
             if not cursor or not rows:
                 break
+        if ep == "/historical/trades" and m.partition == "live":
+            st["historical_done"] = True
 
     st["series"] = m.series
     st["event_ticker"] = m.event_ticker

@@ -257,3 +257,94 @@ def test_state_is_batched_but_never_lost(tmp_path):
     assert not p.exists(), "should not have written yet"
     s.save(force=True)
     assert len(State(p).data["markets"]) == 9
+
+
+# --- the pre-cutoff sweep ----------------------------------------------------
+
+class HistoricalRouter(Router):
+    """Kalshi with a live/historical cutoff.
+
+    `/markets/trades` serves the recent rows, `/historical/trades` serves rows
+    from before the cutoff. Both honour `min_ts`, which is the whole point:
+    the live watermark is newer than every historical row, so passing it to
+    the historical endpoint returns nothing.
+    """
+
+    def __init__(self):
+        super().__init__()
+        oldest = min(int(kalshi.parse_rfc3339(t["created_time"]).timestamp())
+                     for t in self.trades)
+        self.cutoff = oldest
+        self.historical = [
+            dict(t, trade_id=f"h{i}",
+                 created_time="2026-02-0%dT12:00:00.000000Z" % (i + 1))
+            for i, t in enumerate(self.trades[:3])]
+
+    def handler(self, request):
+        p = request.url.path
+        if p.endswith("/historical/trades"):
+            self.calls.append((p, dict(request.url.params)))
+            q = request.url.params
+            rows = self.historical
+            if "min_ts" in q:
+                mt = int(q["min_ts"])
+                rows = [t for t in rows
+                        if int(kalshi.parse_rfc3339(t["created_time"]).timestamp()) >= mt]
+            return httpx.Response(200, json={"trades": rows, "cursor": ""})
+        return super().handler(request)
+
+
+def test_historical_sweep_is_not_bounded_by_the_live_watermark(tmp_path, small_cfg, matcher):
+    """The bug that would have wasted a twenty-hour pass.
+
+    Every 2026 futures market opened in January, and coach hedges are
+    plausibly written preseason. That window is only reachable through
+    `/historical/trades`. Passing the live watermark as `min_ts` asks that
+    endpoint for a window starting after its data ends, so the run costs a
+    full day and returns none of what it was run for.
+    """
+    router = HistoricalRouter()
+    run_once(tmp_path, router, small_cfg, matcher)          # live-only first
+    router.calls.clear()
+    _, state, _, stats = run_once(tmp_path, router, small_cfg, matcher, historical=True)
+
+    hist = [q for p, q in router.calls if p.endswith("/historical/trades")]
+    assert hist, "the historical endpoint was never called"
+    assert all("min_ts" not in q for q in hist), \
+        "the historical sweep must not inherit the live watermark"
+    assert state.market("KXNCAAFB10-26-NEB")["historical_done"] is True
+
+
+def test_the_historical_sweep_runs_once_and_then_stops(tmp_path, small_cfg, matcher):
+    """Pre-cutoff data is settled and immutable, so it is swept, not polled."""
+    router = HistoricalRouter()
+    run_once(tmp_path, router, small_cfg, matcher, historical=True)
+    router.calls.clear()
+    run_once(tmp_path, router, small_cfg, matcher, historical=True)
+    assert not any(p.endswith("/historical/trades") for p, _ in router.calls)
+
+
+def test_a_settled_market_still_gets_its_pre_cutoff_history(tmp_path, small_cfg, matcher):
+    """The other half of the bug.
+
+    2,836 markets were already flagged finalized by the live-only pass. A
+    settled market cannot trade again, so it is skipped -- which would have
+    meant its January-to-July history was never fetched at all.
+    """
+    router = HistoricalRouter()
+    router.market = {"market": dict(router.market["market"], status="finalized")}
+    _, state, _, _ = run_once(tmp_path, router, small_cfg, matcher)
+    assert state.market("KXNCAAFB10-26-NEB")["finalized_complete"] is True
+
+    router.calls.clear()
+    _, state, _, stats = run_once(tmp_path, router, small_cfg, matcher, historical=True)
+    assert any(p.endswith("/historical/trades") for p, _ in router.calls), \
+        "a finalized market was skipped before its historical sweep"
+    # and it costs no metadata request, because settled metadata is frozen
+    assert not any(p.endswith("/markets/KXNCAAFB10-26-NEB") for p, _ in router.calls)
+    assert state.market("KXNCAAFB10-26-NEB")["historical_done"] is True
+
+    router.calls.clear()
+    _, _, _, stats = run_once(tmp_path, router, small_cfg, matcher, historical=True)
+    assert stats.skipped_finalized == 1
+    assert not router.calls or not any("trades" in p for p, _ in router.calls)
