@@ -1,0 +1,125 @@
+name: husker-markets — daily collection
+
+# Runs the Kalshi collector once a day and keeps two things:
+#   * the collectors' watermark state, kept in the Actions cache rather than
+#     committed. At the Nebraska scope it is a few KB, but the wide scope
+#     tracks 22,564 markets, and a multi-megabyte file rewritten by a daily
+#     commit is exactly the pattern this repo has already had to purge from
+#     its history once;
+#   * the day's raw archive, uploaded as a workflow artifact (90-day
+#     retention). Raw is gitignored because a season of it is tens of MB.
+#     Where raw lives past 90 days is an open decision (RECON §6). Until it is
+#     made, download artifacts you care about; the same trades stay
+#     re-fetchable from the API for ~3 months plus the historical endpoints.
+#
+# Cadence is the point: markets settle and delist, and a market never seen
+# active is a market whose metadata came only from the historical mirror.
+#
+# Moved into this repo when it split out of diepjustin.github.io. The
+# Actions cache is repo-scoped and did not move with it, so the first run
+# here starts cold -- survivable per the note above, not a data gap.
+
+on:
+  schedule:
+    # 10:00 UTC ≈ 5am Central, after Kalshi's overnight lull and before
+    # Saturday kickoffs move the numbers.
+    - cron: '0 10 * * *'
+  workflow_dispatch:
+
+# Read-only: this job no longer writes to the repository. State lives in the
+# cache and raw lives in an artifact.
+permissions:
+  contents: read
+
+concurrency:
+  group: husker-markets-collect
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    # ~500 requests at one a second plus retries; anything past 40 min is hung.
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install
+        run: uv sync --frozen
+
+      # Watermarks from the last run. The key carries the run id so every run
+      # writes a fresh entry, and the prefix restore-key picks up the newest
+      # previous one -- the same pattern the Pages workflow uses for its
+      # payload.
+      #
+      # Losing this cache is survivable, not a data gap: the collectors simply
+      # refetch from the beginning of each platform's live window, which is
+      # slow rather than lossy. GitHub evicts entries untouched for a week, so
+      # a job left disabled that long starts cold. The step below says which
+      # happened.
+      - name: Restore collector state
+        id: state
+        uses: actions/cache/restore@v5
+        with:
+          path: data/state
+          key: husker-state-${{ github.run_id }}
+          restore-keys: |
+            husker-state-
+
+      - name: Say whether state came back
+        run: |
+          # The directory is gitignored now, so a checkout with no cache hit
+          # does not have it, and the `tee` below would fail before the
+          # collector wrote anything.
+          mkdir -p data/state
+          if [ -n "${{ steps.state.outputs.cache-matched-key }}" ]; then
+            echo "restored ${{ steps.state.outputs.cache-matched-key }}"
+            wc -c data/state/*.json 2>/dev/null || true
+          else
+            echo "no state cache: this run starts cold and will refetch each"
+            echo "market from the start of its live window"
+          fi
+
+      - name: Collect Kalshi
+        env:
+          HUSKER_MARKETS_CONTACT: ${{ secrets.HUSKER_MARKETS_CONTACT || 'Justin Diep, The Daily Nebraskan' }}
+        run: uv run python -m collectors.kalshi | tee data/state/last_run_kalshi.json
+
+      # Runs even if Kalshi failed: a gap on one platform should not open a
+      # gap on the other. Markets settle and delist; a missed day is gone.
+      - name: Collect Polymarket
+        if: always()
+        env:
+          HUSKER_MARKETS_CONTACT: ${{ secrets.HUSKER_MARKETS_CONTACT || 'Justin Diep, The Daily Nebraskan' }}
+        run: uv run python -m collectors.polymarket | tee data/state/last_run_polymarket.json
+
+      # The artifact is a publication. On a public repository any GitHub
+      # account can download a run artifact, and raw Polymarket trades name
+      # the person who made each one. Raw itself is append-only and is not
+      # touched; this stages a separate redacted copy and only that is
+      # uploaded. See scripts/redact_for_upload.py.
+      - name: Stage a redacted copy for upload
+        if: always()
+        run: uv run python scripts/redact_for_upload.py
+
+      - name: Upload raw archive
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: raw-${{ github.run_id }}
+          path: data/raw_for_upload
+          retention-days: 90
+          if-no-files-found: warn
+
+      # Saved even when a collector failed, because the watermarks it did
+      # advance are still correct and re-fetching them costs hours at the wide
+      # scope.
+      - name: Save collector state
+        if: always()
+        uses: actions/cache/save@v5
+        with:
+          path: data/state
+          key: husker-state-${{ github.run_id }}
