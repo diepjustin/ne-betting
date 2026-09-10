@@ -282,3 +282,23 @@ def test_the_title_names_the_team_for_reused_code_schools(title, team):
 ])
 def test_a_game_splits_into_two_schools_without_splitting_on_hyphens(game_id, pair):
     assert r._teams_of(game_id) == pair
+
+
+@pytest.mark.parametrize("title,expected", [
+    # The reused-code schools have to come from the title; their ticker code
+    # is deliberately not in the vocabulary. Every verb here was counted in
+    # the archive rather than guessed at.
+    ("Will Kansas St. reach the College Football Playoff National Championship Game?", "KSU"),
+    ("Will Washington St. qualify for the College Football Pac-12 Championship Game?", "WSU"),
+    ("Will Colorado St. win the College Football Mountain West Championship?", "CSU"),
+    ("Will Kansas St. record 10+ wins?", "KSU"),
+])
+def test_a_title_verb_we_do_not_cover_erases_a_school(title, expected):
+    """`reach` was missing, and with it Kansas State's title-game rung."""
+    assert r.team_in_text(title) == expected
+
+
+def test_a_player_market_still_names_no_school():
+    """"Will Arch Manning be selected as a finalist" says nothing about Texas."""
+    assert r.team_in_text(
+        "Will Arch Manning be selected as a finalist for the 2026 Heisman Trophy?") is None

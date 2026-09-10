@@ -1,11 +1,18 @@
 """The bonus-hedging detector, against the trades it was built to find.
 
-The four trades below are real. They were pulled from Kalshi's public trade
-API on 8 Sep 2026 and sit in this project's raw archive; the counts, prices
-and timestamps here are copied from those responses to the microsecond. They
-are the trades CBS and InGame reported as a hedge of LSU's coaching-contract
-bonuses. If a change to this module stops finding them, that is a regression
-in the only case we can check against the outside world.
+The five trades below are real. They were pulled from Kalshi's public trade
+API and sit in this project's raw archive; the counts, prices and timestamps
+here are copied from those responses to the microsecond. They are the trades
+CBS and InGame reported as a hedge of LSU's coaching-contract bonuses. If a
+change to this module stops finding them, that is a regression in the only
+case we can check against the outside world.
+
+The fifth rung arrived late. `KXNCAAFFINALIST` was missing from
+config/targets.yml until 9 Sep 2026, so the first four summed to $2,462,500
+against a reported $3,000,000 and the gap was the series nobody was walking.
+The wide historical pass of 10 Sep 2026 collected it: 537,500 contracts at
+$0.12, block-flagged, timestamped between the semifinal and the title. The
+five rungs sum to exactly 3,000,000 contracts.
 """
 import datetime as dt
 import sqlite3
@@ -19,6 +26,7 @@ from collectors.common import PROJECT_ROOT
 LSU_TRADES = [
     ("KXNCAAFPLAYOFF-26-LSU", "KXNCAAFPLAYOFF", "2026-08-13T19:05:35.120042Z", 837_500, 0.41, "yes", 1),
     ("KXNCAAFSF-27-LSU",      "KXNCAAFSF",      "2026-08-13T19:06:05.418402Z", 470_000, 0.18, "yes", 1),
+    ("KXNCAAFFINALIST-27-LSU", "KXNCAAFFINALIST", "2026-08-13T19:06:16.640392Z", 537_500, 0.12, "yes", 1),
     ("KXNCAAF-27-LSU",        "KXNCAAF",        "2026-08-13T19:06:28.362687Z", 787_500, 0.08, "yes", 1),
     ("KXNCAAFQF-27-LSU",      "KXNCAAFQF",      "2026-08-13T19:06:47.395669Z", 367_500, 0.29, "yes", 1),
 ]
@@ -76,31 +84,32 @@ def test_finds_the_lsu_hedge_and_nothing_else(db, ladder):
     assert len(events) == 1, [e["school"] for e in events]
     e = events[0]
     assert e["school"] == "LSU"
-    assert e["yes_contracts"] == 2_462_500 and e["no_contracts"] == 0
-    assert e["rungs"] == 4
-    assert e["orders"] == 4
+    assert e["yes_contracts"] == 3_000_000 and e["no_contracts"] == 0
+    assert e["rungs"] == 5
+    assert e["orders"] == 5
     assert e["first_utc"] == "2026-08-13T19:05:35.120042Z"
     assert e["last_utc"] == "2026-08-13T19:06:47.395669Z"
     assert e["span_seconds"] == 72
-    assert e["contracts"] == 2_462_500
-    assert e["block_orders"] == 4
+    assert e["contracts"] == 3_000_000
+    assert e["block_orders"] == 5
     assert e["not_a_finding_because"] == ""
 
 
-def test_the_sum_is_the_four_rungs_we_have_not_the_reported_three_million(db, ladder):
-    """$2,462,500, not $3,000,000.
+def test_the_five_rungs_sum_to_the_reported_three_million(db, ladder):
+    """Exactly 3,000,000 contracts for $662,050, across 72 seconds.
 
-    The reported total includes a fifth rung in KXNCAAFFINALIST, a series that
-    was missing from config/targets.yml until 9 Sep 2026 and so was never
-    collected. When a pass that includes it is loaded, this figure moves and
-    this test should be updated against the new archive -- not before.
+    The number that says the pipeline is right. Four rungs summed to
+    $2,462,500 until the wide historical pass of 10 Sep 2026 collected
+    KXNCAAFFINALIST; the missing $537,500 was a series absent from the
+    target list, not a discrepancy in the reporting.
     """
     series_rung, order, tiers = ladder
     events, _, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
                                         a.MIN_CONTRACTS, a.MIN_TAKER_COST)
-    assert events[0]["payout_if_every_rung_hits_usd"] == 2_462_500
-    assert events[0]["taker_cost_usd"] == 597_550.0
-    assert "title_game" not in events[0]["rung_list"]
+    assert events[0]["payout_if_every_rung_hits_usd"] == 3_000_000
+    assert events[0]["taker_cost_usd"] == 662_050.0
+    assert "title_game" in events[0]["rung_list"]
+    assert events[0]["span_seconds"] == 72
 
 
 def test_single_rung_repeat_is_a_lead_not_a_finding(db, ladder):
@@ -198,8 +207,9 @@ def test_totals_table_counts_every_trade_exactly_once(db, ladder):
                " WHERE source_market_id LIKE 'KXNCAAFSPREAD%'")
     db.commit()
     rows, totals = a.timeline_daily(db)
-    assert sum(t["trades"] for t in totals) == 8
-    assert sum(r["trades"] for r in rows) > 8, "school rows double-count on purpose"
+    assert sum(t["trades"] for t in totals) == len(LSU_TRADES) + len(NOISE)
+    assert sum(r["trades"] for r in rows) > len(LSU_TRADES) + len(NOISE), \
+        "school rows double-count on purpose"
 
 
 def test_a_run_that_finds_nothing_still_writes_a_readable_file(tmp_path):

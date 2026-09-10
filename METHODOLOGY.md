@@ -392,12 +392,35 @@ lead without anything appearing to fail. A $25,000 bonus rung bought at ten
 cents is 25,000 contracts costing $2,500, and today's floors would not see
 it.
 
-The thresholds are **provisional**, and the reason is worth stating plainly.
-As of the 9 Sep 2026 run the archive has no traded market at all on the
-title-game rung, and one series with markets out of the nineteen configured
-for conference titles. A conference title is the commonest coach bonus rung,
-so these floors are tuned largely without it. Re-run `calibrate` and re-date
-this paragraph once the wide historical pass has loaded.
+**Re-derived 10 Sep 2026, after the wide historical pass.** Every rung now
+has traded markets, including the 68 title-game markets and 13 of the 19
+conference-title series, so the gap that made the first numbers provisional
+is closed. On 605,925 ladder orders drawn from 21.9 million trades, the
+existing settings -- a 15-minute gap, 5,000 contracts, $5,000 -- still return
+exactly one event, and it is LSU. They were not changed, because a threshold
+that returns the one case an outside source confirms and nothing else is not
+improved by moving it.
+
+**The contract floor is not merely inert, it is arithmetically redundant.**
+A Kalshi contract cannot cost more than $1, so an order of fewer than 5,000
+contracts cannot cost $5,000. Any contract floor at or below 5,000 is
+therefore invisible behind the cost floor: the sweep keeps an identical 1,628
+orders at floors of 1,000 and 5,000. It is retained only because it does bite
+once the cost floor is lowered, and lowering the cost floor is the only way
+to reach a smaller hedge.
+
+**What a smaller hedge would cost to look for.** Dropping the cost floor to
+$1,000 takes the count from 1 event to 22 at a 15-minute gap, and to 57 at a
+day. Those are not noise by construction -- they have already survived the
+direction and price tests -- but they are a review queue rather than a set of
+findings, and they should be read as one. `--min-taker-cost 1000` runs it.
+
+**A wide window destroys the case rather than widening it.** At a full day
+and no cost floor the sweep stops finding LSU altogether: the ladder absorbs
+neighbouring orders until the cluster is mixed-side, and the grading sets it
+aside. That is the strongest argument against reaching for a longer window to
+catch a hedge spread over days. A per-day, per-rung roll-up is the way to do
+that; a wider window is not.
 
 **One confirmed case is not a calibration.** There is exactly one hedge in
 the record that an outside source confirms. One true positive cannot support
@@ -408,11 +431,12 @@ then says in the same breath that quietest is not best, because a floor tight
 enough to return one event also drops every hedge smaller than the one case
 we happen to know about.
 
-**What the takers on ladder markets actually pay**, from the same run and the
-grounds for the near-certainty cut: of 37,689 orders, 657 were priced at 95
-cents or more per contract and 649 of those were No takers. That is the
-cash-parking pattern at full scale rather than the 39 orders visible above
-the size floors.
+**What the takers on ladder markets actually pay**, and the grounds for the
+near-certainty cut. Of 605,925 ladder orders in the full archive, 11,888 were
+priced at 95 cents or more per contract and 10,618 of those were No takers,
+carrying $7.5m of taker cost. Cash-parking is not a handful of trades to be
+explained away; it is a standing feature of these markets and the single
+likeliest thing to be mistaken for a hedge.
 
 **The window is a gap, not a span.** `--window-minutes` bounds the time
 between one order and the next, so a long chain of closely spaced orders is
@@ -578,3 +602,29 @@ ladder event is LSU.
   cannot trade again. The historical side is now swept once per market and
   flagged rather than watermarked, a settled market still gets its sweep, and
   a settled market's frozen metadata is not re-fetched to do it. Three tests.
+- **2026-09-10, wide historical pass.** 77 series, 188 discovery pages, 45,195
+  markets -- twice the 22,564 the live-only walk finds, because `--historical`
+  surfaces markets the live endpoint no longer lists. 90,615 requests at one a
+  second over about 39 hours, 120 retries, no market given up on, 643 MB of
+  gzipped raw in 90,495 files. 17,267,838 trade rows fetched. Every one of the
+  2,836 markets the earlier pass had marked settled did get its pre-cutoff
+  sweep, which is what the collector fix was for. Loaded: 75,533 markets and
+  21,896,119 trades, 5,576 duplicate trade rows collapsed, 163 markets
+  unresolved -- the same 163 as before, so widening the archive fivefold added
+  none.
+- **2026-09-10, the reference case is complete.** The LSU ladder now has its
+  fifth rung: `KXNCAAFFINALIST-27-LSU`, 537,500 contracts at $0.12 for
+  $64,500, block-flagged, timestamped 19:06:16.640392Z between the semifinal
+  and the national title. The five rungs sum to **exactly 3,000,000
+  contracts** for $662,050 across 72.3 seconds, which is the figure the CBS
+  and InGame story reported. The earlier $2,462,500 was not a discrepancy in
+  the reporting; it was a series missing from our own target list.
+- **2026-09-10, a verb erased a school.** Three ladder markets carrying trades
+  resolved to no school. Two are honest: a Big 12 championship market whose
+  title names no team at all, and a Division III program that is not in the
+  canonical team list. The third was ours -- "Will Kansas St. reach the
+  College Football Playoff National Championship Game?" -- because the title
+  verb list covered win, qualify, be, finish and go but not `reach`, and KSU
+  is a reused code deliberately kept out of the ticker vocabulary. The verb
+  list is now the set counted in the archive rather than the set imagined:
+  `reach` appears in 50 titles and singular `record` in 21.

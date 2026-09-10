@@ -374,7 +374,15 @@ def team_in_text(text: str) -> str | None:
                 # total yards", "Nebraska: 4+ touchdowns".
                 r"^([A-Z][A-Za-z .'&()-]+?)\s+(?:wins|scores|records)\b",
                 r"^([A-Z][A-Za-z .'&()-]+?):\s*\d",
-                r"(?i:^will (?:the )?)([A-Z][A-Za-z .'&()-]+?) (?i:win|beat|have|qualify|be|make|go|finish)\b",
+                # The verb list is the set actually observed in Kalshi titles,
+                # counted rather than imagined: be, win, qualify, finish,
+                # reach, go, record. `reach` was missing and erased Kansas
+                # State's title-game rung -- "Will Kansas St. reach the
+                # College Football Playoff National Championship Game?" --
+                # which the ticker cannot supply either, because KSU is a
+                # reused code and is deliberately not in the vocabulary.
+                r"(?i:^will (?:the )?)([A-Z][A-Za-z .'&()-]+?) "
+                r"(?i:win|beat|have|qualify|be|make|go|finish|reach|record)\b",
                 r"^([A-Z][A-Za-z .'&()-]+?) Team Total\b"):
         m = re.search(pat, text)
         if not m:
