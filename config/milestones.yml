@@ -19,6 +19,18 @@ ladder:
     # likely to be paid on. It is the lowest rung and the one a detector
     # scoped to playoff markets would have been blind to.
     series: [KXNCAAFBOWLGAME]
+  - rung: season_wins
+    # "Will West Virginia win at least 8 games this season?" -- a win-total
+    # bonus is among the commonest in a coaching contract. Every strike maps
+    # to this one rung, so a hedger buying the 8-win and 9-win markets is one
+    # rung, not two, and cannot inflate a rung count.
+    #
+    # The conference win series are NOT here and are not rungs: KXNCAAFSECWINS
+    # and its siblings ask "will at least 3 teams in the SEC win at least 10
+    # games", which is a league-level count. KXNCAAFH2HWINS compares two
+    # schools' win totals to each other. Neither is a milestone anyone is paid
+    # on. Checked against the archived titles, not assumed from the ticker.
+    series: [KXNCAAFWINS]
   - rung: conference_qualify
     series: [KXNCAAFB10QUAL, KXNCAAFAACQUAL, KXNCAAFACCQUAL, KXNCAAFB12QUAL,
              KXNCAAFCUSAQUAL, KXNCAAFMACQUAL, KXNCAAFMWCQUAL, KXNCAAFPAC12QUAL,
@@ -70,6 +82,6 @@ bonus_tiers: {}
 # Deliberately not rungs, recorded so the reasoning is not re-litigated:
 #   KXNCAAFSEED       a named seed number (#9), not a milestone anyone is paid on
 #   KXNCAAFUNDEFEATED a record, not a selection or a title
-#   KXNCAAFWINS       a win total; a real bonus rung, but a strike ladder of its
-#                     own whose rungs are win counts rather than milestones
+#   KXNCAAF*CONFWINS  "at least 3 teams in the SEC win 10 games" -- league-level
+#   KXNCAAFH2HWINS    one school's win total against another's, not a milestone
 #   KXNCAAF*GAME/SPREAD/TOTAL   one Saturday is not a contract milestone

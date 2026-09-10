@@ -37,6 +37,14 @@ indistinguishable from a hedge.
 **Shape, not size.** Several different rungs in one window is the signal. A
 big trade on one rung is a lead.
 
+What this cannot tell you: an unwind from a hedge. Kalshi publishes no party
+identity, so 40,000 No at the same price eighty minutes after 40,000 Yes on
+the same market is only *probably* one person closing a position. If it is,
+that is a position being managed rather than a bonus being insured.
+`offsetting_markets` counts the markets in a cluster carrying takers on both
+sides, which is the mechanical trace such a rotation leaves. It does not
+disqualify a cluster -- it says the cluster needs reading by a person.
+
 On fills and orders. Kalshi's API returns fills, not orders, and publishes no
 order id: one taker order crossing several resting orders comes back as
 several rows sharing a timestamp. One market here has 24 such rows at the
@@ -244,6 +252,13 @@ def summarise(group: list[dict], tiers: dict, order: list[str]) -> dict:
     rungs = {o["rung"] for o in group}
     yes = sum(o["contracts"] for o in group if o["taker_side"] == "yes")
     no = sum(o["contracts"] for o in group if o["taker_side"] == "no")
+    # Markets the cluster hit from both sides. With no party identity in the
+    # feed this is the only trace a closed-out position leaves, and an
+    # unwind and a hedge are otherwise the same shape.
+    sides: dict[str, set] = {}
+    for o in group:
+        sides.setdefault(o["source_market_id"], set()).add(o["taker_side"])
+    offsetting = sum(1 for v in sides.values() if len(v) > 1)
     s = {
         "school": school,
         "rungs": len(rungs),
@@ -258,6 +273,7 @@ def summarise(group: list[dict], tiers: dict, order: list[str]) -> dict:
         "yes_contracts": round(yes, 2),
         "no_contracts": round(no, 2),
         "mixed_side": bool(yes and no),
+        "offsetting_markets": offsetting,
         "taker_cost_usd": round(sum(o["taker_cost_usd"] for o in group), 2),
         "max_taker_price": max(o["taker_price"] for o in group),
         # Playoff rungs nest -- a team that wins the title also made the
@@ -475,7 +491,8 @@ HEADERS = {
     "ladder": [
         "school", "rungs", "rung_list", "orders", "fills", "first_utc",
         "last_utc", "span_seconds", "day_central", "contracts",
-        "yes_contracts", "no_contracts", "mixed_side", "taker_cost_usd",
+        "yes_contracts", "no_contracts", "mixed_side", "offsetting_markets",
+        "taker_cost_usd",
         "max_taker_price", "payout_if_every_rung_hits_usd", "block_orders",
         "all_counts_round_2500", "tier_match_exact", "tier_match_within_1pct",
         "not_a_finding_because", "markets", "raw_paths"],
@@ -556,6 +573,11 @@ def main(argv=None) -> int:
         print("         %s  (%s, %d block-flagged, up to $%.2f a contract)"
               % (e["rung_list"], e["day_central"], e["block_orders"],
                  e["max_taker_price"]))
+        if e["offsetting_markets"]:
+            print("         READ THIS ONE: %d market(s) traded from both sides."
+                  " With no party identity in\n         the feed, a position"
+                  " being closed and a bonus being insured look alike."
+                  % e["offsetting_markets"])
         if e["tier_match_exact"]:
             print("         exact bonus tiers: %s" % e["tier_match_exact"])
         if e["tier_match_within_1pct"]:

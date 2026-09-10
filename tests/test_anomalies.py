@@ -386,3 +386,66 @@ def test_player_markets_carry_no_dollar_figure_here(db, ladder):
     db.commit()
     rows = a.large_trades(db, a.MIN_CONTRACTS, a.MIN_TAKER_COST)
     assert all("Heisman" not in (r["title"] or "") for r in rows)
+
+
+def test_season_wins_is_a_rung_and_conference_wins_is_not(ladder):
+    """"Will West Virginia win at least 8 games this season?" is a bonus rung.
+
+    "Will at least 3 teams in the SEC win at least 10 games" is a league-level
+    count and nobody's bonus, and H2HWINS compares two schools to each other.
+    Read off the archived titles rather than guessed from the tickers.
+    """
+    series_rung, order, _ = ladder
+    assert series_rung["KXNCAAFWINS"] == "season_wins"
+    for not_a_rung in ("KXNCAAFSECWINS", "KXNCAAFACCWINS", "KXNCAAFBIG12WINS",
+                       "KXNCAAFBIGTENWINS", "KXNCAAFH2HWINS"):
+        assert not_a_rung not in series_rung
+    assert order.index("season_wins") < order.index("playoff_berth")
+
+
+def test_every_win_strike_is_one_rung(db, ladder):
+    """A hedger buying the 8-win and 9-win markets covers one bonus."""
+    series_rung, order, tiers = ladder
+    add(db, "KXNCAAFWINS-26WVU-8", "KXNCAAFWINS", "2026-07-01T12:00:00Z",
+        100_000, 0.27, "yes", "WVU")
+    add(db, "KXNCAAFWINS-26WVU-9", "KXNCAAFWINS", "2026-07-01T12:00:30Z",
+        100_000, 0.15, "yes", "WVU")
+    db.commit()
+    events, leads, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
+                                            a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    assert all(e["school"] != "WVU" for e in events), "two strikes are not two rungs"
+    assert [l for l in leads if l["school"] == "WVU"][0]["rungs"] == 1
+
+
+def test_a_closed_position_is_flagged_for_a_person_to_read(db, ladder):
+    """South Carolina, 15 Jul 2026, four exchange-flagged blocks.
+
+    40,000 Yes on playoff qualification, then eighty minutes later 40,000 No
+    at the same price plus 50,000 more No, then 100,000 Yes on the 8-win
+    market nine seconds after that. Read one way it is a bonus hedge rotating
+    rungs; read another it is a position being closed. The feed carries no
+    party identity, so the detector cannot choose -- it flags and defers.
+    """
+    series_rung, order, tiers = ladder
+    add(db, "KXNCAAFPLAYOFF-26-SCAR", "KXNCAAFPLAYOFF", "2026-07-15T22:52:40.759101Z",
+        40_000, 0.11, "no", "SC", block=1, tid="sc-a")
+    add(db, "KXNCAAFPLAYOFF-26-SCAR", "KXNCAAFPLAYOFF", "2026-07-15T22:52:50.000000Z",
+        140_000, 0.11, "yes", "SC", block=1, tid="sc-b")
+    add(db, "KXNCAAFWINS-26SCAR-8", "KXNCAAFWINS", "2026-07-15T22:53:06.712186Z",
+        100_000, 0.27, "yes", "SC", block=1, tid="sc-c")
+    db.commit()
+    events, _, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
+                                        a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    sc = [e for e in events if e["school"] == "SC"]
+    assert len(sc) == 1, "it is a two-rung cluster and should surface"
+    assert sc[0]["offsetting_markets"] == 1, "the playoff market was traded both ways"
+    assert sc[0]["mixed_side"] is True
+
+
+def test_the_lsu_hedge_has_nothing_offsetting(db, ladder):
+    """Five rungs, one side, five separate markets. Nothing to read twice."""
+    series_rung, order, tiers = ladder
+    events, _, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
+                                        a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    assert events[0]["school"] == "LSU"
+    assert events[0]["offsetting_markets"] == 0

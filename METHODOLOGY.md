@@ -502,6 +502,31 @@ the reasoning in `config/milestones.yml` so it is not re-litigated: seed
 number, undefeated season, win totals, single games, and the two markets that
 ask which *conference* the champion comes from, which is nobody's bonus.
 
+**Season win totals are a rung, added 10 Sep 2026.** A win-total bonus is
+among the commonest in a coaching contract, and `KXNCAAFWINS` asks "Will West
+Virginia win at least 8 games this season?" Every strike maps to the one
+`season_wins` rung, so a hedger buying the 8-win and 9-win markets is one
+rung and cannot inflate a rung count. The four conference win series are not
+rungs and the titles are why: `KXNCAAFSECWINS` and its siblings ask whether
+at least three teams in a conference win ten games, which is a league-level
+count, and `KXNCAAFH2HWINS` compares two schools' win totals to each other.
+Those were read off the archived titles; going by the ticker names alone
+would have added all four.
+
+**The detector cannot tell an unwind from a hedge, and says so.** Kalshi
+publishes no party identity. South Carolina, 15 July 2026, has four
+exchange-flagged block trades: 40,000 Yes on playoff qualification, then
+eighty minutes later 40,000 No at the same price plus 50,000 more No, then
+100,000 Yes on the 8-win market nine seconds after that. Read one way that is
+a bonus hedge rotating from one rung to another. Read another way it is a
+position being closed. Nothing in the feed decides it. `offsetting_markets`
+counts the markets a cluster hit from both sides, which is the only
+mechanical trace a closed-out position leaves; a cluster carrying one is
+still reported as a finding, with a line telling a person to read it rather
+than quote it. This limit applies to every finding, including LSU's -- which
+happens to have no offsetting market at all, five separate markets bought
+from one side.
+
 **Named athletes carry no dollar figure here.** The outsized-trade view
 excludes player and draft markets. Those markets are titled with an athlete's
 name, this view exists to chase school-level milestone trading, and plan §9
