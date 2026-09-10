@@ -417,20 +417,26 @@ def test_every_win_strike_is_one_rung(db, ladder):
     assert [l for l in leads if l["school"] == "WVU"][0]["rungs"] == 1
 
 
-def test_a_closed_position_is_flagged_for_a_person_to_read(db, ladder):
-    """South Carolina, 15 Jul 2026, four exchange-flagged blocks.
+def test_a_closed_position_is_flagged_even_when_it_opened_hours_earlier(db, ladder):
+    """South Carolina, 15 Jul 2026, the four real exchange-flagged blocks.
 
-    40,000 Yes on playoff qualification, then eighty minutes later 40,000 No
-    at the same price plus 50,000 more No, then 100,000 Yes on the 8-win
-    market nine seconds after that. Read one way it is a bonus hedge rotating
-    rungs; read another it is a position being closed. The feed carries no
-    party identity, so the detector cannot choose -- it flags and defers.
+    40,000 Yes on playoff qualification at 21:33, then eighty minutes later
+    40,000 No at the same price plus 50,000 more No, then 100,000 Yes on the
+    8-win market nine seconds after that. Read one way it is a bonus hedge
+    rotating rungs; read another it is a position being closed.
+
+    The two halves are eighty minutes apart, so only the last three land in
+    one 15-minute cluster and inside that cluster the playoff market shows
+    No takers alone. A check confined to the cluster saw nothing -- which is
+    what the first version of this did, on exactly the case it was built for.
     """
     series_rung, order, tiers = ladder
+    add(db, "KXNCAAFPLAYOFF-26-SCAR", "KXNCAAFPLAYOFF", "2026-07-15T21:33:14.680024Z",
+        40_000, 0.11, "yes", "SC", block=1, tid="sc-open")
     add(db, "KXNCAAFPLAYOFF-26-SCAR", "KXNCAAFPLAYOFF", "2026-07-15T22:52:40.759101Z",
         40_000, 0.11, "no", "SC", block=1, tid="sc-a")
-    add(db, "KXNCAAFPLAYOFF-26-SCAR", "KXNCAAFPLAYOFF", "2026-07-15T22:52:50.000000Z",
-        140_000, 0.11, "yes", "SC", block=1, tid="sc-b")
+    add(db, "KXNCAAFPLAYOFF-26-SCAR", "KXNCAAFPLAYOFF", "2026-07-15T22:52:57.457604Z",
+        50_000, 0.11, "no", "SC", block=1, tid="sc-b")
     add(db, "KXNCAAFWINS-26SCAR-8", "KXNCAAFWINS", "2026-07-15T22:53:06.712186Z",
         100_000, 0.27, "yes", "SC", block=1, tid="sc-c")
     db.commit()
@@ -438,8 +444,29 @@ def test_a_closed_position_is_flagged_for_a_person_to_read(db, ladder):
                                         a.MIN_CONTRACTS, a.MIN_TAKER_COST)
     sc = [e for e in events if e["school"] == "SC"]
     assert len(sc) == 1, "it is a two-rung cluster and should surface"
-    assert sc[0]["offsetting_markets"] == 1, "the playoff market was traded both ways"
-    assert sc[0]["mixed_side"] is True
+    assert sc[0]["orders"] == 3, "the opening Yes is outside the cluster"
+    assert sc[0]["offsetting_markets"] == 1, "and is still found and reported"
+    assert sc[0]["offsetting_contracts"] == 40_000
+
+
+def test_ordinary_retail_flow_on_the_other_side_does_not_flag_a_cluster(db, ladder):
+    """These markets trade both ways constantly.
+
+    Counting any opposite-side order would flag every cluster, including
+    LSU's, and a flag that fires on everything says nothing.
+    """
+    series_rung, order, tiers = ladder
+    add(db, "KXNCAAFPLAYOFF-26-BAY", "KXNCAAFPLAYOFF", "2026-08-20T12:00:00Z",
+        100_000, 0.30, "yes", "BAY", tid="bay-a")
+    add(db, "KXNCAAFSF-27-BAY", "KXNCAAFSF", "2026-08-20T12:00:30Z",
+        100_000, 0.30, "yes", "BAY", tid="bay-b")
+    add(db, "KXNCAAFPLAYOFF-26-BAY", "KXNCAAFPLAYOFF", "2026-08-20T15:00:00Z",
+        400, 0.30, "no", "BAY", tid="bay-retail")
+    db.commit()
+    events, _, _ = a.find_ladder_events(db, series_rung, tiers, order, 900,
+                                        a.MIN_CONTRACTS, a.MIN_TAKER_COST)
+    bay = [e for e in events if e["school"] == "BAY"][0]
+    assert bay["offsetting_markets"] == 0, "400 contracts cannot offset 100,000"
 
 
 def test_the_lsu_hedge_has_nothing_offsetting(db, ladder):

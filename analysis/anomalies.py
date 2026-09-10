@@ -28,11 +28,13 @@ The three things that separate a hedge from a large trade:
 the team succeeds, so they buy the success. A No taker on the same market is
 making the opposite bet and is not hedging a bonus.
 
-**Price.** 62 of the 73 orders clearing the size floors on ladder markets are
-No takers, and 39 of those paid 95 cents or more per contract -- parking cash
-for a 1-to-5% return on a team that will not win. That is a yield trade. It
-walks several rungs of one school's ladder in minutes and would otherwise be
-indistinguishable from a hedge.
+**Price.** Of 630,970 ladder orders in the archive, 12,549 were priced at 95
+cents or more per contract and 10,715 of those were No takers -- parking cash
+for a 1-to-5% return on a team that will not win. That is a yield trade, it
+walks several rungs of one school's ladder in minutes, and without the price
+and direction tests it is indistinguishable from a hedge. Eight such clusters
+are set aside in the current archive; nine would otherwise be reported as
+findings where one belongs.
 
 **Shape, not size.** Several different rungs in one window is the signal. A
 big trade on one rung is a lead.
@@ -41,9 +43,13 @@ What this cannot tell you: an unwind from a hedge. Kalshi publishes no party
 identity, so 40,000 No at the same price eighty minutes after 40,000 Yes on
 the same market is only *probably* one person closing a position. If it is,
 that is a position being managed rather than a bonus being insured.
-`offsetting_markets` counts the markets in a cluster carrying takers on both
-sides, which is the mechanical trace such a rotation leaves. It does not
-disqualify a cluster -- it says the cluster needs reading by a person.
+`offsetting_markets` counts the markets where a comparable order sits on the
+other side within a day either way of the cluster, which is the mechanical
+trace such a rotation leaves. It does not disqualify a cluster -- it says the
+cluster needs reading by a person. The window is deliberately wider than the
+cluster: the first version of this check looked only inside the cluster and
+therefore missed the very case it was written for, because the two halves of
+South Carolina's rotation are eighty minutes apart.
 
 On fills and orders. Kalshi's API returns fills, not orders, and publishes no
 order id: one taker order crossing several resting orders comes back as
@@ -72,12 +78,19 @@ from collectors.common import PROJECT_ROOT, load_yaml
 
 CENTRAL = ZoneInfo("America/Chicago")
 
-# Defaults, and why each is the number it is. Sweeping the archive at floors of
-# 1,000 / 5,000 / 10,000 / 25,000 contracts returned 11 / 1 / 1 / 1 multi-rung
-# clusters; the one that survives every floor is the LSU hedge of 13 Aug 2026.
-# 5,000 is the loosest floor that is not yet noisy. Both numbers were derived
-# on an archive holding six of the ladder's series, so they are provisional
-# until the wide pass lands -- see METHODOLOGY.
+# Defaults, re-derived by analysis/calibrate.py on 10 Sep 2026 against the full
+# archive -- 630,970 ladder orders, every rung carrying traded markets -- and
+# left unchanged, because they return the one case an outside source confirms
+# plus one flagged for reading, and nothing else.
+#
+# The cost floor is the only knob that bites. A contract cannot cost more than
+# $1, so an order of fewer than 5,000 contracts cannot cost $5,000 and any
+# contract floor at or below 5,000 is invisible behind the cost floor: the
+# sweep keeps an identical 1,630 orders at floors of 1,000 and 5,000. The
+# contract floor is kept because it does bite once the cost floor is lowered,
+# and lowering the cost floor is the only way to reach a smaller hedge --
+# $1,000 takes the count from 2 events to 26, which is a review queue rather
+# than a set of findings. See METHODOLOGY.
 MIN_CONTRACTS = 5_000
 MIN_TAKER_COST = 5_000.0
 WINDOW_MINUTES = 15
@@ -87,6 +100,15 @@ NEAR_CERTAIN_PRICE = 0.95
 # A percentile needs a distribution. Below this many trades in a market, the
 # largest trade is trivially the highest and means nothing.
 MIN_TRADES_FOR_PERCENTILE = 30
+# How far either side of a cluster to look for the other side of its own
+# trades. South Carolina bought 40,000 Yes and sold it back eighty minutes
+# later, so a check confined to the cluster's own window saw nothing: the
+# evidence of the unwind sat outside it.
+OFFSET_LOOKBACK_S = 86_400
+# ...and only an order big enough to actually offset counts. These markets
+# carry constant small retail flow, so any opposite-side trade at all would
+# flag every cluster and mean nothing.
+OFFSET_MIN_RATIO = 0.25
 
 
 def load_ladder(path: Path) -> tuple[dict[str, str], list[str], dict]:
@@ -246,19 +268,50 @@ def grade(s: dict) -> str:
     return ""
 
 
-def summarise(group: list[dict], tiers: dict, order: list[str]) -> dict:
+def _offsetting(group: list[dict], nearby: dict[str, list[dict]]) -> tuple[int, float]:
+    """Markets this cluster traded from both sides, counting a wider window.
+
+    With no party identity in the feed, a comparable order on the other side
+    of the same market is the only trace a closed-out position leaves. The
+    window is wider than the cluster because the two halves of a rotation are
+    not adjacent: South Carolina's opening Yes was eighty minutes before the
+    No that reversed it, and a check confined to the cluster saw nothing.
+
+    Only an order at least OFFSET_MIN_RATIO of what the cluster did in that
+    market counts. These markets carry constant small retail flow on both
+    sides, so counting any opposite trade at all would flag every cluster.
+    """
+    lo = min(o["executed_ts"] for o in group) - OFFSET_LOOKBACK_S
+    hi = max(o["executed_ts"] for o in group) + OFFSET_LOOKBACK_S
+    ours: dict[str, dict] = {}
+    for o in group:
+        d = ours.setdefault(o["source_market_id"],
+                            {"sides": set(), "contracts": 0.0})
+        d["sides"].add(o["taker_side"])
+        d["contracts"] += o["contracts"]
+    n, size = 0, 0.0
+    for mkt, d in ours.items():
+        want = {"yes", "no"} - d["sides"]
+        found = 0.0
+        for o in nearby.get(mkt, ()):
+            if lo <= o["executed_ts"] <= hi and o["taker_side"] in want \
+                    and o["contracts"] >= OFFSET_MIN_RATIO * d["contracts"]:
+                found += o["contracts"]
+        # Both sides inside the cluster is itself offsetting.
+        if len(d["sides"]) > 1 or found:
+            n += 1
+            size += found or d["contracts"]
+    return n, round(size, 2)
+
+
+def summarise(group: list[dict], tiers: dict, order: list[str],
+              nearby: dict[str, list[dict]] | None = None) -> dict:
     school = group[0]["team"]
     exact, near = match_tiers(school, group, tiers)
     rungs = {o["rung"] for o in group}
     yes = sum(o["contracts"] for o in group if o["taker_side"] == "yes")
     no = sum(o["contracts"] for o in group if o["taker_side"] == "no")
-    # Markets the cluster hit from both sides. With no party identity in the
-    # feed this is the only trace a closed-out position leaves, and an
-    # unwind and a hedge are otherwise the same shape.
-    sides: dict[str, set] = {}
-    for o in group:
-        sides.setdefault(o["source_market_id"], set()).add(o["taker_side"])
-    offsetting = sum(1 for v in sides.values() if len(v) > 1)
+    offsetting, offsetting_contracts = _offsetting(group, nearby or {})
     s = {
         "school": school,
         "rungs": len(rungs),
@@ -274,6 +327,7 @@ def summarise(group: list[dict], tiers: dict, order: list[str]) -> dict:
         "no_contracts": round(no, 2),
         "mixed_side": bool(yes and no),
         "offsetting_markets": offsetting,
+        "offsetting_contracts": offsetting_contracts,
         "taker_cost_usd": round(sum(o["taker_cost_usd"] for o in group), 2),
         "max_taker_price": max(o["taker_price"] for o in group),
         # Playoff rungs nest -- a team that wins the title also made the
@@ -297,9 +351,14 @@ def find_ladder_events(db, series_rung, tiers, order, window_s,
                        min_contracts, min_cost):
     orders, orphans = fetch_milestone_orders(db, series_rung)
     kept = [o for o in orders if clears_floor(o, min_contracts, min_cost)]
+    # Every ladder order, not just the ones clearing the floors: the other
+    # half of a rotation may be smaller than the half that got noticed.
+    nearby: dict[str, list[dict]] = {}
+    for o in orders:
+        nearby.setdefault(o["source_market_id"], []).append(o)
     events, leads = [], []
     for g in cluster(kept, window_s):
-        s = summarise(g, tiers, order)
+        s = summarise(g, tiers, order, nearby)
         (leads if s["not_a_finding_because"] else events).append(s)
     events.sort(key=lambda e: -e["contracts"])
     leads.sort(key=lambda e: -e["contracts"])
@@ -492,7 +551,7 @@ HEADERS = {
         "school", "rungs", "rung_list", "orders", "fills", "first_utc",
         "last_utc", "span_seconds", "day_central", "contracts",
         "yes_contracts", "no_contracts", "mixed_side", "offsetting_markets",
-        "taker_cost_usd",
+        "offsetting_contracts", "taker_cost_usd",
         "max_taker_price", "payout_if_every_rung_hits_usd", "block_orders",
         "all_counts_round_2500", "tier_match_exact", "tier_match_within_1pct",
         "not_a_finding_because", "markets", "raw_paths"],
@@ -574,10 +633,11 @@ def main(argv=None) -> int:
               % (e["rung_list"], e["day_central"], e["block_orders"],
                  e["max_taker_price"]))
         if e["offsetting_markets"]:
-            print("         READ THIS ONE: %d market(s) traded from both sides."
-                  " With no party identity in\n         the feed, a position"
-                  " being closed and a bonus being insured look alike."
-                  % e["offsetting_markets"])
+            print("         READ THIS ONE: %d market(s) traded from both sides"
+                  " within a day, %s contracts'\n         worth. With no party"
+                  " identity in the feed, a position being closed and a\n"
+                  "         bonus being insured look alike."
+                  % (e["offsetting_markets"], f"{e['offsetting_contracts']:,.0f}"))
         if e["tier_match_exact"]:
             print("         exact bonus tiers: %s" % e["tier_match_exact"])
         if e["tier_match_within_1pct"]:

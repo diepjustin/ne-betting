@@ -533,9 +533,12 @@ name, this view exists to chase school-level milestone trading, and plan §9
 keeps a dollar figure away from a named 20-year-old. `analysis/breakdown.py`
 holds the one view that names players and it carries the editor warning.
 
-**What it currently finds.** Across 4.6 million trade rows: seven block
-trades, one ladder event, 64 leads, every one of them a single rung. The
-ladder event is LSU.
+**What it currently finds.** Across 21.9 million trade rows: nine block
+trades, two ladder events, 725 leads. The events are LSU's five-rung ladder
+and a two-rung South Carolina cluster that carries the offsetting flag. Of
+the leads, 717 are a single rung; the other eight are multi-rung clusters set
+aside on direction or price, and without those two tests this run would
+report nine findings where one belongs.
 
 ## Limitations
 
@@ -653,3 +656,23 @@ ladder event is LSU.
   is a reused code deliberately kept out of the ticker vocabulary. The verb
   list is now the set counted in the archive rather than the set imagined:
   `reach` appears in 50 titles and singular `record` in 21.
+- **2026-09-10, the offsetting check was looking in the wrong window.** Added
+  the same day and immediately wrong: it counted only markets a cluster hit
+  from both sides *inside* the cluster, and South Carolina's opening 40,000
+  Yes is eighty minutes before the No that reverses it, so only the last three
+  trades fall in one 15-minute cluster and inside it the playoff market shows
+  No takers alone. The check found nothing on the single case it was written
+  for. It now looks a day either side of a cluster and counts only an order at
+  least a quarter the size of what the cluster did in that market, because
+  these markets carry constant small retail flow on both sides and a flag that
+  fires on everything says nothing. South Carolina now reports 40,000
+  offsetting contracts; LSU reports none, five markets bought from one side.
+- **2026-09-10, second ladder event.** South Carolina, 15 July 2026: two rungs
+  in 26 seconds, 190,000 contracts for $107,100, three of the four trades
+  exchange-flagged as blocks. It is reported as a finding and printed with a
+  line telling a reader to read it rather than quote it. **Not published on
+  the page.** The LSU cluster is corroborated by outside reporting; this one
+  rests entirely on our own reading of ambiguous evidence, and putting a
+  school's name beside the phrase "coach bonus hedging" on evidence we have
+  ourselves recorded as unresolvable would insinuate what it cannot support.
+  The school, the timestamps and the reasoning stay here and in the CSVs.
