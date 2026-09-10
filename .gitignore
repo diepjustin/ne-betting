@@ -22,3 +22,6 @@ data/state/*.json
 # R writes these into whatever directory it is started in
 .Rhistory
 .RData
+
+# SQLite journal beside the ignored database; transient.
+data/husker.db-journal
