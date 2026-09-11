@@ -163,7 +163,14 @@ For contrast the same Ohio game on Kalshi shows 6.36 million contracts of volume
 
 **Rate limits** (`docs/docs_polymarket_rate-limits.md`, Cloudflare IP-based, throttled not rejected): gamma general 4,000 req/10 s, `/events` 500/10 s, `/markets` 300/10 s, `/public-search` 350/10 s; data-api `/trades` 200/10 s.
 
-**polymarket.us:** the site alternated between "Maintenance Mode" and a CFB games list for 10–12 Sep across three loads on 8 Sep; the games list never rendered a Nebraska row while I was looking. Whether polymarket.us games share the same gamma ids and whether their fills appear in `data-api` is **unconfirmed**. This is the single most important open question for the "Nebraskans are trading on Polymarket" thread, because US users are told to trade there.
+**polymarket.us:** the site alternated between "Maintenance Mode" and a CFB games list for 10–12 Sep across three loads on 8 Sep; the games list never rendered a Nebraska row while I was looking. **Resolved 10 Sep 2026, live in the site's own page data:** it is not a mirror of `.com`'s order books. Loaded `https://polymarket.us/sports/cfb/cfb-bowlgr-nebr-2026-09-12` — same event slug as `.com` — and found:
+
+- The *market* slug is `aec-cfb-bowlgr-nebr-2026-09-12` (an `aec-` prefix `.com` never uses), market id `580085`, outcome ids `1159682`/`1159683` — small sequential integers, not the `clobTokenIds` / `conditionId` fields `.com`'s gamma API returns (§2 above). Neither `conditionId` nor `clobTokenIds` appears anywhere in the `.us` page data.
+- A `feeCoefficient: 0.06` field is present — `.com`'s CLOB carries no such per-market fee.
+- All first-party API traffic from the page goes to `web.polymarket.us/gateway.config.v1.ConfigService/GetConfigs` — a distinct gateway. Zero requests were made to `gamma-api.polymarket.com` or `data-api.polymarket.com` anywhere in the page's network log.
+- This market currently shows `volume: 0, liquidity: 0`.
+
+**Conclusion: polymarket.us is a separate product with its own market/outcome ids and its own backend, not a frontend on the same order books.** Its fills will not appear by querying `data-api.polymarket.com/trades` — collecting `.us` activity needs its own collector against `web.polymarket.us` (or whatever REST/gRPC-web surface backs it), which has not been scoped: no recon yet on unauthenticated reachability, a trade-history endpoint, or rate limits.
 
 ---
 
@@ -206,7 +213,7 @@ Per §9 of the plan: the collector may store these rows because they are markets
 1. **Kalshi Data Terms of Use** — editor / counsel read before scheduled collection.
 2. **Kalshi unauthenticated rate limit** — unpublished; run at ≤1 req/s with backoff and log every 429.
 3. **trade-data daily file** — Justin to download one day manually; then decide whether the file or the API is the primary source (the API is confirmed and covers pre-cutoff history).
-4. **polymarket.us** — confirm whether its fills surface in `data-api`. Plan: watch the Bowling Green game (`cfb-bowlgr-nebr-2026-09-12`) on both sites during and after the game and compare fills.
+4. ~~**polymarket.us** — confirm whether its fills surface in `data-api`.~~ **Resolved 10 Sep 2026:** no — it's a separate backend with its own market/outcome ids (§2). New open item: recon `web.polymarket.us`'s gateway for an unauthenticated trade-history route, its rate limits, and whether a `.us` collector is even legally reachable before writing one.
 5. **Team-code table** — Kalshi event tickers use codes (`OHIO`, `BGSU`, `UND`, `NEB`); Polymarket slugs use others (`ohio`, `bowlgr`, `ndak`, `nebr`). Build the mapping from the ESPN schedule as games appear; never guess a code.
 6. Everything player-level stays in the raw archive and out of every summary except a count.
 
