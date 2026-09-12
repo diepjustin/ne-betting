@@ -625,6 +625,24 @@ report nine findings where one belongs.
   traded, carrying 824,128,445 contracts. A full first pass is roughly 7.7
   hours at one request a second. Nothing at that scale has been collected yet;
   where three gigabytes of raw archive lives is still undecided.
+- **2026-09-08, Polymarket run at `--scope all`, logged 12 Sep 2026.** Run the
+  same evening as the Kalshi measurement above but never written down until
+  Justin asked, on 12 Sep, how much bigger the project would get at full
+  college-football scope and the answer came from querying the database
+  instead of a log entry that should already have existed. Recovered from
+  `data/state/fullpass_polymarket.log`, 16:04:03-18:08:45 UTC. 48 discovery
+  pages, 2,396 events seen -- identical to the Nebraska-scope run, because
+  discovery walks the same pages regardless of scope -- of which 1,837
+  matched and 20,881 of their markets were skipped as never-traded. 31,281
+  markets matched, 10,115 with metadata captured. 20,974 requests in just
+  over two hours, 7 retries. 10,804 trade pages, 1,281,759 trade rows, 150.8
+  MB of gzipped raw in 20,967 files. Trades in the loaded archive now reach
+  back to 21 Aug 2024, which the event-listing sweep alone does not reach for
+  a non-Nebraska school -- `search_terms` in `config/targets.yml` are
+  Nebraska-specific and would not have surfaced, say, an LSU game two seasons
+  back -- so `--backfill-since` was almost certainly used for this pass,
+  though the exact value was not captured in the log and is not recorded
+  here as fact.
 - **2026-09-09, hedging detector first run.** Over the 4,633,771 trade rows and
   53,845 markets loaded so far: seven trades carry Kalshi's block flag, three
   on South Carolina's playoff market in July and four on LSU's ladder in

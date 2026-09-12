@@ -297,3 +297,159 @@ dollar figure against a named athlete without the editor.
 The RotoWire page would need collecting weekly and close to kickoff, not daily.
 The Odds API needs an account and a key, which is Justin's decision to make;
 I cannot create accounts. Bot-detection bypass is not on the table.
+
+---
+
+# Phase 0c — Robinhood's prediction markets, and the exchange behind them
+
+Justin asked on 12 Sep 2026 what other venues besides Kalshi and Polymarket
+take Nebraska action. Robinhood was the obvious next question, since it lists
+event contracts through its own app. Probed the same day, no account created,
+no login attempted, nothing beyond public marketing and support pages plus a
+public data endpoint found along the way.
+
+## Robinhood is a broker, not an exchange
+
+Its own support page states this outright: **"Event contracts are offered by
+Robinhood Derivatives, LLC through either KalshiEX LLC, ForecastEX, LLC or
+Rothera Exchange and Clearing LLC."**
+(`robinhood.com/support/articles/event-contracts-overview/`, captured
+12 Sep 2026). So Robinhood volume splits across at least three underlying
+venues. `KalshiEX LLC` is Kalshi's own exchange entity — Robinhood-routed
+Kalshi trades are almost certainly already inside this project's Kalshi
+archive, just not separable as "Robinhood's share" of it, because Kalshi's
+API carries no order-origin field.
+
+State restrictions listed on that page name Maryland (no sports event
+contracts) and Nevada (no *new* sports contracts as of 1 Dec 2025).
+**Nebraska is not on the list.** Same pattern as Kalshi and Polymarket: a
+federal-preemption product that does not respect the state's sports-wagering
+ban.
+
+A fourth venue surfaced in the same search, reported by Reuters and
+Robinhood's own newsroom as four days old at the time of this recon:
+Robinhood began routing "some football event contracts" through **OG.com**'s
+CFTC-regulated exchange starting 8 Sep 2026, under a multi-year deal. OG.com's
+own "About" page claims DraftKings and FanDuel also route through the same
+core exchange. **Not probed further.** If that claim holds, it is a
+potential crack in the "every sportsbook refuses automated access" finding
+in Phase 0b — a regulated exchange layer under a sportsbook brand might
+behave like Kalshi rather than like the sportsbook's own consumer API. Worth
+its own Phase 0 pass if pursued.
+
+`ForecastEX, LLC` (Interactive Brokers' CFTC-registered exchange) — named on
+the same disclosure, not independently probed. Unconfirmed whether it lists
+college football at all.
+
+## Rothera Exchange and Clearing LLC — the one that matters
+
+**Registration.** Confirmed against the CFTC's own registrant records
+(`cftc.gov/TradingOrganizations`): dually registered as a Designated Contract
+Market (DCM #40473) and Derivatives Clearing Organization (DCO #30998).
+Formerly LedgerX LLC, renamed to MIAX Derivatives Exchange (MIAXdx) in 2024,
+renamed again to Rothera on 20 Feb 2026. Rothera's own regulatory-notices
+archive (`rothera.io/reg-notices`) carries the full rulebook lineage back to
+the original LedgerX filings.
+
+**Ownership and scale.** Per trade press (Crypto Briefing, citing Q2 2026
+filings, not independently verified against a primary financial filing): a
+joint venture majority-owned by Robinhood with Susquehanna International
+Group as an investor. Went live for trading in late May/early June 2026.
+Processed **3.5 billion contracts in Q2 2026**, reported as a top-3-to-5 US
+prediction-market venue by volume within weeks of launch. Robinhood's own
+listed clearing firm on its Legal page is "Robinhood Derivatives, LLC" —
+consistent with the ownership claim.
+
+**It lists Nebraska college football, confirmed with live data, not just a
+marketing claim.** Robinhood's own market pages exist for the actual North
+Dakota @ Nebraska game (19 Sep 2026 — the same game as Polymarket's
+`cfb-ndak-nebr-2026-09-19`, §2 above) and a Nebraska season-win-totals market.
+Confirmed server-side below.
+
+### A public bulk data feed, and it actually works
+
+`https://publicfiles.rotheramarkets.com/` — no authentication, no key, a
+plain file listing, discovered from a "Public Data" link on
+`rothera.io/volume-open-interest`. This is what Kalshi's own `trade-data`
+page was supposed to be and, per Phase 0 §1, is not: that page's download
+button fired no request in a logged-out session. Rothera's does, over plain
+HTTPS, and returned real data on the first request.
+
+**Per-trade file** — `exchange/outbound/trade_data/trades_eod_<YYYYMMDD>.csv.gz`,
+one per trading day. Fetched and gzip-decoded `trades_eod_20260911.csv.gz`
+directly (1.3 MB compressed, 106,559 rows):
+
+```
+"timestamp","contract","price","quantity"
+"2026-09-11T14:05:10.150448282Z","NCAAFB10-26WINNER-NEB","0.01","268"
+```
+
+One Nebraska row that day: the Big Ten winner future, 268 contracts at a
+penny each.
+
+**Daily market-summary file** — `clearing/outbound/mkt_eod_<YYYYMMDD>.csv`,
+one row per symbol per day, matching the per-trade file exactly for the same
+symbol and date:
+
+```
+"date","product","symbol","expiration_date","trade_count","volume","oi",
+"block_volume","settlement_price","open","high","low","close",
+"contracts_delivered"
+"2026-09-11","NCAAFB10-26WINNER","NCAAFB10-26WINNER-NEB","2026-12-07","1",
+"268","96231","0","0.01","0.01","0.01","0.01","0.01","0"
+```
+
+`block_volume` is a per-symbol-per-day aggregate, the closest analogue to
+Kalshi's per-trade `is_block_trade` flag, but coarser: it cannot identify
+which individual trade was the block.
+
+**History depth.** The bucket listing rendered in full on one page load, no
+pagination, no rate limit hit: every trading day from **21 May 2026**
+(Rothera's live-trading launch, matching the trade-press figure above)
+through **11 Sep 2026** (the day of this recon). Market-summary files exist
+from launch; per-trade files begin appearing 28 Jul 2026, so individual-trade
+history before that date is not available, only daily aggregates — Rothera's
+own version of Kalshi's live/historical split. `contract_terms/*-T&C.pdf`
+filenames date each product family's launch: `NCAAFGame-T&C.pdf` first
+appears 6 Aug 2026, which is when college football itself went live on this
+exchange; `NCAAFHeisman-T&C.pdf` and `NCAAFQualifier-T&C.pdf` follow later in
+August.
+
+**Terms.** No Kalshi-style restrictive "Data Terms of Use" found on Rothera's
+Legal page (`rothera.io/legal`) — only a Privacy Policy and FCM / Non-FCM
+Participant Agreements, neither read in full. `robots.txt` on both
+`rothera.io` and the file host disallow nothing. The bucket root's
+`AccessDenied` response is the ordinary S3 behavior for an unlisted key, not
+a block signal.
+
+**Rate limits.** Unpublished and untested. This is a static file host, not
+an API with a documented budget; a collector would still run polite and
+sequential rather than assume that means unlimited.
+
+## The limitation that matters most: no direction
+
+The per-trade schema is `timestamp, contract, price, quantity` only.
+**No taker side, no Yes/No flag, no counterparty identity of any kind** —
+thinner than Kalshi (`taker_side`) and thinner than Polymarket (`side`,
+`proxyWallet`). `analysis/anomalies.py`'s first and most load-bearing test —
+"a bonus hedge is a Yes purchase" — has no field to key on in this feed.
+Rothera data would support the plain volume/timeline reporting this project
+already does; it would not slot into the existing ladder-hedge detector
+without a materially different method, because the direction signal the
+detector depends on does not exist here.
+
+## Open items before building anything on this
+
+1. **Scope decision, not a technical one.** Does Rothera earn its own
+   collector for the volume/timeline thread even without the hedge-detection
+   angle, or is the schema mismatch reason enough to leave it out for now?
+2. **Participant Agreement PDFs** — not read. Confirm no redistribution
+   restriction before treating the terms question as closed.
+3. **OG.com** — reported four days old at the time of this recon, not probed
+   at all. If the DraftKings/FanDuel routing claim holds, this could reopen
+   the sportsbook question Phase 0b closed.
+4. **ForecastEX** — named by Robinhood, not probed. Unconfirmed whether it
+   lists college football.
+5. A schema and normalizer for Rothera's contract-symbol format
+   (`NCAAFB10-26WINNER-NEB`) would need building from scratch; nothing in
+   `normalize/resolve.py` reads it today.
