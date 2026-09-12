@@ -1,0 +1,150 @@
+name: husker-markets — weekly wide-scope collection
+
+# The daily job (collect.yml) runs the Nebraska scope only, on purpose: at
+# wide scope, 13,892 of the 22,564 college-football markets Kalshi's live
+# endpoint discovers are non-finalized on any given day -- about 101x the
+# ~137 the Nebraska scope has to touch -- and a live-side full pass at that
+# size runs an estimated 7.7 hours, which already exceeds GitHub-hosted
+# runners' ~6 hour job ceiling before a single retry. Daily is not viable
+# at this measured size.
+#
+# SCOPE-all-cfb.md recommended running the first wide pass by hand and
+# expected daily increments to be small afterward -- written before the
+# series list was audited from 33 to 77 and before anything was actually
+# measured. The 13,892 figure above is what running it found instead.
+# Weekly is this project's own response to that number, not what that doc
+# predicted.
+#
+# The first several runs will not fully complete, and that is expected
+# rather than a failure to fix. Watermarks are per-market and resumable
+# (collectors/common.py's State), and every collector saves them in a
+# `finally` block regardless of how the run ends, so a run cut off by
+# timeout-minutes below keeps whatever progress it made and the next
+# Tuesday's run continues from there. Expect partial coverage for the first
+# three or four weeks, settling into a fast weekly tail-fetch once caught
+# up -- the same ramp-up the one-time Kalshi historical pass and the
+# Polymarket --scope all pass already went through by hand (METHODOLOGY.md,
+# 8 and 10 Sep 2026), just spread across scheduled runs instead of one
+# sitting.
+#
+# Shares its state and its concurrency group with the daily job on purpose:
+# State.market() keys watermarks by ticker/condition id, not by scope, so
+# whichever job -- daily or weekly -- last touched a given Nebraska market
+# is the one whose watermark the other resumes from; nothing here is
+# scope-partitioned. That only stays correct if the two jobs never run at
+# the same time and race to save state, which is what the shared
+# `concurrency.group` below guarantees.
+#
+# What this does not solve: where the growing raw archive lives past each
+# artifact's 90-day retention. At a season's cadence (19 weeks) that window
+# is shorter than the season, so the earliest weekly snapshots will expire
+# and stop being downloadable before this one ends unless someone
+# separately archives them. Left open on purpose -- see METHODOLOGY.md,
+# Limitations. Not solved here.
+
+on:
+  schedule:
+    # Tuesday, after the weekend's games have settled and before the next
+    # slate opens. Off the top of the hour for the same reason collect.yml's
+    # cron is: GitHub's busiest scheduler minute is :00.
+    - cron: '43 9 * * 2'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: husker-markets-collect
+  cancel-in-progress: false
+
+jobs:
+  collect-wide:
+    runs-on: ubuntu-latest
+    # GitHub's own ceiling for a hosted-runner job is ~360 minutes; this
+    # stays under it rather than assume a higher number would actually be
+    # honored. A run that hits this limit is cut off, not broken -- see the
+    # ramp-up note above.
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install
+        run: uv sync --frozen
+
+      # Same cache, same key pattern as the daily job -- this is the state
+      # sharing described above, not a separate wide-scope store.
+      - name: Restore collector state
+        id: state
+        uses: actions/cache/restore@v5
+        with:
+          path: data/state
+          key: husker-state-${{ github.run_id }}
+          restore-keys: |
+            husker-state-
+
+      - name: Say whether state came back
+        run: |
+          mkdir -p data/state
+          if [ -n "${{ steps.state.outputs.cache-matched-key }}" ]; then
+            echo "restored ${{ steps.state.outputs.cache-matched-key }}"
+            wc -c data/state/*.json 2>/dev/null || true
+          else
+            echo "no state cache: this run starts cold and will refetch each"
+            echo "market from the start of its live window"
+          fi
+
+      # A step-level timeout here, not just the job-level one below, on
+      # purpose: if Kalshi ran until the *job* timeout killed it, `if:
+      # always()` steps still fire but may inherit close to zero remaining
+      # budget, and "Save collector state" not actually getting to run
+      # would mean this job silently restarts from scratch every Tuesday
+      # forever rather than ramping up as designed. Bounding this step
+      # leaves the rest of the job's budget genuinely free: Polymarket's own
+      # `--scope all` bootstrap took 124 minutes by hand on 8 Sep 2026
+      # (METHODOLOGY.md), so ~150 minutes is comfortable margin for it plus
+      # redact, upload and state-save. A red X on this step during the
+      # ramp-up weeks is the honest signal that Kalshi didn't finish, not a
+      # bug to silence.
+      - name: Collect Kalshi (scope all)
+        timeout-minutes: 200
+        env:
+          HUSKER_MARKETS_CONTACT: ${{ secrets.HUSKER_MARKETS_CONTACT || 'Justin Diep, The Daily Nebraskan' }}
+        run: uv run python -m collectors.kalshi --scope all | tee data/state/last_run_kalshi_wide.json
+
+      # Runs even if Kalshi's step above timed out and failed -- `if:
+      # always()` fires on a failed step same as a cancelled job, and now
+      # with the job's remaining budget actually available to it.
+      - name: Collect Polymarket (scope all)
+        if: always()
+        env:
+          HUSKER_MARKETS_CONTACT: ${{ secrets.HUSKER_MARKETS_CONTACT || 'Justin Diep, The Daily Nebraskan' }}
+        run: uv run python -m collectors.polymarket --scope all | tee data/state/last_run_polymarket_wide.json
+
+      - name: Stage a redacted copy for upload
+        if: always()
+        run: uv run python scripts/redact_for_upload.py
+
+      # Named distinctly from the daily job's raw-<run_id> artifacts so the
+      # two are not confused in the Actions UI. Same 90-day retention as the
+      # daily job -- deliberately not raised here, because raising it would
+      # quietly resolve the open retention question above rather than leave
+      # it open.
+      - name: Upload raw archive
+        if: always()
+        uses: actions/upload-artifact@v5
+        with:
+          name: raw-wide-${{ github.run_id }}
+          path: data/raw_for_upload
+          retention-days: 90
+          if-no-files-found: warn
+
+      - name: Save collector state
+        if: always()
+        uses: actions/cache/save@v5
+        with:
+          path: data/state
+          key: husker-state-${{ github.run_id }}

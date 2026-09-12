@@ -578,9 +578,20 @@ report nine findings where one belongs.
 - About 1,050 game markets carry no game identifier, mostly older events whose
   slugs or tickers use a code that names more than one school. They are left
   unidentified rather than guessed.
-- The scheduled job runs the Nebraska scope. What still gates the wide scope
-  is where three gigabytes of first-pass raw archive lives, not the state
-  file.
+- The daily scheduled job runs the Nebraska scope. A second, weekly job
+  (`collect-wide.yml`, added 12 Sep 2026) runs `--scope all` -- weekly is
+  this project's own response to what running the wide scope actually
+  measured (13,892 non-finalized Kalshi markets, ~101x Nebraska's), not
+  what SCOPE-all-cfb.md predicted; that doc expected daily increments to
+  stay small and recommended only the first pass be run by hand, written
+  before the series list was audited from 33 to 77. A season is 19 weeks
+  and each run's artifact carries the same 90-day retention as the daily
+  job's, so
+  the earliest weekly snapshots will expire before the season does unless
+  someone separately archives them. **Where the wide-scope archive lives
+  past 90 days is still an open decision** -- the same one that gated
+  switching this on in the first place, not resolved by adding the job,
+  deliberately left open when it was built.
 - No sportsbook or DFS prop lines are collected, by decision on 8 Sep 2026
   (RECON "Phase 0b"). Any claim about how many chances there were to bet on a
   Nebraska athlete at a sportsbook is therefore out of this project's reach;
@@ -709,3 +720,27 @@ report nine findings where one belongs.
   school's name beside the phrase "coach bonus hedging" on evidence we have
   ourselves recorded as unresolvable would insinuate what it cannot support.
   The school, the timestamps and the reasoning stay here and in the CSVs.
+- **2026-09-12, a weekly wide-scope job added alongside the daily one.**
+  Justin asked how much bigger the project would get at all-of-college-
+  football scope; the answer came from querying the archive the 8 Sep
+  Polymarket pass and the 10 Sep Kalshi pass had already produced (see both
+  entries above), not from a fresh estimate. That led to checking whether
+  the *daily* job could simply be widened: at wide scope 13,892 of the
+  22,564 markets Kalshi's live endpoint discovers are non-finalized on a
+  given day, about 101x the Nebraska scope's ~137, and a live-side pass at
+  that size is estimated at 7.7 hours -- past GitHub-hosted runners' ~6-hour
+  job ceiling before a single retry. Daily wasn't viable at this scope.
+  `collect-wide.yml` runs the same collectors at `--scope all` on a Tuesday
+  weekly cron instead, sharing its state and its `concurrency.group` with
+  the daily job so the two never race to save the same per-ticker
+  watermarks. Its Kalshi step carries its own 200-minute timeout, separate
+  from the job's 350-minute ceiling, specifically so a cut-off Kalshi run
+  still leaves the job enough budget to save state and let Polymarket run
+  -- without it, a job-level timeout could silently zero out a Tuesday's
+  progress instead of banking it. The first several runs are expected not
+  to finish Kalshi in one pass; each keeps whatever watermark progress it
+  made and the next Tuesday continues from there. What this did not solve,
+  on purpose: each
+  run's artifact still carries 90-day retention, shorter than a 19-week
+  season, so the earliest weekly snapshots expire before the season ends
+  unless archived separately. See the Limitations entry above.

@@ -8,9 +8,10 @@ name: husker-markets — daily collection
 #     its history once;
 #   * the day's raw archive, uploaded as a workflow artifact (90-day
 #     retention). Raw is gitignored because a season of it is tens of MB.
-#     Where raw lives past 90 days is an open decision (RECON §6). Until it is
-#     made, download artifacts you care about; the same trades stay
-#     re-fetchable from the API for ~3 months plus the historical endpoints.
+#     Where raw lives past 90 days is an open decision (METHODOLOGY.md,
+#     Limitations). Until it is made, download artifacts you care about; the
+#     same trades stay re-fetchable from the API for ~3 months plus the
+#     historical endpoints.
 #
 # Cadence is the point: markets settle and delist, and a market never seen
 # active is a market whose metadata came only from the historical mirror.
