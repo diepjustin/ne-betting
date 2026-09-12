@@ -21,9 +21,11 @@ name: husker-markets — daily collection
 
 on:
   schedule:
-    # 10:00 UTC ≈ 5am Central, after Kalshi's overnight lull and before
-    # Saturday kickoffs move the numbers.
-    - cron: '0 10 * * *'
+    # 10:17 UTC ≈ 5:17am Central, after Kalshi's overnight lull and before
+    # Saturday kickoffs move the numbers. Off the top of the hour on purpose:
+    # at `0 10` the first two scheduled runs started 3h16m and 3h57m late,
+    # which is GitHub's documented behaviour for the busiest scheduler minute.
+    - cron: '17 10 * * *'
   workflow_dispatch:
 
 # Read-only: this job no longer writes to the repository. State lives in the
