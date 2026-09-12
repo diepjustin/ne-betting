@@ -187,6 +187,18 @@ retrieved yet (RECON §1). The API is the primary source until then.
   `data/analysis/`, which is gitignored. Plan §9 keeps published figures
   aggregate; naming players is for reporting, and publication is the editor's
   call.
+- **2026-09-12.** The ordinal on a synthesised Polymarket trade id is now
+  scoped to one response. It had been scoped to the whole load, so the same
+  fill served in two overlapping fetches -- the 60-second watermark overlap,
+  and the inclusive `end=` boundary row on every re-anchor -- was given a
+  fresh ordinal and stored twice, which is the opposite of what the collector
+  promises when it says duplicates are removed downstream. On the archive as
+  loaded that was 27 rows and $4,272 of $311m -- every one of the 27 a row
+  repeated across two raw files, none a repeat inside one response, checked
+  by joining each `#2` key to its base and comparing `raw_path`. Small only
+  because the archive came from one pass; every scheduled run would have
+  added another overlap window. A repeat inside one response is still two
+  fills. `tests/test_load.py` pins both cases.
 
 ## Widening past Nebraska
 
@@ -557,9 +569,12 @@ report nine findings where one belongs.
   cannot be used to study individual trading behaviour. That analysis needs
   the local raw archive.
 - Polymarket coverage before 2026 relies on the platform's search index.
-- polymarket.com tells US visitors to trade on polymarket.us instead. Whether
-  polymarket.us fills appear in these public feeds is unconfirmed, and it
-  matters for any claim about Nebraskans trading on Polymarket.
+- polymarket.com tells US visitors to trade on polymarket.us instead, and
+  polymarket.us is a separate product on its own backend (RECON §2, resolved
+  10 Sep 2026): its own market and outcome ids, no `conditionId`, a distinct
+  gateway. Its fills do not appear in the feeds collected here. Any claim
+  about Nebraskans trading on Polymarket therefore covers polymarket.com
+  only; a polymarket.us collector has not been scoped.
 - About 1,050 game markets carry no game identifier, mostly older events whose
   slugs or tickers use a code that names more than one school. They are left
   unidentified rather than guessed.

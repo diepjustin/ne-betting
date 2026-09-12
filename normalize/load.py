@@ -155,8 +155,15 @@ def load_kalshi(db, root: Path, stats: Counter) -> None:
 
 def _pm_trade_id(t: dict, seen: Counter) -> tuple[str, int]:
     """Polymarket serves no trade id and transaction hashes are not unique
-    (one carried 18 fills), so the key is a hash of the row. Exact repeats get
-    an ordinal; two identical fills are genuinely indistinguishable here."""
+    (one carried 18 fills), so the key is a hash of the row. Exact repeats
+    within one response get an ordinal, because two identical fills served
+    together are genuinely indistinguishable here.
+
+    `seen` must be scoped to a single raw file. The same fill comes back in
+    every fetch that overlaps the last -- the 60-second watermark overlap, and
+    the inclusive `end=` boundary row on every re-anchor -- and a counter
+    shared across files handed that repeat a fresh ordinal and stored the one
+    fill twice."""
     canon = json.dumps([t.get(k) for k in
                         ("transactionHash", "conditionId", "asset", "side",
                          "size", "price", "timestamp", "proxyWallet", "outcomeIndex")],
@@ -211,10 +218,12 @@ def load_polymarket(db, root: Path, stats: Counter) -> None:
                     _ts(env["fetched_at"]), str(p.relative_to(PROJECT_ROOT))))
         stats["markets"] += 1
 
-    seen: Counter = Counter()
     for p, env, body in envelopes(root, "polymarket", "trades"):
         if not isinstance(body, list):
             continue
+        # One counter per response: a repeat across files is one fill fetched
+        # twice and must collapse on its key.
+        seen: Counter = Counter()
         fetched = _ts(env["fetched_at"])
         rel = str(p.relative_to(PROJECT_ROOT))
         for t in body:
