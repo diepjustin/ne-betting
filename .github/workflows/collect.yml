@@ -19,14 +19,16 @@ name: husker-markets — daily collection
 # Moved into this repo when it split out of diepjustin.github.io. The
 # Actions cache is repo-scoped and did not move with it, so the first run
 # here starts cold -- survivable per the note above, not a data gap.
+#
+# No `schedule:` trigger here on purpose. It was `0 10 * * *`, then `17 10
+# * * *` to dodge GitHub's documented top-of-hour congestion -- both still
+# started 3-4 hours late (3h16m, 3h57m, 4h07m across the two settings).
+# GitHub's schedule queue is drained best-effort with no timing guarantee;
+# offsetting the minute doesn't touch that. Cadence is now driven by an
+# external cron hitting this workflow's `workflow_dispatch` over the API --
+# see docs/EXTERNAL-CRON.md. See issue #1 for the delay data.
 
 on:
-  schedule:
-    # 10:17 UTC ≈ 5:17am Central, after Kalshi's overnight lull and before
-    # Saturday kickoffs move the numbers. Off the top of the hour on purpose:
-    # at `0 10` the first two scheduled runs started 3h16m and 3h57m late,
-    # which is GitHub's documented behaviour for the busiest scheduler minute.
-    - cron: '17 10 * * *'
   workflow_dispatch:
 
 # Read-only: this job no longer writes to the repository. State lives in the
