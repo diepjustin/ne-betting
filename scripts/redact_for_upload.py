@@ -63,6 +63,18 @@ def redact_rows(rows: list) -> tuple[list, int]:
     return rows, touched
 
 
+def out_unsafe(raw: Path, out: Path) -> bool:
+    """True if `rmtree(out)` would delete `raw` or part of it.
+
+    Raw is the append-only archive; `out` is rebuilt from scratch on every
+    run via `rmtree`. A typo that points `--out` at `--raw` itself, or at a
+    path inside it, would have this script destroy the one thing it exists
+    to protect.
+    """
+    raw_r, out_r = raw.resolve(), out.resolve()
+    return out_r == raw_r or raw_r in out_r.parents
+
+
 def stage(raw: Path, out: Path) -> dict:
     copied = redacted = rows_touched = failed = 0
     for src in sorted(raw.rglob("*.json.gz")):
@@ -111,6 +123,10 @@ def main(argv=None) -> int:
     if not args.raw.exists():
         print(f"no raw archive at {args.raw}", file=sys.stderr)
         return 0
+    if out_unsafe(args.raw, args.out):
+        print(f"refusing: --out {args.out} is --raw {args.raw} or inside it; "
+              "rmtree would destroy the append-only archive", file=sys.stderr)
+        return 1
     if args.out.exists():
         shutil.rmtree(args.out)
     print(json.dumps(stage(args.raw, args.out), indent=1))

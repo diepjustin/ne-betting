@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
-from scripts.redact_for_upload import redact_rows, stage
+from scripts.redact_for_upload import out_unsafe, redact_rows, stage
 
 
 def write(path: Path, body):
@@ -76,6 +76,25 @@ def test_kalshi_files_pass_through_byte_for_byte(tmp_path):
     stage(raw, tmp_path / "out")
     dst = tmp_path / "out" / "kalshi" / "2026-09-08" / "trades_T_x.json.gz"
     assert dst.read_bytes() == src.read_bytes()
+
+
+def test_out_equal_to_raw_is_refused(tmp_path):
+    raw = tmp_path / "raw"
+    raw.mkdir()
+    assert out_unsafe(raw, raw) is True
+
+
+def test_out_nested_inside_raw_is_refused(tmp_path):
+    raw = tmp_path / "raw"
+    (raw / "staging").mkdir(parents=True)
+    assert out_unsafe(raw, raw / "staging") is True
+
+
+def test_out_beside_raw_is_safe(tmp_path):
+    raw = tmp_path / "raw"
+    out = tmp_path / "raw_for_upload"
+    raw.mkdir()
+    assert out_unsafe(raw, out) is False
 
 
 def test_no_wallet_survives_but_market_ids_do(tmp_path):
