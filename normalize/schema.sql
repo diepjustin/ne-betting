@@ -55,14 +55,6 @@ CREATE TABLE IF NOT EXISTS unresolved (
   seen_at           INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS schedule (
-  game_id     TEXT PRIMARY KEY,
-  game_date   TEXT NOT NULL,
-  opponent    TEXT NOT NULL,
-  home_away   TEXT,
-  source      TEXT
-);
-
 CREATE INDEX IF NOT EXISTS trade_market  ON trade (source, source_market_id);
 CREATE INDEX IF NOT EXISTS trade_time    ON trade (executed_ts);
 CREATE INDEX IF NOT EXISTS market_type_i ON market (market_type);

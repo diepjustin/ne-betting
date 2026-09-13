@@ -213,6 +213,16 @@ retrieved yet (RECON §1). The API is the primary source until then.
   because the archive came from one pass; every scheduled run would have
   added another overlap window. A repeat inside one response is still two
   fills. `tests/test_load.py` pins both cases.
+- **2026-09-13, dropped the `schedule` table.** `schema.sql` created a
+  `schedule(game_id, game_date, opponent, home_away, source)` table from the
+  original plan's ESPN-schedule approach to game identity. Nothing in the
+  codebase ever selected from it or inserted into it -- game identity ended
+  up coming directly from each platform's own ticker or slug instead (the
+  "Which school a market belongs to" section below), which worked well
+  enough that the ESPN path this table was for was never built. RECON.md §4
+  still notes the open question of how the collector should identify itself
+  to ESPN (which 403s the project's own User-Agent); this removal does not
+  answer that, it just stops carrying schema for a table nothing writes.
 
 ## Widening past Nebraska
 
