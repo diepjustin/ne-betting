@@ -206,6 +206,34 @@ def test_wide_scope_keeps_every_football_market_but_no_basketball(wide):
     assert [e["slug"] for e in bb if wide.why(e)] == []
 
 
+def test_a_null_startdate_does_not_falsely_trip_the_floor(tmp_path):
+    """One event on a page missing `startDate` used to make the whole page's
+    minimum date "" -- below any real floor -- and stop the walk before it
+    actually reached the floor. Page 1 (all above floor, one undated) must
+    not stop the walk; page 2 (below floor) must."""
+    pages = {
+        0: [{"id": "1", "slug": "a", "startDate": "2026-06-01"},
+            {"id": "2", "slug": "b", "startDate": None},
+            {"id": "3", "slug": "c", "startDate": "2026-01-01"}],
+        3: [{"id": "4", "slug": "d", "startDate": "2024-01-01"}],
+    }
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        offset = int(dict(request.url.params).get("offset", 0))
+        return httpx.Response(200, json=pages.get(offset, []))
+
+    cfg = dict(CFG, events_page_size=3)
+    client = Client(cfg["gamma_url"], min_interval=0,
+                    transport=httpx.MockTransport(handler))
+    archive = RawArchive(tmp_path / "raw")
+    stats = polymarket.RunStats()
+    out = polymarket._page_events(client, archive, cfg, stats, {}, "test",
+                                  floor="2025-01-01")
+    client.close()
+    assert [e["id"] for e in out] == ["1", "2", "3", "4"]
+    assert stats.discovery_pages == 2
+
+
 def test_wide_scope_keeps_every_rung_of_a_futures_event(wide, matcher):
     b10 = [e for e in fixture("pm_futures_events.json")
            if "big-ten-conference-winner" in e["slug"]][0]

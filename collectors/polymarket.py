@@ -151,7 +151,14 @@ def _page_events(client: Client, archive: RawArchive, cfg: dict, stats: RunStats
             break
         out.extend(body)
         stats.events_seen += len(body)
-        if floor and min(str(e.get("startDate") or "") for e in body) < floor:
+        # Events with no startDate are excluded from the floor check, not
+        # treated as "before the floor": `str(None or "")` is "", which
+        # sorts below every real date and would stop the walk on a page
+        # that has not actually reached the floor yet. A page with no dated
+        # events at all says nothing about the floor either way, so pages
+        # through rather than guessing.
+        dated = [str(e["startDate"]) for e in body if e.get("startDate")]
+        if floor and dated and min(dated) < floor:
             break
         offset += cfg["events_page_size"]
         if offset > 20000:  # listing is not supposed to be this deep
