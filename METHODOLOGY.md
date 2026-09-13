@@ -151,7 +151,21 @@ retrieved yet (RECON §1). The API is the primary source until then.
 - **2026-09-08.** Metadata for each matched market is fetched from
   `/markets/{ticker}` on every run it is active, even though the discovery
   pages already contain it, so every normalized row can point at one small
-  raw file rather than a multi-megabyte discovery page.
+  raw file rather than a multi-megabyte discovery page. **Correction,
+  13 Sep 2026: this is not what the loader actually does for a market
+  discovered before it traded.** `load_markets_from_discovery` runs first
+  and inserts from the (large) discovery page; when the per-market fetch's
+  own row lands afterward, its `ON CONFLICT` clause
+  (`normalize/load.py`, `load_kalshi`/`load_polymarket`) only refreshes
+  `status`, `settled_outcome` and `close_ts` -- not `raw_path`. A market
+  seen in a discovery page first keeps pointing at that discovery page for
+  its whole life, even once its own small per-market file exists. The
+  traceability invariant still holds -- every row names *a* raw file that
+  produced it -- but not always the small one this paragraph originally
+  claimed, and not for the reason given. Left as a documentation fix rather
+  than a code change: changing the `ON CONFLICT` clause would need every
+  row rebuilt from raw to take effect, and nothing here is wrong enough to
+  justify that against a live 8.6 GB store.
 
 ## Normalization decisions
 
