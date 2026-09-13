@@ -17,6 +17,7 @@ import sqlite3
 import sys
 from pathlib import Path
 
+from analysis.anomalies import central_day
 from collectors.common import PROJECT_ROOT
 
 VIEWS = {
@@ -92,25 +93,47 @@ VIEWS = {
         LEFT JOIN trade t
           ON t.source = i.source AND t.source_market_id = i.source_market_id
         GROUP BY 1, 2 ORDER BY 6 DESC""",
-    "daily_volume": """
-        SELECT DATE(t.executed_ts, 'unixepoch') AS day, t.source,
-               COUNT(*) AS trades,
-               ROUND(SUM(t.count), 2) AS units,
-               ROUND(SUM(t.taker_cost_usd), 2) AS taker_cost_usd
-        FROM trade t GROUP BY 1, 2 ORDER BY 1""",
 }
+
+DAILY_VOLUME_COLS = ["day_central", "source", "trades", "units", "taker_cost_usd"]
+
+
+def daily_volume(db: sqlite3.Connection) -> list[tuple]:
+    """Daily volume by platform, dated in America/Chicago.
+
+    Not a SQL GROUP BY: a `DATE(executed_ts, 'unixepoch')` bucket is UTC, and
+    a 6:30pm Central kickoff is 23:30 UTC, so a UTC date cuts a game's
+    trading in half and puts the second half on the following day -- the
+    same reasoning `analysis/anomalies.py`'s `central_day` was written for.
+    Reused here rather than duplicated so the two never drift apart again.
+    """
+    agg: dict[tuple, dict] = {}
+    for source, ts, count, cost in db.execute(
+            "SELECT source, executed_ts, count, COALESCE(taker_cost_usd, 0) FROM trade"):
+        key = (central_day(ts), source)
+        a = agg.setdefault(key, {"trades": 0, "units": 0.0, "cost": 0.0})
+        a["trades"] += 1
+        a["units"] += count
+        a["cost"] += cost
+    rows = [(day, source, a["trades"], round(a["units"], 2), round(a["cost"], 2))
+            for (day, source), a in sorted(agg.items())]
+    return rows
 
 
 def dump(db: sqlite3.Connection, name: str, sql: str, out: Path) -> list:
     cur = db.execute(sql)
     cols = [d[0] for d in cur.description]
     rows = cur.fetchall()
+    write_csv(name, cols, rows, out)
+    return rows
+
+
+def write_csv(name: str, cols: list[str], rows: list, out: Path) -> None:
     out.mkdir(parents=True, exist_ok=True)
     with open(out / f"{name}.csv", "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(cols)
         w.writerows(rows)
-    return rows
 
 
 def main(argv=None) -> int:
@@ -124,6 +147,8 @@ def main(argv=None) -> int:
         return 1
     db = sqlite3.connect(args.db)
     results = {n: dump(db, n, sql, args.out) for n, sql in VIEWS.items()}
+    results["daily_volume"] = daily_volume(db)
+    write_csv("daily_volume", DAILY_VOLUME_COLS, results["daily_volume"], args.out)
 
     print("WHAT THE TRADES ARE ON")
     print("  %-11s %-17s %8s %14s %14s" % ("platform", "market type", "trades", "units", "taker cost"))

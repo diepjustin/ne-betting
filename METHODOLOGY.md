@@ -474,7 +474,13 @@ market; the cell reads "market too thin" instead of carrying a number that
 only reflects thinness. 310 of 12,786 large trades fall in that class.
 
 **Days are Central.** A 6:30pm Central kickoff is 23:30 UTC, so UTC dates cut
-games in half. The daily timeline is dated in America/Chicago and carries the
+games in half. **`analysis/breakdown.py`'s `daily_volume` view bucketed by a
+plain SQL `DATE(executed_ts, 'unixepoch')` until 13 Sep 2026** -- a UTC date,
+the exact bug this paragraph exists to warn against, sitting in the other
+analysis module the whole time. It now imports `central_day` from this
+module and buckets in Python instead of SQL, because SQLite has no named
+timezone support and a fixed UTC offset would be wrong half the year across
+the daylight-saving boundary. The daily timeline is dated in America/Chicago and carries the
 UTC dates alongside so a figure can still be checked against a UTC-stamped
 source. Two platforms serve time differently and the store keeps both
 verbatim: Kalshi sends RFC 3339 to the microsecond, Polymarket sends a
