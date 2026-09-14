@@ -41,13 +41,15 @@ name: husker-markets — weekly wide-scope collection
 # and stop being downloadable before this one ends unless someone
 # separately archives them. Left open on purpose -- see METHODOLOGY.md,
 # Limitations. Not solved here.
+#
+# No `schedule:` trigger here, same reasoning as collect.yml (issue #1):
+# GitHub's schedule queue is drained best-effort with no timing guarantee,
+# and that's a repo-wide, provider-side property, not something the choice
+# of minute fixes. Cadence is driven by an external cron hitting
+# workflow_dispatch instead -- see docs/EXTERNAL-CRON.md. Register this
+# workflow's Tuesday slot alongside collect.yml's daily one.
 
 on:
-  schedule:
-    # Tuesday, after the weekend's games have settled and before the next
-    # slate opens. Off the top of the hour for the same reason collect.yml's
-    # cron is: GitHub's busiest scheduler minute is :00.
-    - cron: '43 9 * * 2'
   workflow_dispatch:
 
 permissions:
