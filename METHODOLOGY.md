@@ -761,7 +761,9 @@ report nine findings where one belongs.
   that size is estimated at 7.7 hours -- past GitHub-hosted runners' ~6-hour
   job ceiling before a single retry. Daily wasn't viable at this scope.
   `collect-wide.yml` runs the same collectors at `--scope all` on a Tuesday
-  weekly cron instead, sharing its state and its `concurrency.group` with
+  weekly cron instead (**correction, 14 Sep 2026: no longer a GitHub
+  `schedule:` cron -- see the entry below**), sharing its state and its
+  `concurrency.group` with
   the daily job so the two never race to save the same per-ticker
   watermarks. Its Kalshi step carries its own 200-minute timeout, separate
   from the job's 350-minute ceiling, specifically so a cut-off Kalshi run
@@ -774,3 +776,22 @@ report nine findings where one belongs.
   run's artifact still carries 90-day retention, shorter than a 19-week
   season, so the earliest weekly snapshots expire before the season ends
   unless archived separately. See the Limitations entry above.
+- **2026-09-13 to 14, both scheduled jobs moved off GitHub's `schedule:`
+  trigger entirely.** `collect.yml`'s cron was moved once already (12 Sep,
+  `0 10 * * *` to `17 10 * * *`) on the theory that GitHub's documented
+  top-of-hour congestion was the cause of two observed late starts (3h57m,
+  3h16m). The next run under the new minute started 4h08m late --
+  same band, not better. GitHub's own docs say the `schedule` trigger "can
+  be delayed during periods of high load" and "some queued jobs may be
+  dropped," with no SLA offered; community reports describe the same
+  multi-hour lag independent of which minute is picked, attributing it to
+  the schedule-event queue being drained best-effort rather than to
+  hourly congestion specifically. Offsetting the minute was treating the
+  wrong cause. Both `collect.yml` and `collect-wide.yml` dropped
+  `schedule:` and now rely solely on `workflow_dispatch`, fired by an
+  external cron service hitting the GitHub REST API (docs/EXTERNAL-CRON.md
+  has the setup). `collect-wide.yml`'s trigger was changed on the same
+  reasoning without waiting to independently measure its own lag -- the
+  cause is repo-wide and provider-side, not specific to one workflow's
+  minute or scope. First confirmed external dispatch of `collect.yml`:
+  configured for 10:43:00 UTC, actually fired 2026-09-14T10:43:01Z.
