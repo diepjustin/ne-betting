@@ -44,17 +44,26 @@ workflow.
   - `Content-Type: application/json`
   - `Authorization: Bearer <the token from step 1>` -- `Bearer` and the
     space before the token are both part of the value; leaving them off
-    is a 401 with no other symptom.
+    is a 401 (visible in cron-job.org's own execution history, not
+    anywhere in this repo -- see the last section below).
 - Body (raw JSON): `{"ref":"main"}`
-- Configured as: daily, 10:43 UTC (5:43am Central) -- after Kalshi's
-  overnight lull, before Saturday kickoffs move the numbers.
+- Configured as: daily, **5:43am Central** (10:43 UTC while Central is on
+  daylight time) -- after Kalshi's overnight lull, before Saturday
+  kickoffs move the numbers.
 
 **Weekly (`collect-wide.yml`):**
 
 - URL: `https://api.github.com/repos/diepjustin/ne-betting/actions/workflows/collect-wide.yml/dispatches`
 - Same method, headers, and body as above.
-- Configured as: weekly, Tuesday 10:23 UTC (5:23am Central) -- after the
-  weekend's games have settled, before the next slate opens.
+- Configured as: weekly, **Tuesday 5:23am Central** (10:23 UTC while
+  Central is on daylight time) -- after the weekend's games have settled,
+  before the next slate opens.
+
+Central, not UTC, is the number that actually governs both jobs (see the
+time-zone note below) -- so it's stated first. The UTC figures will shift
+by an hour when Central daylight time ends (1 Nov 2026 this season): the
+jobs keep firing at 5:43/5:23am Central either way, but a `gh run list`
+check done in November should expect 11:43/11:23 UTC, not 10:43/10:23.
 
 For both: the exact minute no longer matters; picking one away from `:00`
 was only ever a workaround for GitHub's own queue, and this path doesn't
@@ -84,8 +93,9 @@ gh run list --workflow=collect-wide.yml --limit 3 --json databaseId,status,concl
 
 A successful external trigger shows up with `"event":"workflow_dispatch"`
 at (close to) the scheduled minute, instead of `"event":"schedule"` hours
-late. First confirmed fire, `collect.yml`: configured for 10:43:00 UTC,
-actually dispatched 2026-09-14T10:43:01Z -- one second off.
+late. First confirmed fire, `collect.yml`: configured for 5:43am Central
+(10:43:00 UTC that day), actually dispatched 2026-09-14T10:43:01Z -- one
+second off.
 
 ## If the token expires or the cron service job gets disabled
 
