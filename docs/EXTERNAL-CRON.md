@@ -41,25 +41,39 @@ workflow.
 - Headers:
   - `Accept: application/vnd.github+json`
   - `X-GitHub-Api-Version: 2022-11-28`
-  - `Authorization: Bearer <the token from step 1>`
+  - `Content-Type: application/json`
+  - `Authorization: Bearer <the token from step 1>` -- `Bearer` and the
+    space before the token are both part of the value; leaving them off
+    is a 401 with no other symptom.
 - Body (raw JSON): `{"ref":"main"}`
-- Schedule: daily, ~10:00-11:00 UTC (5-6am Central) -- after Kalshi's
+- Configured as: daily, 10:43 UTC (5:43am Central) -- after Kalshi's
   overnight lull, before Saturday kickoffs move the numbers.
 
 **Weekly (`collect-wide.yml`):**
 
 - URL: `https://api.github.com/repos/diepjustin/ne-betting/actions/workflows/collect-wide.yml/dispatches`
 - Same method, headers, and body as above.
-- Schedule: weekly, Tuesday ~09:00-10:00 UTC -- after the weekend's games
-  have settled, before the next slate opens.
+- Configured as: weekly, Tuesday 10:23 UTC (5:23am Central) -- after the
+  weekend's games have settled, before the next slate opens.
 
 For both: the exact minute no longer matters; picking one away from `:00`
 was only ever a workaround for GitHub's own queue, and this path doesn't
 go through it.
 
+cron-job.org defaults a new job's schedule to the account's own local time
+zone (`America/Chicago` here), not UTC -- its Hours/Minutes picker is
+already in Central, so there's no manual UTC conversion to do when setting
+the schedule (the Central times above are what to type directly).
+
+`Content-Type` isn't optional in practice: cron-job.org's own UI prompts
+for it the moment the method is set to POST, and a missing one is one more
+way this can silently misbehave.
+
 Enter the token directly into the cron service's own header field. Don't
 paste it into a chat session, a commit, or anywhere in this repo -- treat
-it like any other credential.
+it like any other credential. If a token does end up somewhere it
+shouldn't (a screenshot, a paste), revoke it and generate a fresh one
+rather than trying to un-expose it.
 
 ## 3. Verify it fired
 
@@ -70,7 +84,8 @@ gh run list --workflow=collect-wide.yml --limit 3 --json databaseId,status,concl
 
 A successful external trigger shows up with `"event":"workflow_dispatch"`
 at (close to) the scheduled minute, instead of `"event":"schedule"` hours
-late.
+late. First confirmed fire, `collect.yml`: configured for 10:43:00 UTC,
+actually dispatched 2026-09-14T10:43:01Z -- one second off.
 
 ## If the token expires or the cron service job gets disabled
 
