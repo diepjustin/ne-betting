@@ -54,6 +54,11 @@ on:
 
 permissions:
   contents: read
+  # For the ramp-up monitor's final step: actions:read to look at recent
+  # run history, issues:write to open/update a tracking issue if the
+  # Kalshi step's timeout streak crosses the alert threshold.
+  actions: read
+  issues: write
 
 concurrency:
   group: husker-markets-collect
@@ -150,3 +155,15 @@ jobs:
         with:
           path: data/state
           key: husker-state-${{ github.run_id }}
+
+      # Runs last, after state is already saved, so it never gates the
+      # collectors -- it only watches for the Kalshi step's 200-minute
+      # timeout above happening five weeks running, which would mean the
+      # ramp-up (expected to take three or four weeks -- see the note atop
+      # this file) isn't actually converging. Opens or comments on one
+      # tracking issue; never fails the job on its own account.
+      - name: Check for a stuck wide-scope ramp-up
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: uv run python scripts/check_wide_scope_timeouts.py

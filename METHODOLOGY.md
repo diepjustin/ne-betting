@@ -795,3 +795,14 @@ report nine findings where one belongs.
   cause is repo-wide and provider-side, not specific to one workflow's
   minute or scope. First confirmed external dispatch of `collect.yml`:
   configured for 10:43:00 UTC, actually fired 2026-09-14T10:43:01Z.
+- **2026-09-15, a monitor for a stuck wide-scope ramp-up.** Two weekly runs
+  in (12 and 15 Sep), the Kalshi step has timed out at its 200-minute limit
+  both times -- exactly the ramp-up this project expected (see the 12 Sep
+  entry above), not yet cause for concern. `scripts/check_wide_scope_timeouts.py`
+  runs as `collect-wide.yml`'s last step and opens (or comments on) one
+  GitHub issue only if that streak reaches 5 consecutive weeks, which is
+  past the 3-4 week estimate; it never fails the job itself. Distinguishes
+  an actual timeout (failed at ~200 minutes) from some other Kalshi failure
+  (failed early), so a real bug does not get silently absorbed into "ramp-up
+  as expected." Threshold and alert mechanism (a tracking issue, not a
+  louder job annotation) were the user's own call, not inferred.
