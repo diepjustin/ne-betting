@@ -113,6 +113,35 @@ def test_kalshi_end_to_end_market_and_trades_load(tmp_path, monkeypatch):
     assert t == (100.0, 0.60, "yes", 60.0, 60.0, 100.0)
 
 
+def test_discovery_raw_path_survives_a_later_per_market_fetch(tmp_path, monkeypatch):
+    """METHODOLOGY.md's 13 Sep 2026 correction: a market first seen on a
+    (large) discovery listing page keeps pointing at that page forever, even
+    after a smaller per-market fetch loads for the same ticker -- the
+    per-market ON CONFLICT clause in load_kalshi only refreshes status,
+    settled_outcome and close_ts, never raw_path. Pinned here so a future
+    change to that clause has to touch this test on purpose."""
+    monkeypatch.setattr(load, "PROJECT_ROOT", tmp_path)
+    discovery_path = tmp_path / "kalshi" / "2026-09-01"
+    per_market_path = tmp_path / "kalshi" / "2026-09-05"
+    discovery_event = {"event_ticker": KALSHI_MARKET["event_ticker"],
+                        "title": "Ohio vs Nebraska", "markets": [KALSHI_MARKET]}
+    write_kalshi(discovery_path / "events_p1_20260901000000000000Z.json.gz",
+                "events", {"events": [discovery_event]}, "2026-09-01T00:00:00.000000Z")
+    write_kalshi(per_market_path / "market_KXNCAAFGAME-26SEP05OHIONEB-NEB_20260905200000000000Z.json.gz",
+                "market", {"market": KALSHI_MARKET}, "2026-09-05T20:00:00.000000Z")
+
+    db = sqlite3.connect(":memory:")
+    db.executescript(load.SCHEMA.read_text())
+    load.load_markets_from_discovery(db, tmp_path, Counter(), sources=("kalshi",))
+    load.load_kalshi(db, tmp_path, Counter())
+
+    raw_path, status = db.execute(
+        "SELECT raw_path, status FROM market WHERE source='kalshi' AND source_market_id=?",
+        (KALSHI_MARKET["ticker"],)).fetchone()
+    assert "events_p1_" in raw_path, f"raw_path should still be the discovery page, got {raw_path}"
+    assert status == "active"  # status itself does refresh from the per-market fetch
+
+
 def test_kalshi_no_taker_side_uses_the_yes_price_for_cost(tmp_path, monkeypatch):
     """A No taker's cost is the No price, not the Yes price -- the exact
     13% understatement METHODOLOGY.md's 8 Sep 2026 note describes."""
