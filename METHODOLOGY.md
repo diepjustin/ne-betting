@@ -38,7 +38,13 @@ retrieved yet (RECON §1). The API is the primary source until then.
 ## What a Kalshi row means
 
 - Kalshi counts one Yes/No pair as one contract (exchange notice, 24 Dec 2021).
-  Contract face value is $1. `count_fp` is contracts, fractional since 2026.
+  Contract face value is $1. `count_fp` is contracts, fractional since 2026 --
+  two separate conventions, not one: pair-counting is the 2021 notice above;
+  sub-contract sizing (minimum 0.01 contracts) is a distinct feature Kalshi
+  rolled out ~13 Mar 2026 after a Jan 2026 CFTC Rule 13.1 filing, stated
+  rationale being smaller position sizes without a full-contract capital
+  minimum. This is why some trades settle for a fraction of a cent: a
+  0.01-contract fill at $0.07 is $0.0007, not a parsing artifact.
 - `yes_price_dollars` × `count_fp` is what the Yes side paid; `count_fp` × $1
   is the payout to whichever side wins. Neither is "money at risk on Nebraska"
   without saying which side you mean.
